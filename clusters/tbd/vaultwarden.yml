@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: vaultwarden
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: vaultwarden
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
     repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    targetRevision: 4.2.3
+    chart: vaultwarden
     helm:
       values: |-
 
@@ -22,8 +22,6 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - PruneLast=true
       - ApplyOutOfSyncOnly=true
+      - PruneLast=true
       - CreateNamespace=true
-
-

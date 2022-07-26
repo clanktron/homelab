@@ -1,40 +1,35 @@
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: linksys-tls
-  namespace: external
-spec:
-  secretName: linksys-tls
-  privateKey:
-    rotationPolicy: Always 
-  dnsNames:
-    - linksys.claytonc.dev
-  issuerRef:
-    name: letsencrypt
-    kind: ClusterIssuer
-    group: cert-manager.io
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: linksys
   namespace: external
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+    flame.pawelmalak/type: app
+    flame.pawelmalak/name: linksys
+    flame.pawelmalak/url: https://linksys.claytonc.dev
+    flame.pawelmalak/icon: access-point-network
 spec:
-  entryPoints:
-    - web
-    - websecure
-  routes:
-  - match: Host(`linksys.claytonc.dev`)
-    kind: Rule
-    middlewares:
-      - name: traefik-local-whitelist@kubernetescrd
-    services:
-    - name: linksys
-      port: 80
   tls:
+  - hosts:
+      - linksys.claytonc.dev
     secretName: linksys-tls
+  rules:
+    - host: linksys.claytonc.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  linksys
+                port:
+                  number: 80
+
 ---
 apiVersion: v1
 kind: Service

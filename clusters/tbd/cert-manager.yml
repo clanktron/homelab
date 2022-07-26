@@ -1,21 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: cert-manager
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: cert-manager
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    repoURL: 'https://charts.jetstack.io'
+    targetRevision: v1.8.0
+    chart: cert-manager
     helm:
-      values: |-
-
+      values: 'installCRDs: true'
   project: default
   syncPolicy:
     automated:
@@ -25,5 +24,3 @@ spec:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
       - CreateNamespace=true
-
-

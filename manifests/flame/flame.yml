@@ -29,12 +29,12 @@ kind: IngressRoute
 metadata:
   name: flame
   namespace: flame
-
+  annotations:
+    kubernetes.io/ingress.class: traefik-crd-external
 spec:
   entryPoints:
     - web
     - websecure
-
   routes:
   - match: Host(`dash.claytonc.dev`)
     kind: Rule
@@ -49,18 +49,19 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: flame-secret
+  namespace: flame
 data:
   PASSWORD: azgzZmRuc2p0a2V3K28w
 
+
+
 ---
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: flame
-  labels:
-    app: flame
+  namespace: flame
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: flame
@@ -69,26 +70,35 @@ spec:
       labels:
         app: flame
     spec:
+      serviceAccountName: flame
+      securityContext:
+        fsGroup: 1000
       containers:
-      - name: flame
-        image: pawelmalak/flame:latest
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 5005
-        env:
+        - name: flame
+          image: pawelmalak/flame
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - name: http
+              containerPort: 5005
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          env:
           - name: PASSWORD
             valueFrom:
               secretKeyRef:
                 name: flame-secret
                 key: PASSWORD
                 optional: false
-        volumeMounts:
+          volumeMounts:
           - mountPath: "/app/data"
             name: flame-data
       volumes:
@@ -101,6 +111,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: flame
+  namespace: flame
 spec:
   selector:
     app: flame
@@ -114,6 +125,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: flame-data
+  namespace: flame
 spec:
   accessModes:
     - ReadWriteMany
@@ -121,3 +133,35 @@ spec:
     requests:
       storage: 10Gi
 
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flame
+  namespace: flame
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: flame
+  namespace: flame
+rules:
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flame
+  namespace: flame
+subjects:
+- kind: ServiceAccount
+  name: flame
+  namespace: flame
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flame

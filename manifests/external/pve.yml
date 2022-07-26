@@ -1,19 +1,36 @@
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: pve-tls
+  name: pve
   namespace: external
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+    # traefik.ingress.kubernetes.io/service.serverstransport: insecure-skip-verify
+    # traefik.ingress.kubernetes.io/service.serversscheme: https
+    flame.pawelmalak/type: app
+    flame.pawelmalak/name: proxmox
+    flame.pawelmalak/url: https://pve.claytonc.dev
+    flame.pawelmalak/icon: server
 spec:
-  secretName: pve-tls
-  privateKey:
-    rotationPolicy: Always 
-  dnsNames:
-    - pve.claytonc.dev
-  issuerRef:
-    name: letsencrypt
-    kind: ClusterIssuer
-    group: cert-manager.io
+  tls:
+  - hosts:
+      - pve.claytonc.dev
+    secretName: pve-tls
+  rules:
+    - host: pve.claytonc.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pve
+                port:
+                  number: 8006
 
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -21,6 +38,8 @@ kind: IngressRoute
 metadata:
   name: pve
   namespace: external
+  annotations: 
+    kubernetes.io/ingress.class: traefik-crd-internal
 spec:
   entryPoints:
     - web
@@ -28,8 +47,6 @@ spec:
   routes:
   - match: Host(`pve.claytonc.dev`)
     kind: Rule
-    middlewares:
-      - name: traefik-local-whitelist@kubernetescrd
     services:
     - name: pve
       port: 8006
@@ -37,12 +54,16 @@ spec:
       serversTransport: insecure-skip-verify
   tls:
     secretName: pve-tls
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: pve
   namespace: external
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: insecure-skip-verify
 spec:
   externalName: 192.168.1.29
   type: ExternalName

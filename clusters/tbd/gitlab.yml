@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: gitlab
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: gitlab
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    repoURL: 'https://charts.gitlab.io/'
+    targetRevision: 6.0.1
+    chart: gitlab
     helm:
       values: |-
 
@@ -24,6 +24,3 @@ spec:
     syncOptions:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
-      - CreateNamespace=true
-
-

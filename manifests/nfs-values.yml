@@ -1,0 +1,9 @@
+nfs:
+  server: 192.168.1.108
+  path: /mnt/virutal-ssd/kube-volumes
+  volumeName: nfs-storage
+  reclaimPolicy: Retain
+storageClass:
+  create: true
+  defaultClass: true
+  name: nfs-storage

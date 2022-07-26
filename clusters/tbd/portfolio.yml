@@ -1,21 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: portfolio
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: portfolio
     server: 'https://kubernetes.default.svc'
   source:
-    path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
-    helm:
-      values: |-
-
+    path: manifests/portfolio
+    repoURL: 'https://github.com/clanktron/kube-manifests'
+    targetRevision: HEAD
   project: default
   syncPolicy:
     automated:
@@ -24,6 +20,4 @@ spec:
     syncOptions:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
-      - CreateNamespace=true
-
 

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: nextcloud
-  namespace: argocd
+  namespace: argo
 spec:
   destination:
     name: ''
@@ -15,61 +15,6 @@ spec:
     chart: nextcloud
     helm:
       values: |-
-        ingress:
-          enabled: false
-        
-        phpClientHttpsFix:
-          enabled: true
-          protocol: https
-        
-        nextcloud:
-          host: cloud.claytonc.dev
-        
-        internalDatabase:
-          enabled: true
-          name: nextcloud
-        
-        externalDatabase:
-          enabled: false
-        
-        mariadb:
-          enabled: false
-        
-        postgresql:
-          enabled: false
-        
-        redis:
-          enabled: false
-        
-        cronjob:
-          enabled: false
-        
-        service:
-          type: ClusterIP
-          port: 8080
-          loadBalancerIP: nil
-          nodePort: nil
-        
-        persistence:
-          enabled: true
-          accessMode: ReadWriteMany
-          size: 8Gi
-        
-        livenessProbe:
-          enabled: false
-        readinessProbe:
-          enabled: false
-        startupProbe:
-          enabled: false
-        
-        metrics:
-          enabled: true
-        
-        rbac:
-          enabled: true
-          serviceaccount:
-            create: true
-            name: nextcloud-serviceaccount
 
   project: default
   syncPolicy:

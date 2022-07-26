@@ -1,29 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: argo-events
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: argo
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    repoURL: 'https://argoproj.github.io/argo-helm'
+    targetRevision: 1.13.0
+    chart: argo-events
     helm:
-      values: |-
-
+      parameters:
+        - name: singleNamespace
+          value: 'false'
   project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - PruneLast=true
       - ApplyOutOfSyncOnly=true
       - CreateNamespace=true
-
-
+      - PruneLast=true

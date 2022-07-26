@@ -1,0 +1,29 @@
+env:
+  TZ: PT
+
+ingress:
+  main:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: traefik-internal
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.tls: 'true'
+      flame.pawelmalak/type: app
+      flame.pawelmalak/name: prowlarr
+      flame.pawelmalak/url: https://prowlarr.claytonc.dev
+      flame.pawelmalak/icon: text-search-variant
+    hosts:
+      - host: prowlarr.claytonc.dev
+        paths:
+          - path: /
+    tls: 
+     - secretName: prowlarr-tls
+       hosts:
+         - prowlarr.claytonc.dev
+
+persistence:
+  config:
+    enabled: true
+    retain: true
+

@@ -1,0 +1,28 @@
+env:
+  DATA_FOLDER: "config"
+
+ingress:
+  main:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: traefik-external
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.tls: 'true'
+      flame.pawelmalak/type: app
+      flame.pawelmalak/name: vaultwarden
+      flame.pawelmalak/url: https://vault.claytonc.dev
+      flame.pawelmalak/icon: lock
+    hosts:
+      - host: vault.claytonc.dev
+        paths:
+          - path: /
+    tls: 
+     - secretName: vault-tls
+       hosts:
+         - vault.claytonc.dev
+
+persistence:
+  config:
+    enabled: true
+    retain: true

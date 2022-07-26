@@ -1,0 +1,88 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: linkerd-viz
+  annotations:
+    linkerd.io/inject: enabled
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+  namespace: linkerd-viz
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`stats.claytonc.dev`)
+      kind: Rule
+      middlewares: 
+        - name: traefik-local-whitelist@kubernetescrd
+        - name: traefik-l5d-header@kubernetescrd
+      services:
+      - name: grafana
+        port: 3000
+  tls:
+    secretName: grafana-tls
+
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: linkerd
+  namespace: linkerd-viz
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`mesh.claytonc.dev`)
+      kind: Rule
+      middlewares: 
+        - name: traefik-local-whitelist@kubernetescrd
+        - name: traefik-l5d-header@kubernetescrd
+      services:
+      - name: web
+        port: 8084
+  tls:
+    secretName: linkerd-tls
+
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: linkerd-tls
+  namespace: linkerd-viz
+spec:
+  secretName: linkerd-tls
+  privateKey:
+    rotationPolicy: Always 
+  dnsNames:
+    - mesh.claytonc.dev
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-tls
+  namespace: linkerd-viz
+spec:
+  secretName: grafana-tls
+  privateKey:
+    rotationPolicy: Always 
+  dnsNames:
+    - stats.claytonc.dev
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io

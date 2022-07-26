@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: grafana
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    repoURL: 'https://grafana.github.io/helm-charts/'
+    targetRevision: 6.32.0
+    chart: grafana
     helm:
       values: |-
 

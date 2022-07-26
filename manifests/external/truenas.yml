@@ -1,42 +1,33 @@
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: nas-claytonc-dev
-  namespace: external
-spec:
-  secretName: truenas-tls
-  privateKey:
-    rotationPolicy: Always 
-  dnsNames:
-    - nas.claytonc.dev
-  issuerRef:
-    name: letsencrypt
-    kind: ClusterIssuer
-    group: cert-manager.io
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: truenas
   namespace: external
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+    flame.pawelmalak/type: app
+    flame.pawelmalak/name: truenas
+    flame.pawelmalak/url: https://nas.claytonc.dev
+    flame.pawelmalak/icon: nas
 spec:
-  entryPoints:
-    - web
-    - websecure
-  routes:
-  - match: Host(`nas.claytonc.dev`)
-    kind: Rule
-    middlewares:
-      - name: traefik-local-whitelist@kubernetescrd
-    services:
-    - name: truenas
-      port: 443
-      scheme: https
-      serversTransport: insecure-skip-verify
   tls:
+  - hosts:
+      - nas.claytonc.dev
     secretName: truenas-tls
+  rules:
+    - host: nas.claytonc.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: truenas
+                port:
+                  number: 80
 ---
 apiVersion: v1
 kind: Service
@@ -48,4 +39,4 @@ spec:
   type: ExternalName
   ports:
   - protocol: TCP
-    port: 443
+    port: 80

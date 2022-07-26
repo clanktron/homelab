@@ -1,21 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: argo-rollouts
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: argo
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 2.6.5
-    chart: home-assistant
+    repoURL: 'https://argoproj.github.io/argo-helm'
+    targetRevision: 2.16.0
+    chart: argo-rollouts
     helm:
-      values: |-
-
+      parameters:
+        - name: dashboard.enabled
+          value: 'true'
   project: default
   syncPolicy:
     automated:
@@ -25,5 +26,3 @@ spec:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
       - CreateNamespace=true
-
-

@@ -1,21 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: home-assistant
+  name: loki
   namespace: argo
 spec:
   destination:
     name: ''
-    namespace: home-assistant
+    namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
     path: ''
-    repoURL: 'https://k8s-at-home.com/charts/'
+    repoURL: 'https://grafana.github.io/helm-charts/'
     targetRevision: 2.6.5
-    chart: home-assistant
-    helm:
-      values: |-
-
+    chart: loki-stack
+    # helm:
+    #   values: |-
   project: default
   syncPolicy:
     automated:

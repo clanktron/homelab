@@ -1,0 +1,37 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: uptime-kuma
+  namespace: uptime
+  annotations:
+    kubernetes.io/ingress.class: traefik-crd-external
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`uptime.claytonc.dev`)
+    kind: Rule
+    services:
+    - name: uptime-kuma
+      port: 80
+  tls:
+    secretName: uptime-tls
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: uptime-tls
+  namespace: uptime
+spec:
+  secretName: uptime-tls
+  privateKey:
+    rotationPolicy: Always 
+  dnsNames:
+    - uptime.claytonc.dev
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io

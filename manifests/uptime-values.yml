@@ -1,0 +1,39 @@
+env:
+  TZ: PT
+
+service:
+  main:
+    ports:
+      http:
+        port: 3001
+
+ingress:
+  main:
+    enabled: true
+    annotations: 
+      kubernetes.io/ingress.class: traefik-external
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.tls: 'true'
+      flame.pawelmalak/type: app
+      flame.pawelmalak/name: uptime
+      flame.pawelmalak/url: https://uptime.claytonc.dev
+      flame.pawelmalak/icon: heart-pulse
+    hosts:
+      - host: uptime.claytonc.dev
+        paths:
+          - path: /
+    tls: 
+     - secretName: uptime-tls
+       hosts:
+         - uptime.claytonc.dev
+
+persistence:
+  data:
+    enabled: true
+    mountPath: /app/data
+    accessMode: ReadWriteMany
+    retain: true
+    type: pvc
+    size: 1Gi
+
