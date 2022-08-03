@@ -12,7 +12,7 @@ ingress:
       flame.pawelmalak/type: app
       flame.pawelmalak/name: prowlarr
       flame.pawelmalak/url: https://prowlarr.claytonc.dev
-      flame.pawelmalak/icon: text-search-variant
+      flame.pawelmalak/icon: text-search
     hosts:
       - host: prowlarr.claytonc.dev
         paths:
