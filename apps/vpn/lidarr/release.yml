@@ -11,11 +11,10 @@ spec:
       version: 14.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: k8s-at-home
         namespace: flux-system
       interval: 5m
   values:
-    
     env:
       TZ: PT
     
@@ -65,8 +64,17 @@ spec:
         retain: true
         type: pvc
         size: 10Gi
-        existingClaim: transmission-downloads
+        existingClaim: qbittorrent-downloads
     
     metrics:
       enabled: false
-    
+
+    podSecurityContext:
+      supplementalGroups:
+      - 65536
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi

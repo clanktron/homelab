@@ -3,6 +3,5 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: ServersTransport
 metadata:
   name: insecure-skip-verify
-  namespace: external
 spec:
   insecureSkipVerify: true

@@ -1,9 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- flux-system
+# - flux-system
 - sources
 - namespaces
-# - 1_crds.yaml
-# - 2_core.yaml
-# - 3_apps.yaml
+# - 0_crds.yml
+- 1_core.yml
+- 2_apps.yml

@@ -2,7 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: prowlarr
-  namespace: media
 spec:
   interval: 5m
   chart:
@@ -12,7 +11,7 @@ spec:
       version: 4.5.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: k8s-at-home
         namespace: flux-system
       interval: 5m
   values:
@@ -45,4 +44,12 @@ spec:
         enabled: true
         retain: true
     
-    
+    podSecurityContext:
+      supplementalGroups:
+      - 65536
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi
