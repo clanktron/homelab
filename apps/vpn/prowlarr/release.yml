@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prowlarr
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: prowlarr
+      version: 4.5.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    env:
+      TZ: PT
+    
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: traefik-internal
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: prowlarr
+          flame.pawelmalak/url: https://prowlarr.claytonc.dev
+          flame.pawelmalak/icon: text-search
+        hosts:
+          - host: prowlarr.claytonc.dev
+            paths:
+              - path: /
+        tls: 
+         - secretName: prowlarr-tls
+           hosts:
+             - prowlarr.claytonc.dev
+    
+    persistence:
+      config:
+        enabled: true
+        retain: true
+    
+    

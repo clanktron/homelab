@@ -1,0 +1,71 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: sonarr
+      version: 16.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    env:
+      TZ: PT
+    
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: traefik-internal
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: sonarr
+          flame.pawelmalak/url: https://shows.claytonc.dev
+          flame.pawelmalak/icon: television-classic
+        hosts:
+          - host: shows.claytonc.dev
+            paths:
+              - path: /
+        tls: 
+         - secretName: sonarr-tls
+           hosts:
+             - shows.claytonc.dev
+    
+    probes:
+      liveness:
+        enabled: false
+    
+    persistence:
+      config:
+        enabled: true
+        retain: true
+    
+      shows:
+        enabled: true
+        mountPath: /media
+        accessMode: ReadWriteMany
+        retain: true
+        type: pvc
+        size: 10Gi
+        existingClaim: jellyfin-shows
+      
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        accessMode: ReadWriteMany
+        retain: true
+        type: pvc
+        size: 10Gi
+        # existingClaim: transmission-downloads
+    
+    metrics:
+      enabled: false
+    

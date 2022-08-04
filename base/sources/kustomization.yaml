@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - armo.yml
+  - bitnami.yml
+  - cillium.yml
+  - crossplane.yml
+  - external-secrets.yml
+  - gitlab.yml
+  - grafana.yml
+  - hashicorp.yml
+  - jetstack.yml
+  - k8s-at-home.yml
+  - kubevela.yml
+  - kubevious,yml
+  - longhorn.yml
+  - nextcloud.yml
+  - nfs.yml
+  - prometheus.yml
+  - shipa.yml
+  - teleport.yml

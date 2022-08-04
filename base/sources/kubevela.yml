@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: kubevela
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://kubevelacharts.oss-cn-hangzhou.aliyuncs.com/core
+  timeout: 3m

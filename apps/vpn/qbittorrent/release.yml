@@ -1,0 +1,124 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: qbittorrent
+      version: 13.5.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    
+    settings:
+      automaticPortSetup: true
+    
+    env:
+      TZ: PT
+      WAIT_FOR_VPN: "true"
+    
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: traefik-internal
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: qBittorrent
+          flame.pawelmalak/url: https://download.claytonc.dev
+          flame.pawelmalak/icon: download-lock
+        hosts:
+          - host: download.claytonc.dev
+            paths:
+              - path: /
+        tls: 
+         - secretName: qbittorrent-tls
+           hosts:
+             - download.claytonc.dev
+    
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        retain: true
+    
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        retain: true
+        accessMode: ReadWriteMany
+        size: 10Gi
+        existingClaim: transmission-downloads
+    
+      shared:
+        enabled: true
+        type: emptyDir
+        mountPath: /shared
+    
+    metrics:
+      enabled: true
+      serviceMonitor:
+        interval: 15s
+        scrapeTimeout: 5s
+        labels: {}
+      prometheusRule:
+        enabled: false
+        labels: {}
+        rules:
+          - alert: qBittorrentDown
+            annotations:
+              description: qBittorrent service is down.
+              summary: qBittorrent is down.
+            expr: |
+              qbittorrent_up == 0
+            for: 5m
+            labels:
+              severity: critical
+    
+    addons:
+      vpn:
+        enabled: true
+        type: wireguard
+    
+        securityContext:
+          runAsUser: 568
+          runAsGroup: 568
+    
+        env:
+          KILLSWITCH: "true"
+    
+        configFile: |-
+          [Interface]
+          # Key for transmission
+          # NetShield = 1
+          # Moderate NAT = off
+          # VPN Accelerator = on
+          PrivateKey = CEj/D39Dt9wa3v1zhkb7VwtFjfUS6avTRvOCAE2arXw=
+          Address = 10.2.0.2/32
+          DNS = 10.2.0.1
+          PreUp = sysctl net.ipv4.conf.all.src_valid_mark=1
+          PostUp = /config/up.sh %i
+          PreDown = /config/down.sh %i
+          
+          [Peer]
+          # SE-US#1
+          PublicKey = ce06fOftuyKP16IymSeHUNeTs4aGfA3SA033wGHrixg=
+          AllowedIPs = 0.0.0.0/5, 8.0.0.0/7, 10.0.0.0/9, 10.128.0.0/10, 10.192.0.0/11, 10.224.0.0/12, 10.240.0.0/14, 10.245.0.0/16, 10.246.0.0/15, 10.248.0.0/13, 11.0.0.0/8, 12.0.0.0/6, 16.0.0.0/4, 32.0.0.0/3, 64.0.0.0/2, 128.0.0.0/2, 192.0.0.0/9, 192.128.0.0/11, 192.160.0.0/13, 192.168.0.0/24, 192.168.2.0/23, 192.168.4.0/22, 192.168.8.0/21, 192.168.16.0/20, 192.168.32.0/19, 192.168.64.0/18, 192.168.128.0/17, 192.169.0.0/16, 192.170.0.0/15, 192.172.0.0/14, 192.176.0.0/12, 192.192.0.0/10, 193.0.0.0/8, 194.0.0.0/7, 196.0.0.0/6, 200.0.0.0/5, 208.0.0.0/4, 224.0.0.0/3
+          Endpoint = 185.159.156.69:51820
+    
+        scripts:
+          up: |-
+            #!/bin/bash
+            echo "connected" > /shared/vpnstatus
+    
+          down: |-
+            #!/bin/bash
+            echo "disconnected" > /shared/vpnstatus

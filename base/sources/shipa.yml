@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: shipa
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://shipa-charts.storage.googleapis.com
+  timeout: 3m
