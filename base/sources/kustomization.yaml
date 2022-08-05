@@ -13,7 +13,7 @@ resources:
   - jetstack.yml
   - k8s-at-home.yml
   - kubevela.yml
-  - kubevious,yml
+  - kubevious.yml
   - longhorn.yml
   - nextcloud.yml
   - nfs.yml
