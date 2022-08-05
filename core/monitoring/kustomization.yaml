@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: cert-manager
 resources:
   - loki-stack-release.yml
-  - prometheuss-stack-release.yml
+  - prometheus-stack-release.yml
