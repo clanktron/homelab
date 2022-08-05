@@ -8,3 +8,4 @@ resources:
 - traefik.yml
 - vpn-gateway.yml
 - vpn.yml
+- storage.yml
