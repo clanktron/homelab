@@ -15,8 +15,9 @@ spec:
         name: k8s-at-home
         namespace: flux-system
       interval: 5m
-
-  # See https://github.com/k8s-at-home/charts/blob/master/charts/stable/pod-gateway/values.yaml
+  install:
+    remediation:
+      retries: 3
   values:
     addons:
       vpn:

@@ -4,5 +4,5 @@ resources:
 - sources
 - namespaces
 - 0_crds.yml
-# - 1_core.yml
-# - 2_apps.yml
+- 1_core.yml
+- 2_apps.yml

@@ -14,4 +14,7 @@ spec:
         name: grafana
         namespace: flux-system
       interval: 5m
+  install:
+    remediation:
+      retries: 3
   # values:
