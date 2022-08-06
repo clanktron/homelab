@@ -5,13 +5,17 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  wait: true 
+  timeout: 5m0s 
+  retryInterval: 1m0s 
+  prune: true 
+  force: true 
   dependsOn:
     - name: core
   sourceRef:
     kind: GitRepository
     name: flux-system
   path: ./apps
-  prune: true
   validation: client
   # healthChecks:
   #   - apiVersion: helm.toolkit.fluxcd.io/v1beta1
