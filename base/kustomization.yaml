@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - sources
 - namespaces
-- 0_core.yml
-# - 1_crds.yml
+- 0_crds.yml
+# - 1_core.yml
 # - 2_apps.yml
