@@ -15,9 +15,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    # namespaceOverride: "monitoring"
-    # fullnameOverride: ""
-    
     alertmanager:
       enabled: true
       ingress:
