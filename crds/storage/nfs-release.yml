@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: nfs
 spec:
-  interval: 5m
+  interval: 2m
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
@@ -16,7 +16,7 @@ spec:
       interval: 5m
   install:
     remediation:
-      retries: 3
+      retries: 10
   values:
     nfs:
       server: 192.168.1.108
