@@ -6,7 +6,7 @@ resources:
   - external
   - filebrowser
   - flame-dashboard
-  - jellyfin
+  # - jellyfin
   - littlelink
   - portfolio
   - uptime-kuma
