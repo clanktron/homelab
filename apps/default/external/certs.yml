@@ -18,13 +18,13 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: dns-tls
+  name: pihole-tls
 spec:
-  secretName: dns-tls
+  secretName: pihole-tls
   privateKey:
     rotationPolicy: Always 
   dnsNames:
-    - dns.claytonc.dev
+    - pihole.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer

@@ -9,15 +9,15 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: truenas
-    flame.pawelmalak/url: https://nas.claytonc.dev
+    flame.pawelmalak/url: https://truenas.claytonc.dev
     flame.pawelmalak/icon: nas
 spec:
   tls:
   - hosts:
-      - nas.claytonc.dev
+      - truenas.claytonc.dev
     secretName: truenas-tls
   rules:
-    - host: nas.claytonc.dev
+    - host: truenas.claytonc.dev
       http:
         paths:
           - path: /

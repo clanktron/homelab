@@ -31,16 +31,16 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: radarr
-          flame.pawelmalak/url: https://movies.claytonc.dev
+          flame.pawelmalak/url: https://radarr.claytonc.dev
           flame.pawelmalak/icon: movie-open
         hosts:
-          - host: movies.claytonc.dev
+          - host: radarr.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: radarr-tls
            hosts:
-             - movies.claytonc.dev
+             - radarr.claytonc.dev
     
     probes:
       liveness:

@@ -31,16 +31,16 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: lidarr
-          flame.pawelmalak/url: https://music.claytonc.dev
+          flame.pawelmalak/url: https://lidarr.claytonc.dev
           flame.pawelmalak/icon: music
         hosts:
-          - host: music.claytonc.dev
+          - host: lidarr.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: lidarr-tls
            hosts:
-             - music.claytonc.dev
+             - lidarr.claytonc.dev
     
     probes:
       liveness:
