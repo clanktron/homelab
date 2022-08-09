@@ -1,0 +1,27 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jellyfin-tls
+spec:
+  secretName: jellyfin-tls
+  dnsNames:
+    - jellyfin.claytonc.dev
+  issuerRef:
+    name: letsencrypt
+    kind: Issuer
+    group: cert-manager.io
+
+
+---
+apiVersion: v1
+data:
+  ca.crt: ''
+  tls.crt: ''
+  tls.key: ''
+kind: Secret
+metadata:
+  name: jellyfin-tls
+  annotations:
+    kubed.appscode.com/sync: "cert-manager-tls=vpn" # Sync certificate to matching namespaces
+type: kubernetes.io/tls

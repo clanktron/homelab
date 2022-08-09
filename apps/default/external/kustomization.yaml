@@ -6,4 +6,3 @@ resources:
   - pihole.yml
   - pve.yml
   - truenas.yml
-  - certs.yml
