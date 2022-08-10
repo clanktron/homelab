@@ -41,7 +41,7 @@ spec:
             paths:
               - path: /
         tls: 
-         - secretName: cloud-tls
+         - secretName: filebrowser-tls
            hosts:
              - cloud1.claytonc.dev
     

@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - deploy.yml
   - ingress.yml
+  - portfolio-tls.yml

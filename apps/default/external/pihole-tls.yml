@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: prometheus-tls
+  name: pihole-tls
 spec:
-  secretName: prometheus-tls
+  secretName: pihole-tls
   dnsNames:
-    - prometheus1.claytonc.dev
+    - pihole1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -21,7 +21,7 @@ spec:
 #   tls.key: ''
 # kind: Secret
 # metadata:
-#   name: prometheus-tls
+#   name: pihole-tls
 #   annotations:
-#     kubed.appscode.com/sync: "cert-manager-tls=monitoring" # Sync certificate to matching namespaces
+#     kubed.appscode.com/sync: "cert-manager-tls=default" # Sync certificate to matching namespaces
 # type: kubernetes.io/tls
