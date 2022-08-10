@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: radarr-tls
   dnsNames:
-    - radarr.claytonc.dev
+    - radarr1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

@@ -44,20 +44,21 @@ spec:
       main:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-external
+          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: littlelink
-          flame.pawelmalak/url: https://claytonc.dev
+          flame.pawelmalak/url: https://1.claytonc.dev
           flame.pawelmalak/icon: link-variant
+        ingressClassName: traefik-external
         hosts:
-          - host: claytonc.dev
+          - host: 1.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: littlelink-tls
            hosts:
-             - claytonc.dev
+             - 1.claytonc.dev
 

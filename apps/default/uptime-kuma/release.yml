@@ -32,22 +32,23 @@ spec:
       main:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-external
+          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: uptime
-          flame.pawelmalak/url: https://uptime.claytonc.dev
+          flame.pawelmalak/url: https://uptime1.claytonc.dev
           flame.pawelmalak/icon: heart-pulse
+        ingressClassName: traefik-external
         hosts:
-          - host: uptime.claytonc.dev
+          - host: uptime1.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: uptime-tls
            hosts:
-             - uptime.claytonc.dev
+             - uptime1.claytonc.dev
     
     persistence:
       data:

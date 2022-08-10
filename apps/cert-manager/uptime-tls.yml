@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: uptime-tls
   dnsNames:
-    - uptime.claytonc.dev
+    - uptime1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

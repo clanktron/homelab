@@ -4,21 +4,22 @@ kind: Ingress
 metadata:
   name: portfolio
   annotations:
-    kubernetes.io/ingress.class: traefik-external
+    # kubernetes.io/ingress.class: traefik-external
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     # cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: portfolio
-    flame.pawelmalak/url: https://portfolio.claytonc.dev
+    flame.pawelmalak/url: https://portfolio1.claytonc.dev
     flame.pawelmalak/icon: folder-multiple-image
+  ingressClassName: traefik-external
 spec:
   tls:
   - hosts:
-      - portfolio.claytonc.dev
+      - portfolio1.claytonc.dev
     secretName: portfolio-tls
   rules:
-    - host: portfolio.claytonc.dev
+    - host: portfolio1.claytonc.dev
       http:
         paths:
           - path: /

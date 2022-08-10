@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: vault-tls
   dnsNames:
-    - vault.claytonc.dev
+    - vault1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

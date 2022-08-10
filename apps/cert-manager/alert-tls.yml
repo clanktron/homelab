@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: linksys-tls
+  name: alert-tls
 spec:
-  secretName: linksys-tls
+  secretName: alert-tls
   dnsNames:
-    - linksys1.claytonc.dev
+    - alert1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer
@@ -21,7 +21,7 @@ data:
   tls.key: ''
 kind: Secret
 metadata:
-  name: linksys-tls
+  name: alert-tls
   annotations:
-    kubed.appscode.com/sync: "cert-manager-tls=default" # Sync certificate to matching namespaces
+    kubed.appscode.com/sync: "cert-manager-tls=monitoring" # Sync certificate to matching namespaces
 type: kubernetes.io/tls

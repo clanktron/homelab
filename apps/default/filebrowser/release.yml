@@ -26,23 +26,24 @@ spec:
       main:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-external
+          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: filebrowser
-          flame.pawelmalak/url: https://cloud.claytonc.dev
+          flame.pawelmalak/url: https://cloud1.claytonc.dev
           # flame.pawelmalak/icon: https://raw.githubusercontent.com/filebrowser/filebrowser/master/frontend/public/img/logo.svg
           flame.pawelmalak/icon: file-multiple
+        ingressClassName: traefik-external
         hosts:
-          - host: cloud.claytonc.dev
+          - host: cloud1.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: cloud-tls
            hosts:
-             - cloud.claytonc.dev
+             - cloud1.claytonc.dev
     
     
     config: |

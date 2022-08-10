@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: pve
   annotations:
-    kubernetes.io/ingress.class: traefik-internal
+    # kubernetes.io/ingress.class: traefik-internal
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     # cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
@@ -12,15 +12,16 @@ metadata:
     # traefik.ingress.kubernetes.io/service.serversscheme: https
     flame.pawelmalak/type: app
     flame.pawelmalak/name: proxmox
-    flame.pawelmalak/url: https://pve.claytonc.dev
+    flame.pawelmalak/url: https://pve1.claytonc.dev
     flame.pawelmalak/icon: server
+  ingressClassName: traefik-internal
 spec:
   tls:
   - hosts:
-      - pve.claytonc.dev
+      - pve1.claytonc.dev
     secretName: pve-tls
   rules:
-    - host: pve.claytonc.dev
+    - host: pve1.claytonc.dev
       http:
         paths:
           - path: /

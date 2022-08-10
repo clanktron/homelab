@@ -25,22 +25,23 @@ spec:
       main:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-internal
+          # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: radarr
-          flame.pawelmalak/url: https://radarr.claytonc.dev
+          flame.pawelmalak/url: https://radarr1.claytonc.dev
           flame.pawelmalak/icon: movie-open
+        ingressClassName: traefik-internal
         hosts:
-          - host: radarr.claytonc.dev
+          - host: radarr1.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: radarr-tls
            hosts:
-             - radarr.claytonc.dev
+             - radarr1.claytonc.dev
     
     probes:
       liveness:

@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: nas-tls
   dnsNames:
-    - nas.claytonc.dev
+    - nas1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

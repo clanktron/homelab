@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: sonarr-tls
   dnsNames:
-    - sonarr.claytonc.dev
+    - sonarr1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

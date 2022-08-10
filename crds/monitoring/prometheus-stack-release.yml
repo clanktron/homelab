@@ -23,21 +23,22 @@ spec:
       ingress:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-internal
+          # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: alertmanager
-          flame.pawelmalak/url: https://alert.claytonc.dev
+          flame.pawelmalak/url: https://alert1.claytonc.dev
           flame.pawelmalak/icon: alert-circle-outline
+        ingressClassName: traefik-internal
         path: /
         hosts:
-          - alert.claytonc.dev
+          - alert1.claytonc.dev
         tls: 
          - secretName: alert-tls
            hosts:
-             - alert.claytonc.dev
+             - alert1.claytonc.dev
       serviceMonitor:
         interval: "1m"
         selfMonitor: true
@@ -47,21 +48,22 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: traefik-external
+          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: grafana
-          flame.pawelmalak/url: https://grafana.claytonc.dev
+          flame.pawelmalak/url: https://grafana1.claytonc.dev
           flame.pawelmalak/icon: chart-box-outline
+        ingressClassName: traefik-external
         path: /
         hosts:
-          - grafana.claytonc.dev
+          - grafana1.claytonc.dev
         tls: 
          - secretName: grafana-tls
            hosts:
-             - grafana.claytonc.dev
+             - grafana1.claytonc.dev
     
       sidecar:
         dashboards:
@@ -98,21 +100,22 @@ spec:
       ingress:
         enabled: true
         annotations: 
-          kubernetes.io/ingress.class: traefik-internal
+          # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: prometheus
-          flame.pawelmalak/url: https://prometheus.claytonc.dev
+          flame.pawelmalak/url: https://prometheus1.claytonc.dev
           flame.pawelmalak/icon: fire
+        ingressClassName: traefik-internal
         path: /
         hosts:
-          - prometheus.claytonc.dev
+          - prometheus1.claytonc.dev
         tls: 
          - secretName: prometheus-tls
            hosts:
-             - prometheus.claytonc.dev
+             - prometheus1.claytonc.dev
         
       serviceMonitor:
         enabled: true

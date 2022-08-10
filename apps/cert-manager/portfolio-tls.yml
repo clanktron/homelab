@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: portfolio-tls
   dnsNames:
-    - portfolio.claytonc.dev
+    - portfolio1.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: Issuer

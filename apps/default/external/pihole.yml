@@ -4,21 +4,22 @@ kind: Ingress
 metadata:
   name: pihole
   annotations:
-    kubernetes.io/ingress.class: traefik-internal
+    # kubernetes.io/ingress.class: traefik-internal
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     # cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: pihole
-    flame.pawelmalak/url: https://pihole.claytonc.dev/admin
+    flame.pawelmalak/url: https://pihole1.claytonc.dev/admin
     flame.pawelmalak/icon: router
+  ingressClassName: traefik-internal
 spec:
   tls:
   - hosts:
-      - pihole.claytonc.dev
+      - pihole1.claytonc.dev
     secretName: pihole-tls
   rules:
-    - host: pihole.claytonc.dev
+    - host: pihole1.claytonc.dev
       http:
         paths:
           - path: /
