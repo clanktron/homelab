@@ -1,0 +1,27 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: filebrowser-tls
+spec:
+  secretName: filebrowser-tls
+  dnsNames:
+    - cloud1.claytonc.dev
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+
+# ---
+# apiVersion: v1
+# data:
+#   ca.crt: ''
+#   tls.crt: ''
+#   tls.key: ''
+# kind: Secret
+# metadata:
+#   name: filebrowser-tls
+#   annotations:
+#     kubed.appscode.com/sync: "cert-manager-tls=default" # Sync certificate to matching namespaces
+# type: kubernetes.io/tls
