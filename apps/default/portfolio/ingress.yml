@@ -12,8 +12,8 @@ metadata:
     flame.pawelmalak/name: portfolio
     flame.pawelmalak/url: https://portfolio1.claytonc.dev
     flame.pawelmalak/icon: folder-multiple-image
-  ingressClassName: traefik-external
 spec:
+  ingressClassName: traefik-external
   tls:
   - hosts:
       - portfolio1.claytonc.dev

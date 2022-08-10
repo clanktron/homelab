@@ -12,8 +12,8 @@ metadata:
     flame.pawelmalak/name: linksys
     flame.pawelmalak/url: https://linksys1.claytonc.dev
     flame.pawelmalak/icon: access-point-network
-  ingressClassName: traefik-internal
 spec:
+  ingressClassName: traefik-internal
   tls:
   - hosts:
       - linksys1.claytonc.dev

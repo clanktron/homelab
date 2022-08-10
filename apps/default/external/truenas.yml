@@ -11,8 +11,8 @@ metadata:
     flame.pawelmalak/name: truenas
     flame.pawelmalak/url: https://truenas1.claytonc.dev
     flame.pawelmalak/icon: nas
-  ingressClassName: traefik-internal
 spec:
+  ingressClassName: traefik-internal
   tls:
   - hosts:
       - truenas1.claytonc.dev

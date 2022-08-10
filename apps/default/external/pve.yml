@@ -14,8 +14,8 @@ metadata:
     flame.pawelmalak/name: proxmox
     flame.pawelmalak/url: https://pve1.claytonc.dev
     flame.pawelmalak/icon: server
-  ingressClassName: traefik-internal
 spec:
+  ingressClassName: traefik-internal
   tls:
   - hosts:
       - pve1.claytonc.dev

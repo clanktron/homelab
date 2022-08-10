@@ -12,8 +12,8 @@ metadata:
     flame.pawelmalak/name: pihole
     flame.pawelmalak/url: https://pihole1.claytonc.dev/admin
     flame.pawelmalak/icon: router
-  ingressClassName: traefik-internal
 spec:
+  ingressClassName: traefik-internal
   tls:
   - hosts:
       - pihole1.claytonc.dev
