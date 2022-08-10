@@ -9,7 +9,7 @@ spec:
     - sonarr1.claytonc.dev
   issuerRef:
     name: letsencrypt
-    kind: Issuer
+    kind: ClusterIssuer
     group: cert-manager.io
 
 
