@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: filebrowser-tls
   dnsNames:
-    - cloud1.claytonc.dev
+    - cloud.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
