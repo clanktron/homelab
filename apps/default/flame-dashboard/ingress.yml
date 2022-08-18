@@ -10,7 +10,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`dash1.claytonc.dev`)
+  - match: Host(`dash.claytonc.dev`)
     kind: Rule
     services:
     - name: flame

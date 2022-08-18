@@ -32,18 +32,18 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: filebrowser
-          flame.pawelmalak/url: https://cloud1.claytonc.dev
+          flame.pawelmalak/url: https://cloud.claytonc.dev
           # flame.pawelmalak/icon: https://raw.githubusercontent.com/filebrowser/filebrowser/master/frontend/public/img/logo.svg
           flame.pawelmalak/icon: file-multiple
         ingressClassName: traefik-external
         hosts:
-          - host: cloud1.claytonc.dev
+          - host: cloud.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: filebrowser-tls
            hosts:
-             - cloud1.claytonc.dev
+             - cloud.claytonc.dev
     
     
     config: |

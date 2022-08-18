@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: littlelink-tls
+  name: uptime-tls
 spec:
-  secretName: littlelink-tls
+  secretName: uptime-tls
   dnsNames:
-    - 1.claytonc.dev
+    - uptime.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -21,7 +21,7 @@ spec:
 #   tls.key: ''
 # kind: Secret
 # metadata:
-#   name: littlelink-tls
+#   name: uptime-tls
 #   annotations:
 #     kubed.appscode.com/sync: "cert-manager-tls=default" # Sync certificate to matching namespaces
 # type: kubernetes.io/tls

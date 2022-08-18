@@ -38,17 +38,17 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: uptime
-          flame.pawelmalak/url: https://uptime1.claytonc.dev
+          flame.pawelmalak/url: https://uptime.claytonc.dev
           flame.pawelmalak/icon: heart-pulse
         ingressClassName: traefik-external
         hosts:
-          - host: uptime1.claytonc.dev
+          - host: uptime.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: uptime-tls
            hosts:
-             - uptime1.claytonc.dev
+             - uptime.claytonc.dev
     
     persistence:
       data:

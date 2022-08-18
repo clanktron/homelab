@@ -50,15 +50,15 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: littlelink
-          flame.pawelmalak/url: https://1.claytonc.dev
+          flame.pawelmalak/url: https://claytonc.dev
           flame.pawelmalak/icon: link-variant
         ingressClassName: traefik-external
         hosts:
-          - host: 1.claytonc.dev
+          - host: claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: littlelink-tls
            hosts:
-             - 1.claytonc.dev
+             - claytonc.dev
 

@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: flame-tls
   dnsNames:
-    - dash1.claytonc.dev
+    - dash.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
