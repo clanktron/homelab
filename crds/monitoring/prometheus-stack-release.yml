@@ -29,16 +29,16 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: alertmanager
-          flame.pawelmalak/url: https://alert1.claytonc.dev
+          flame.pawelmalak/url: https://alert.claytonc.dev
           flame.pawelmalak/icon: alert-circle-outline
         ingressClassName: traefik-internal
         path: /
         hosts:
-          - alert1.claytonc.dev
+          - alert.claytonc.dev
         tls: 
          - secretName: alert-tls
            hosts:
-             - alert1.claytonc.dev
+             - alert.claytonc.dev
       serviceMonitor:
         interval: "1m"
         selfMonitor: true
@@ -54,16 +54,16 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: grafana
-          flame.pawelmalak/url: https://grafana1.claytonc.dev
+          flame.pawelmalak/url: https://grafana.claytonc.dev
           flame.pawelmalak/icon: chart-box-outline
         ingressClassName: traefik-external
         path: /
         hosts:
-          - grafana1.claytonc.dev
+          - grafana.claytonc.dev
         tls: 
          - secretName: grafana-tls
            hosts:
-             - grafana1.claytonc.dev
+             - grafana.claytonc.dev
     
       sidecar:
         dashboards:
@@ -106,16 +106,16 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: prometheus
-          flame.pawelmalak/url: https://prometheus1.claytonc.dev
+          flame.pawelmalak/url: https://prometheus.claytonc.dev
           flame.pawelmalak/icon: fire
         ingressClassName: traefik-internal
         path: /
         hosts:
-          - prometheus1.claytonc.dev
+          - prometheus.claytonc.dev
         tls: 
          - secretName: prometheus-tls
            hosts:
-             - prometheus1.claytonc.dev
+             - prometheus.claytonc.dev
         
       serviceMonitor:
         enabled: true
