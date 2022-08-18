@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: media-tls
+  name: qbittorrent-tls
 spec:
-  secretName: media-tls
+  secretName: qbittorrent-tls
   dnsNames:
-    - media1.claytonc.dev
+    - qbittorrent.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -21,7 +21,7 @@ spec:
 #   tls.key: ''
 # kind: Secret
 # metadata:
-#   name: media-tls
+#   name: qbittorrent-tls
 #   annotations:
 #     kubed.appscode.com/sync: "cert-manager-tls=vpn" # Sync certificate to matching namespaces
 # type: kubernetes.io/tls

@@ -32,17 +32,17 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: vaultwarden
-          flame.pawelmalak/url: https://vault1.claytonc.dev
+          flame.pawelmalak/url: https://vault.claytonc.dev
           flame.pawelmalak/icon: lock
         ingressClassName: traefik-external
         hosts:
-          - host: vault1.claytonc.dev
+          - host: vault.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: vault-tls
            hosts:
-             - vault1.claytonc.dev
+             - vault.claytonc.dev
     
     persistence:
       config:

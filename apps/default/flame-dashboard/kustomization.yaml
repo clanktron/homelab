@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - deploy.yml
   - flame-tls.yml
-  - ingress.yml
+  - ingressroute.yml
   - persistence.yml
   - rbac.yml
   - secret.yml

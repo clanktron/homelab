@@ -27,7 +27,7 @@ spec:
         annotations: 
           # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: jellyfin
@@ -35,34 +35,34 @@ spec:
           flame.pawelmalak/icon: play-network
         ingressClassName: traefik-external
         hosts:
-          - host: jellyfin1.claytonc.dev
+          - host: jellyfin.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: jellyfin-tls
            hosts:
-             - jellyfin1.claytonc.dev
+             - jellyfin.claytonc.dev
 
       local:
         enabled: true
         annotations: 
           # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: 'jellyfin (local)'
-          flame.pawelmalak/url: https://media1.claytonc.dev
+          flame.pawelmalak/url: https://media.claytonc.dev
           flame.pawelmalak/icon: play-network
         ingressClassName: traefik-internal
         hosts:
-          - host: media1.claytonc.dev
+          - host: media.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: media-tls
            hosts:
-             - media1.claytonc.dev
+             - media.claytonc.dev
     
     persistence:
       config:

@@ -30,17 +30,17 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: prowlarr
-          flame.pawelmalak/url: https://index1.claytonc.dev
+          flame.pawelmalak/url: https://index.claytonc.dev
           flame.pawelmalak/icon: text-search
         ingressClassName: traefik-internal
         hosts:
-          - host: index1.claytonc.dev
+          - host: index.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: prowlarr-tls
            hosts:
-             - index1.claytonc.dev
+             - index.claytonc.dev
     
     persistence:
       config:

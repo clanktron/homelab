@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: prowlarr-tls
+  name: media-tls
 spec:
-  secretName: prowlarr-tls
+  secretName: media-tls
   dnsNames:
-    - prowlarr1.claytonc.dev
+    - media.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -21,7 +21,7 @@ spec:
 #   tls.key: ''
 # kind: Secret
 # metadata:
-#   name: prowlarr-tls
+#   name: media-tls
 #   annotations:
 #     kubed.appscode.com/sync: "cert-manager-tls=vpn" # Sync certificate to matching namespaces
 # type: kubernetes.io/tls

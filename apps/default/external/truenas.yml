@@ -5,20 +5,20 @@ metadata:
   annotations:
     # kubernetes.io/ingress.class: traefik-internal
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    # cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: truenas
-    flame.pawelmalak/url: https://truenas1.claytonc.dev
+    flame.pawelmalak/url: https://truenas.claytonc.dev
     flame.pawelmalak/icon: nas
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - truenas1.claytonc.dev
+      - truenas.claytonc.dev
     secretName: truenas-tls
   rules:
-    - host: truenas1.claytonc.dev
+    - host: truenas.claytonc.dev
       http:
         paths:
           - path: /

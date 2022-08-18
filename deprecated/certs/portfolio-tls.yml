@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: linksys-tls
+  name: portfolio-tls
 spec:
-  secretName: linksys-tls
+  secretName: portfolio-tls
   dnsNames:
-    - linksys1.claytonc.dev
+    - portfolio.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -21,7 +21,7 @@ spec:
 #   tls.key: ''
 # kind: Secret
 # metadata:
-#   name: linksys-tls
+#   name: portfolio-tls
 #   annotations:
 #     kubed.appscode.com/sync: "cert-manager-tls=default" # Sync certificate to matching namespaces
 # type: kubernetes.io/tls
