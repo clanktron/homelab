@@ -33,13 +33,13 @@ spec:
         enabled: true
         allowCrossNamespace: true
         allowExternalNameServices: true
-        allowEmptyServices: false
+        allowEmptyServices: true
         ingressClass: traefik-crd-external
     
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
-        allowEmptyServices: false
+        allowEmptyServices: true
         ingressClass: traefik-external
     
     logs:
