@@ -44,7 +44,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`pve.claytonc.dev`)
+  - match: Host(`pve1.claytonc.dev`)
     kind: Rule
     services:
     - name: pve
