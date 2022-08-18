@@ -31,7 +31,7 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: jellyfin
-          flame.pawelmalak/url: https://jellyfin1.claytonc.dev
+          flame.pawelmalak/url: https://jellyfin.claytonc.dev
           flame.pawelmalak/icon: play-network
         ingressClassName: traefik-external
         hosts:
