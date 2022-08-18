@@ -31,17 +31,17 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: sonarr
-          flame.pawelmalak/url: https://sonarr.claytonc.dev
+          flame.pawelmalak/url: https://sonarr1.claytonc.dev
           flame.pawelmalak/icon: television-classic
         ingressClassName: traefik-internal
         hosts:
-          - host: sonarr.claytonc.dev
+          - host: sonarr1.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: sonarr-tls
            hosts:
-             - sonarr.claytonc.dev
+             - sonarr1.claytonc.dev
     
     probes:
       liveness:

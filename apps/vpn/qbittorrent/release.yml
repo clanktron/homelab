@@ -35,17 +35,17 @@ spec:
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: qBittorrent
-          flame.pawelmalak/url: https://torrent.claytonc.dev
+          flame.pawelmalak/url: https://qbittorrent.claytonc.dev
           flame.pawelmalak/icon: download-lock
         ingressClassName: traefik-internal
         hosts:
-          - host: torrent.claytonc.dev
+          - host: qbittorrent.claytonc.dev
             paths:
               - path: /
         tls: 
          - secretName: qbittorrent-tls
            hosts:
-             - torrent.claytonc.dev
+             - qbittorrent.claytonc.dev
     
     persistence:
       config:

@@ -12,16 +12,16 @@ metadata:
     # traefik.ingress.kubernetes.io/service.serversscheme: https
     flame.pawelmalak/type: app
     flame.pawelmalak/name: proxmox
-    flame.pawelmalak/url: https://pve.claytonc.dev
+    flame.pawelmalak/url: https://pve1.claytonc.dev
     flame.pawelmalak/icon: server
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - pve.claytonc.dev
+      - pve1.claytonc.dev
     secretName: pve-tls
   rules:
-    - host: pve.claytonc.dev
+    - host: pve1.claytonc.dev
       http:
         paths:
           - path: /

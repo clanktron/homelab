@@ -10,16 +10,16 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: pihole
-    flame.pawelmalak/url: https://pihole.claytonc.dev/admin
+    flame.pawelmalak/url: https://pihole1.claytonc.dev/admin
     flame.pawelmalak/icon: router
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - pihole.claytonc.dev
+      - pihole1.claytonc.dev
     secretName: pihole-tls
   rules:
-    - host: pihole.claytonc.dev
+    - host: pihole1.claytonc.dev
       http:
         paths:
           - path: /
