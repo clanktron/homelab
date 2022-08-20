@@ -22,3 +22,5 @@ resources:
   - shipa.yml
   - teleport.yml
   - traefik.yml
+  - velero.yml
+  - vault.yml
