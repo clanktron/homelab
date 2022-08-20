@@ -23,4 +23,4 @@ resources:
   - teleport.yml
   - traefik.yml
   - velero.yml
-  - vault.yml
+  # - vault.yml
