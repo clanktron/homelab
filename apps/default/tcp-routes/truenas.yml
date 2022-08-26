@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: truenas
+spec:
+  entryPoints:
+    - ssh
+  routes:
+  - match: truenas.claytonc.dev
+    services:
+      - name: truenas
+        port: 22
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: truenas
+spec:
+  externalName: 192.168.1.108
+  type: ExternalName
+  ports:
+  - protocol: TCP
+    port: 22

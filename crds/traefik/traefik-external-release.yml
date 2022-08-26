@@ -41,7 +41,34 @@ spec:
         allowExternalNameServices: true
         allowEmptyServices: true
         ingressClass: traefik-external
-    
+
+    ports:
+      traefik:
+        port: 9000
+        expose: false
+        exposedPort: 9000
+        protocol: TCP
+      web:
+        port: 8000
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 8443
+        expose: true
+        exposedPort: 443
+        protocol: TCP
+      ssh:
+        port: 22
+        expose: true
+        exposedPort: 22
+        protocol: TCP
+      metrics:
+        port: 9100
+        expose: false
+        exposedPort: 9100
+        protocol: TCP
+        
     logs:
       general:
         level: INFO
