@@ -9,4 +9,5 @@ resources:
   # - jellyfin
   - littlelink
   - portfolio
+  - tcp-routes
   - uptime-kuma
