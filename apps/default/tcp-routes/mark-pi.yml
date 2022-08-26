@@ -18,7 +18,7 @@ kind: Service
 metadata:
   name: mark-pi
 spec:
-  externalName: 192.168.1.14
+  externalName: 192.168.1.241
   type: ExternalName
   ports:
   - protocol: TCP
