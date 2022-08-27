@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: linksys-tls
+  name: linksys-test
 spec:
-  secretName: linksys-tls
+  secretName: linksys-test
   dnsNames:
     - linksys.claytonc.dev
   issuerRef:

@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: pihole-tls
+  name: pihole-test
 spec:
-  secretName: pihole-tls
+  secretName: pihole-test
   dnsNames:
     - pihole.claytonc.dev
   issuerRef:
