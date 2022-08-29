@@ -1,4 +1,4 @@
-# kube-manifests
+# Homelab
 
 kubernetes manifest files for my home environment
 
