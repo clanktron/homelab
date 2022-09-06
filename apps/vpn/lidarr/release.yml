@@ -83,13 +83,3 @@ spec:
     
     metrics:
       enabled: false
-
-  podSecurityContext:
-      supplementalGroups:
-      - 65536
-  resources:
-      requests:
-        memory: 250Mi
-        cpu: 500m
-      limits:
-        memory: 1500Mi
