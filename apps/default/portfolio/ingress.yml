@@ -10,16 +10,16 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: portfolio
-    flame.pawelmalak/url: https://portfolio1.claytonc.dev
+    flame.pawelmalak/url: https://portfolio.claytonc.dev
     flame.pawelmalak/icon: folder-multiple-image
 spec:
   ingressClassName: traefik-external
   tls:
   - hosts:
-      - portfolio1.claytonc.dev
+      - portfolio.claytonc.dev
     secretName: portfolio-tls
   rules:
-    - host: portfolio1.claytonc.dev
+    - host: portfolio.claytonc.dev
       http:
         paths:
           - path: /

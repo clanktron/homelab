@@ -51,14 +51,20 @@ spec:
       config:
         enabled: true
         mountPath: /config
-        retain: true
-    
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/qbittorrent/"
+
       downloads:
         enabled: true
         mountPath: /downloads
-        retain: true
-        accessMode: ReadWriteMany
-        size: 10Gi
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/jellyfin/downloads"
 
     podSecurityContext:
       supplementalGroups:

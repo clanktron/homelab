@@ -4,6 +4,6 @@ resources:
   - deploy.yml
   - flame-tls.yml
   - ingressroute.yml
-  - persistence.yml
+  # - persistence.yml
   - rbac.yml
   - secret.yml

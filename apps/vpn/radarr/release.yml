@@ -50,25 +50,28 @@ spec:
     persistence:
       config:
         enabled: true
-        retain: true
-    
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/radarr"    
       movies:
         enabled: true
         mountPath: /media
-        accessMode: ReadWriteMany
-        retain: true
-        type: pvc
-        size: 10Gi
-        existingClaim: jellyfin-movies
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/jellyfin/movies"
       
       downloads:
         enabled: true
         mountPath: /downloads
-        accessMode: ReadWriteMany
-        retain: true
-        type: pvc
-        size: 10Gi
-        existingClaim: qbittorrent-downloads
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/jellyfin/downloads"
     
     metrics:
       enabled: false

@@ -19,8 +19,8 @@ spec:
       retries: 10
   values:
     nfs:
-      server: 192.168.1.108
-      path: /mnt/virutal-ssd/kube-volumes
+      server: 192.168.1.56
+      path: /mnt/ssd/vols
       volumeName: nfs
       reclaimPolicy: Retain
     storageClass:

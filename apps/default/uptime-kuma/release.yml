@@ -53,9 +53,9 @@ spec:
     persistence:
       data:
         enabled: true
-        mountPath: /app/data
-        accessMode: ReadWriteMany
-        retain: true
-        type: pvc
-        size: 1Gi
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/uptime/"
     

@@ -45,8 +45,13 @@ spec:
     persistence:
       config:
         enabled: true
-        retain: true
-    
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/prowlarr/"
+
+
     podSecurityContext:
       supplementalGroups:
       - 65536
