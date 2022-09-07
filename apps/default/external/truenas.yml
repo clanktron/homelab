@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: truenas
 spec:
-  externalName: 192.168.1.108
+  externalName: 192.168.1.56
   type: ExternalName
   ports:
   - protocol: TCP
