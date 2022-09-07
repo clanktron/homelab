@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: kube-system
-  labels:
-    cert-manager-tls: kube-system
+  # labels:
+  #   cert-manager-tls: kube-system
 
 ---
 kind: NetworkPolicy

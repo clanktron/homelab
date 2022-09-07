@@ -62,7 +62,7 @@ spec:
         volumeSpec:
           nfs:
             server: "192.168.1.56"
-            path: "/mnt/ssd/vols/jellyfin/movies"
+            path: "/mnt/rust/movies"
       
       downloads:
         enabled: true

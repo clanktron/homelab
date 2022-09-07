@@ -4,4 +4,4 @@ metadata:
   name: vpn-gateway
   labels:
     gateway: "true"
-    cert-manager-tls: vpn-gateway
+    # cert-manager-tls: vpn-gateway

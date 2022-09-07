@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: traefik
-  labels:
-    cert-manager-tls: traefik
+  # labels:
+  #   cert-manager-tls: traefik
 
 ---
 kind: NetworkPolicy
