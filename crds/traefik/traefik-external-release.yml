@@ -22,11 +22,11 @@ spec:
       enabled: true
       isDefaultClass: true
 
-    experimental:
-      http3:
-        enabled: true
-      plugins:
-        enabled: true
+    # experimental:
+    #   http3:
+    #     enabled: true
+    #   plugins:
+    #     enabled: true
       # kubernetesGateway:
       #   enabled: true 
     
