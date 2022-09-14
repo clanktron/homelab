@@ -15,10 +15,10 @@ spec:
     name: flux-system
   path: ./crds
   validation: client
-  # decryption:
-  #   provider: sops
-  #   secretRef:
-  #     name: sops-gpg
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
   # postBuild:
   #   substitute: {}
   #   substituteFrom:
