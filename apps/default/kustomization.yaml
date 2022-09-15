@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: default
 resources:
   - bitwarden
-  - external
+  # - external
   - filebrowser
   - flame-dashboard
   - jellyfin
