@@ -25,5 +25,5 @@ spec:
       reclaimPolicy: Retain
     storageClass:
       create: true
-      defaultClass: true
+      defaultClass: false
       name: nfs
