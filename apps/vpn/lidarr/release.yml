@@ -38,10 +38,10 @@ spec:
           - host: lidarr.claytonc.dev
             paths:
               - path: /
-        # tls: 
-        #  - secretName: lidarr-tls
-        #    hosts:
-        #      - lidarr.claytonc.dev
+        tls: 
+         - secretName: lidarr-tls
+           hosts:
+             - lidarr.claytonc.dev
     
     probes:
       liveness:
