@@ -4,6 +4,7 @@ namespace: default
 resources:
   - bitwarden
   # - external
+  - certs
   - filebrowser
   - flame-dashboard
   - jellyfin
