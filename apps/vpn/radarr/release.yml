@@ -27,8 +27,8 @@ spec:
         annotations: 
           # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          cert-manager.io/cluster-issuer: letsencrypt
-          traefik.ingress.kubernetes.io/router.tls: 'true'
+          # cert-manager.io/cluster-issuer: letsencrypt
+          # traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: radarr
           flame.pawelmalak/url: https://radarr.claytonc.dev
@@ -38,10 +38,10 @@ spec:
           - host: radarr.claytonc.dev
             paths:
               - path: /
-        tls: 
-         - secretName: radarr-tls
-           hosts:
-             - radarr.claytonc.dev
+        # tls: 
+        #  - secretName: radarr-tls
+        #    hosts:
+        #      - radarr.claytonc.dev
     
     probes:
       liveness:
@@ -50,11 +50,13 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "192.168.1.56"
-            path: "/mnt/ssd/vols/radarr"    
+        type: pvc
+        accessMode: ReadWriteMany
+        size: 1Gi        
+        # volumeSpec:
+        #   nfs:
+        #     server: "192.168.1.56"
+        #     path: "/mnt/ssd/vols/radarr"    
       movies:
         enabled: true
         mountPath: /media

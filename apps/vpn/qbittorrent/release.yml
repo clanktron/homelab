@@ -31,8 +31,8 @@ spec:
         annotations: 
           # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          cert-manager.io/cluster-issuer: letsencrypt
-          traefik.ingress.kubernetes.io/router.tls: 'true'
+          # cert-manager.io/cluster-issuer: letsencrypt
+          # traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: qBittorrent
           flame.pawelmalak/url: https://qbittorrent.claytonc.dev
@@ -42,20 +42,22 @@ spec:
           - host: qbittorrent.claytonc.dev
             paths:
               - path: /
-        tls: 
-         - secretName: qbittorrent-tls
-           hosts:
-             - qbittorrent.claytonc.dev
+        # tls: 
+        #  - secretName: qbittorrent-tls
+        #    hosts:
+        #      - qbittorrent.claytonc.dev
     
     persistence:
       config:
         enabled: true
         mountPath: /config
-        type: custom
-        volumeSpec:
-          nfs:
-            server: "192.168.1.56"
-            path: "/mnt/ssd/vols/qbittorrent/"
+        type: pvc
+        accessMode: ReadWriteMany
+        size: 1Gi       
+        # volumeSpec:
+        #   nfs:
+        #     server: "192.168.1.56"
+        #     path: "/mnt/ssd/vols/qbittorrent/"
 
       downloads:
         enabled: true

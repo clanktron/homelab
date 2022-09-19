@@ -27,8 +27,8 @@ spec:
         annotations: 
           # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          cert-manager.io/cluster-issuer: letsencrypt
-          traefik.ingress.kubernetes.io/router.tls: 'true'
+          # cert-manager.io/cluster-issuer: letsencrypt
+          # traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: lidarr
           flame.pawelmalak/url: https://lidarr.claytonc.dev
@@ -38,10 +38,10 @@ spec:
           - host: lidarr.claytonc.dev
             paths:
               - path: /
-        tls: 
-         - secretName: lidarr-tls
-           hosts:
-             - lidarr.claytonc.dev
+        # tls: 
+        #  - secretName: lidarr-tls
+        #    hosts:
+        #      - lidarr.claytonc.dev
     
     probes:
       liveness:
@@ -50,11 +50,10 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec: 
-          nfs:
-            server: "192.168.1.56"
-            path: "/mnt/ssd/vols/lidarr"
+        type: pvc
+        accessMode: ReadWriteMany
+        size: 1Gi
+        
       music:
         enabled: true
         mountPath: /music
