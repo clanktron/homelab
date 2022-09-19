@@ -23,8 +23,8 @@ spec:
       defaultClassReplicaCount: 1
       reclaimPolicy: Retain
 
-    defaultSettings:
-      defaultReplicaCount: 1
+    # defaultSettings:
+    #   defaultReplicaCount: 1
     
     csi:
       attacherReplicaCount: 1
