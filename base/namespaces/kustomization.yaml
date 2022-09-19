@@ -8,4 +8,6 @@ resources:
 - traefik.yml
 - vpn-gateway.yml
 - vpn.yml
-- storage.yml
+- longhorn-system.yml
+- nfs-provisioner.yml
+# - storage.yml
