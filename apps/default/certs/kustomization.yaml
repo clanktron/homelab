@@ -6,6 +6,6 @@ resources:
   - pihole-tls.yml
   - prowlarr-tls.yml
   - qbittorrent.yml
-  # - radarr-tls.yml
-  # - sonarr-tls.yml
+  - radarr-tls.yml
+  - sonarr-tls.yml
 

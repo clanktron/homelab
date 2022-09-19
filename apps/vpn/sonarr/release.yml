@@ -38,10 +38,10 @@ spec:
           - host: sonarr.claytonc.dev
             paths:
               - path: /
-        # tls: 
-        #  - secretName: sonarr-tls
-        #    hosts:
-        #      - sonarr.claytonc.dev
+        tls: 
+         - secretName: sonarr-tls
+           hosts:
+             - sonarr.claytonc.dev
     
     probes:
       liveness:

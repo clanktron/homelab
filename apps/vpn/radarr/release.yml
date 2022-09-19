@@ -38,10 +38,10 @@ spec:
           - host: radarr.claytonc.dev
             paths:
               - path: /
-        # tls: 
-        #  - secretName: radarr-tls
-        #    hosts:
-        #      - radarr.claytonc.dev
+        tls: 
+         - secretName: radarr-tls
+           hosts:
+             - radarr.claytonc.dev
     
     probes:
       liveness:

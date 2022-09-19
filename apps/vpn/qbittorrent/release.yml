@@ -42,10 +42,10 @@ spec:
           - host: qbittorrent.claytonc.dev
             paths:
               - path: /
-        # tls: 
-        #  - secretName: qbittorrent-tls
-        #    hosts:
-        #      - qbittorrent.claytonc.dev
+        tls: 
+         - secretName: qbittorrent-tls
+           hosts:
+             - qbittorrent.claytonc.dev
     
     persistence:
       config:
