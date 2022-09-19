@@ -11,6 +11,9 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer
     group: cert-manager.io
+  secretTemplate:
+    annotations:
+      kubed.appscode.com/sync: "cert-manager-tls=vpn" # Sync certificate to matching namespaces
 
 
 # ---
