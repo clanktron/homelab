@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: longhorn-system 
-  # labels:
-  #   cert-manager-tls: storage
+  labels:
+    cert-manager-tls: longhorn
 
 ---
 kind: NetworkPolicy

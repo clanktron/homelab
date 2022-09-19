@@ -5,7 +5,7 @@ metadata:
   name: vpn
   labels:
     routed-gateway: "true"
-    # cert-manager-tls: vpn
+    cert-manager-tls: vpn
 
 ---
 kind: NetworkPolicy
