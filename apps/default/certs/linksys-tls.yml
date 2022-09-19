@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: linksys-tls
   dnsNames:
-    - linksys.claytonc.dev
+    - router.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer

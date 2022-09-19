@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: pihole-tls
   dnsNames:
-    - pihole.claytonc.dev
+    - dns.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
