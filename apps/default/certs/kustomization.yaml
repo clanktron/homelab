@@ -5,7 +5,8 @@ resources:
   - linksys-tls.yml
   - pihole-tls.yml
   - prowlarr-tls.yml
+  - pve-tls.yml
   - qbittorrent.yml
   - radarr-tls.yml
   - sonarr-tls.yml
-
+  - truenas-tls.yml

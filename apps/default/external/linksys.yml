@@ -5,20 +5,19 @@ metadata:
   name: linksys
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: linksys
-    flame.pawelmalak/url: https://linksys1.claytonc.dev
+    flame.pawelmalak/url: https://router.claytonc.dev
     flame.pawelmalak/icon: access-point-network
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - linksys1.claytonc.dev
+      - router.claytonc.dev
     secretName: linksys-tls
   rules:
-    - host: linksys1.claytonc.dev
+    - host: router.claytonc.dev
       http:
         paths:
           - path: /

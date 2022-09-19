@@ -4,7 +4,6 @@ metadata:
   name: truenas
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
     flame.pawelmalak/name: truenas
