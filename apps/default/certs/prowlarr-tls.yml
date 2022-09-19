@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: prowlarr-tls
   dnsNames:
-    - prowlarr.claytonc.dev
+    - index.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
