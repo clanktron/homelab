@@ -27,7 +27,7 @@ spec:
           # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           # cert-manager.io/cluster-issuer: letsencrypt
-          # traefik.ingress.kubernetes.io/router.tls: 'true'
+          traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: prowlarr
           flame.pawelmalak/url: https://index.claytonc.dev
@@ -37,15 +37,16 @@ spec:
           - host: index.claytonc.dev
             paths:
               - path: /
-        # tls: 
-        #  - secretName: prowlarr-tls
-        #    hosts:
-        #      - index.claytonc.dev
+        tls: 
+         - secretName: prowlarr-tls
+           hosts:
+             - index.claytonc.dev
     
     persistence:
       config:
         enabled: true
         type: pvc
+        storageClass: nfs
         accessMode: ReadWriteMany
         size: 1Gi
 
