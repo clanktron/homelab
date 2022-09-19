@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nfs-provisioner 
+  # labels:
+  #   cert-manager-tls: storage
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: default
+  namespace: nfs-provisioner
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    # Only allow ingress from K8S
+    - ipBlock:
+        cidr: 10.0.0.0/8
+  egress:
+  - to:
+    # Only allow egress to K8S and local network
+    - ipBlock:
+        cidr: 10.0.0.0/8
+    - ipBlock:
+        cidr: 192.168.0.0/24
+  policyTypes:
+    - Ingress
+    - Egress
