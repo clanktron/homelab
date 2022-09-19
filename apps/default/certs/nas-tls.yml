@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: truenas-tls
+  name: nas-tls
 spec:
-  secretName: truenas-tls
+  secretName: nas-tls
   dnsNames:
-    - truenas.claytonc.dev
+    - nas.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer

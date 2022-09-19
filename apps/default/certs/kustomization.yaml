@@ -9,4 +9,4 @@ resources:
   - qbittorrent.yml
   - radarr-tls.yml
   - sonarr-tls.yml
-  - truenas-tls.yml
+  - nas-tls.yml

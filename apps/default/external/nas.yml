@@ -1,36 +1,36 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: truenas
+  name: nas
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
     flame.pawelmalak/type: app
-    flame.pawelmalak/name: truenas
-    flame.pawelmalak/url: https://truenas.claytonc.dev
+    flame.pawelmalak/name: nas
+    flame.pawelmalak/url: https://nas.claytonc.dev
     flame.pawelmalak/icon: nas
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - truenas.claytonc.dev
-    secretName: truenas-tls
+      - nas.claytonc.dev
+    secretName: nas-tls
   rules:
-    - host: truenas.claytonc.dev
+    - host: nas.claytonc.dev
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: truenas
+                name: nas
                 port:
                   number: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: truenas
+  name: nas
 spec:
   externalName: 192.168.1.56
   type: ExternalName
