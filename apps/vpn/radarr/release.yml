@@ -51,6 +51,7 @@ spec:
       config:
         enabled: true
         type: pvc
+        storageClass: nfs
         accessMode: ReadWriteMany
         size: 1Gi        
         # volumeSpec:
