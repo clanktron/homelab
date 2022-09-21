@@ -45,9 +45,11 @@ spec:
             name: flame-data
       volumes:
         - name: flame-data
-          nfs:
-            server: 192.168.1.56
-            path: /mnt/ssd/vols/flame/
+          persistentVolumeClaim:
+            claimName: flame-data
+          # nfs:
+          #   server: 192.168.1.56
+          #   path: /mnt/ssd/vols/flame/
 
 
 ---
