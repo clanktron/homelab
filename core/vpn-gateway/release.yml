@@ -33,8 +33,8 @@ spec:
     settings:
       VPN_INTERFACE: wg0
       VPN_BLOCK_OTHER_TRAFFIC: true
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "172.16.0.0/12 10.0.0.0/8 192.168.1.0/24"
-      VPN_LOCAL_CIDRS: "172.16.0.0/12 10.0.0.0/8 192.168.1.0/24"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.0.0.0/8 192.168.1.0/24"
+      VPN_LOCAL_CIDRS: "10.0.0.0/8 192.168.1.0/24"
 
     resources:
       requests:
@@ -49,8 +49,8 @@ spec:
         tag: v3.6.0
 
     addons:
-      netshoot:
-        enabled: false
+      # netshoot:
+      #   enabled: false
 
       vpn:
         enabled: true
@@ -66,13 +66,7 @@ spec:
           runAsUser: 568
           runAsGroup: 568
           capabilities:
-            drop:
-              - "SYS_MODULE"
-
-        env:
-          TZ: PT
-          IPTABLES_BACKEND: nft
-          KILLSWITCH: "false"
+            add: ["NET_ADMIN", "SYS_MODULE", "CAP_AUDIT_WRITE"]
 
         configFileSecret: vpn-config
 
