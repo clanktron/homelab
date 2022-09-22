@@ -4,6 +4,7 @@ resources:
   - lidarr-tls.yml
   - linksys-tls.yml
   - pihole-tls.yml
+  - pydio-tls.yml
   - prowlarr-tls.yml
   - pve-tls.yml
   - qbittorrent.yml

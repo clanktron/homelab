@@ -5,7 +5,6 @@ metadata:
   name: lidarr-tls
 spec:
   secretName: lidarr-tls
-  commonName: lidarr
   dnsNames:
     - lidarr.claytonc.dev
   issuerRef:
