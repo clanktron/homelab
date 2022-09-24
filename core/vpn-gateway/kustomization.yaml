@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: vpn-gateway
 resources:
   - release.yml
-  - vpn-secret.yml
+  - vpn-config.yml
