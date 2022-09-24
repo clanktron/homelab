@@ -20,6 +20,8 @@ spec:
     # Only allow ingress from K8S
     - ipBlock:
         cidr: 10.0.0.0/8
+    - ipBlock:
+        cidr: 192.168.0.0/24
   egress:
   - to:
     # Only allow egress to K8S
