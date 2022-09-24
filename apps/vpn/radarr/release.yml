@@ -56,23 +56,23 @@ spec:
         #   nfs:
         #     server: "192.168.1.56"
         #     path: "/mnt/ssd/vols/radarr"    
-      # movies:
-      #   enabled: true
-      #   mountPath: /media
-      #   type: custom
-      #   volumeSpec:
-      #     nfs:
-      #       server: "192.168.1.56"
-      #       path: "/mnt/rust/media/movies"
+      movies:
+        enabled: true
+        mountPath: /media
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/rust/media/movies"
       
-      # downloads:
-      #   enabled: true
-      #   mountPath: /downloads
-      #   type: custom
-      #   volumeSpec:
-      #     nfs:
-      #       server: "192.168.1.56"
-      #       path: "/mnt/ssd/vols/jellyfin/downloads"
+      downloads:
+        enabled: true
+        mountPath: /downloads
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/vols/jellyfin/downloads"
     
     metrics:
       enabled: false
