@@ -35,7 +35,6 @@ spec:
         flame.pawelmalak/url: https://jupyterhub.claytonc.dev
         flame.pawelmalak/icon: notebook-multiple
       ingressClassName: traefik-external
-      path: /
       hosts:
         - jupyterhub.claytonc.dev
       tls: 
