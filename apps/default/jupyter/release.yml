@@ -28,8 +28,8 @@ spec:
       enabled: true
       annotations: 
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-        traefik.ingress.kubernetes.io/router.tls: 'true'
-        cert-manager.io/cluster-issuer: letsencrypt
+        # traefik.ingress.kubernetes.io/router.tls: 'true'
+        # cert-manager.io/cluster-issuer: letsencrypt
         flame.pawelmalak/type: app
         flame.pawelmalak/name: jupyterhub
         flame.pawelmalak/url: https://jupyterhub.claytonc.dev
@@ -37,7 +37,7 @@ spec:
       ingressClassName: traefik-external
       hosts:
         - jupyterhub.claytonc.dev
-      tls: 
-       - secretName: jupyterhub-tls
-         hosts:
-           - jupyterhub.claytonc.dev
+      # tls: 
+      #  - secretName: jupyterhub-tls
+      #    hosts:
+      #      - jupyterhub.claytonc.dev
