@@ -8,6 +8,7 @@ resources:
   - filebrowser
   - flame-dashboard
   - jellyfin
+  - jupyter
   - littlelink
   - portfolio
   - uptime-kuma
