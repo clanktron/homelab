@@ -11,6 +11,7 @@ resources:
   - grafana.yml
   - hashicorp.yml
   - jetstack.yml
+  - jupyter.yml
   - k8s-at-home.yml
   - kubed.yml
   - kubevela.yml
