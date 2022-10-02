@@ -13,3 +13,4 @@ resources:
   - radarr-tls.yml
   - sonarr-tls.yml
   - nas-tls.yml
+  - vault-tls.yml

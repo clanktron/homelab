@@ -5,10 +5,13 @@ resources:
   - bitwarden
   - external
   - certs
+  # - code-server
   - filebrowser
   - flame-dashboard
   - jellyfin
   # - jupyter
   - littlelink
   - portfolio
+  # - pydio
+  - ssh-server
   - uptime-kuma
