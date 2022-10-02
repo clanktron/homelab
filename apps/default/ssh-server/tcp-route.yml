@@ -4,6 +4,8 @@ kind: IngressRouteTCP
 metadata:
   name: ssh-server
   namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik-crd-external
 spec:
   entryPoints:
     - ssh
