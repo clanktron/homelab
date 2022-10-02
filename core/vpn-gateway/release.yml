@@ -67,9 +67,9 @@ spec:
               secretName: vpn-config
 
         securityContext:
-          sysctls:
-          - name: net.ipv4.conf.all.src_valid_mark
-            value: "1"
+          # sysctls:
+          # - name: net.ipv4.conf.all.src_valid_mark
+          #   value: "1"
           privileged: true
           capabilities:
             add:
