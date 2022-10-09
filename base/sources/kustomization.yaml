@@ -6,6 +6,7 @@ resources:
   - bitnami.yml
   - cillium.yml
   - crossplane.yml
+  - coder.yml
   - external-secrets.yml
   - gitlab.yml
   - grafana.yml
