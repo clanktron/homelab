@@ -62,8 +62,7 @@ spec:
         mountpath: /config
         type: custom
         volumeSpec:
-          nfs:
-            server: "192.168.1.56"
+          hostPath:
             path: /home/clayton/filebrowser
     
       data:
@@ -72,8 +71,9 @@ spec:
         accessMode: ReadWriteMany
         type: custom
         volumeSpec:
-          hostPath:
-            path: /home/clayton/nfs/
+          nfs:
+            server: "192.168.1.56"
+            path: "/mnt/ssd/"
               # nfs:
               #   server: "192.168.1.56"
               #   path: "/mnt/ssd/"
