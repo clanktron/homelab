@@ -56,7 +56,7 @@ spec:
         type: custom
         volumeSpec:
           hostPath:
-            path: /home/clayton/nfs/vols/flame
+            path: /home/clayton/flame
           # nfs:
           #   server: "192.168.1.56"
           #   path: "/mnt/ssd/vols/uptime/"

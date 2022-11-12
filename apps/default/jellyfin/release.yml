@@ -70,7 +70,7 @@ spec:
         type: custom
         volumeSpec:
           hostPath:
-            path: /home/clayton/nfs/vols/jellyfin
+            path: /home/clayton/jellyfin
           # nfs:
           #   server: "192.168.1.56"
           #   path: "/mnt/ssd/vols/jellyfin/config"

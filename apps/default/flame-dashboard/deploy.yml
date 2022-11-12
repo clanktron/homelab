@@ -59,7 +59,7 @@ spec:
       volumes:
         - name: flame-data
           hostPath:
-            path: /home/clayton/nfs/vols/flame
+            path: /home/clayton/flame
           # persistentVolumeClaim:
           #   claimName: flame-data
           # nfs:

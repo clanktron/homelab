@@ -50,7 +50,7 @@ spec:
         type: custom
         volumeSpec:
           hostPath:
-            path: /home/clayton/nfs/vols/bitwarden
+            path: /home/clayton/bitwarden
           # nfs:
           #   server: "192.168.1.56"
           #   path: "/mnt/ssd/vols/bitwarden/"
