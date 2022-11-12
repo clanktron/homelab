@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/prometheus.json": "file:///Users/clayton/Dev/kube/homelab/base/sources/prometheus.yml"
-    }
-}
