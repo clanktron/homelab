@@ -64,7 +64,7 @@ spec:
         volumeSpec:
           nfs:
             server: "192.168.1.56"
-            path: "/mnt/ssd/vols/filebrowser/"
+            path: /home/clayton/nfs/vols/filebrowser
     
       data:
         enabled: true
@@ -72,6 +72,8 @@ spec:
         accessMode: ReadWriteMany
         type: custom
         volumeSpec:
-          nfs:
-            server: "192.168.1.56"
-            path: "/mnt/ssd/"
+          hostPath:
+            path: /home/clayton/nfs/
+              # nfs:
+              #   server: "192.168.1.56"
+              #   path: "/mnt/ssd/"

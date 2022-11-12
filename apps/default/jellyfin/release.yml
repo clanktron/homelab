@@ -69,9 +69,11 @@ spec:
         enabled: true
         type: custom
         volumeSpec:
-          nfs:
-            server: "192.168.1.56"
-            path: "/mnt/ssd/vols/jellyfin/config"
+          hostPath:
+            path: /home/clayton/nfs/vols/jellyfin
+          # nfs:
+          #   server: "192.168.1.56"
+          #   path: "/mnt/ssd/vols/jellyfin/config"
       transcode:
         enabled: true
         type: emptyDir
