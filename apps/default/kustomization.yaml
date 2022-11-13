@@ -10,5 +10,4 @@ resources:
   - jellyfin
   - littlelink
   - portfolio
-  # - pydio
   - uptime-kuma
