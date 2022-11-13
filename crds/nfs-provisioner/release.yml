@@ -6,7 +6,6 @@ spec:
   interval: 2m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: nfs-subdir-external-provisioner
       version: 4.0.16
       sourceRef:
@@ -25,5 +24,5 @@ spec:
       reclaimPolicy: Retain
     storageClass:
       create: true
-      defaultClass: true
+      defaultClass: false
       name: nfs

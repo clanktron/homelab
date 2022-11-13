@@ -2,6 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - code-tls.yml
+  - cloud-tls.yml
+  - files-tls.yml
   - jupyterhub-tls.yml
   - lidarr-tls.yml
   - linksys-tls.yml

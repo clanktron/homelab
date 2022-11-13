@@ -6,7 +6,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: jellyfin
       version: 9.5.3
       sourceRef:
@@ -17,7 +16,6 @@ spec:
     remediation:
       retries: 5
   values:
-    
     env:
       TZ: PT
     
@@ -25,7 +23,6 @@ spec:
       main:
         enabled: true
         annotations: 
-          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
@@ -67,21 +64,17 @@ spec:
     persistence:
       config:
         enabled: true
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /home/clayton/jellyfin
-          # nfs:
-          #   server: "192.168.1.56"
-          #   path: "/mnt/ssd/vols/jellyfin/config"
+        type: pvc
+        storageClass: longhorn
+
       transcode:
         enabled: true
         type: emptyDir
         accessMode: ReadWriteOnce
         emptyDir:
           enabled: true
-          #medium: "Memory"
           sizeLimit: 10Gi
+
       movies:
         enabled: true
         mountPath: /movies
@@ -90,6 +83,7 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/rust/media/movies"
+
       shows:
         enabled: true
         mountPath: /videos
@@ -98,6 +92,7 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/rust/media/shows"
+
       music:  
         enabled: true
         mountPath: /music
@@ -106,6 +101,7 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/rust/media/music"
+
       downloads:
         enabled: true
         mountPath: /downloads
@@ -114,11 +110,10 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/ssd/vols/jellyfin/downloads"
+
     resources:
       requests:
-        #gpu.intel.com/i915: 1
         cpu: 500m
         memory: 1000Mi
       limits:
-        #gpu.intel.com/i915: 1
         memory: 8000Mi

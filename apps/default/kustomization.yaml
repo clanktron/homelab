@@ -3,15 +3,12 @@ kind: Kustomization
 namespace: default
 resources:
   - bitwarden
-  - external
+  - proxy
   - certs
-  # - code-server
   - filebrowser
-  - flame-dashboard
+  - flame
   - jellyfin
-  # - jupyter
   - littlelink
   - portfolio
   # - pydio
-  - ssh-server
   - uptime-kuma

@@ -6,7 +6,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: filebrowser
       version: 1.4.2
       sourceRef:
@@ -26,14 +25,12 @@ spec:
       main:
         enabled: true
         annotations: 
-          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: filebrowser
           flame.pawelmalak/url: https://cloud.claytonc.dev
-          # flame.pawelmalak/icon: https://raw.githubusercontent.com/filebrowser/filebrowser/master/frontend/public/img/logo.svg
           flame.pawelmalak/icon: file-multiple
         ingressClassName: traefik-external
         hosts:
@@ -59,11 +56,9 @@ spec:
     persistence:
       config:
         enabled: true
-        mountpath: /config
-        type: custom
-        volumeSpec:
-          hostPath:
-            path: /home/clayton/filebrowser
+        # mountpath: /config
+        type: pvc
+        storageClass: longhorn
     
       data:
         enabled: true
@@ -74,6 +69,3 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/ssd/"
-              # nfs:
-              #   server: "192.168.1.56"
-              #   path: "/mnt/ssd/"

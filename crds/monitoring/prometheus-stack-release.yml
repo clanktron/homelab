@@ -6,7 +6,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: kube-prometheus-stack
       version: 38.0.0
       sourceRef:
@@ -16,16 +15,15 @@ spec:
       interval: 5m
   install:
     remediation:
-      retries: 3
+      retries: 10
   values:
     alertmanager:
       enabled: true
       ingress:
         enabled: true
         annotations: 
-          # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: alertmanager
@@ -48,9 +46,8 @@ spec:
       ingress:
         enabled: true
         annotations:
-          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: grafana
@@ -100,9 +97,8 @@ spec:
       ingress:
         enabled: true
         annotations: 
-          # kubernetes.io/ingress.class: traefik-internal
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: prometheus
