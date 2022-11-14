@@ -7,7 +7,8 @@ currently managed by fluxCD
 To bootstrap the cluster run:
 
 ```bash
-
+export GITHUB_TOKEN=<personal_access_token>
+flux bootstrap github --owner=clanktron --repository=homelab --path=clusters/prod/
 ```
 
 To encrypt a secret using age run: 
