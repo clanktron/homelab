@@ -4,10 +4,7 @@ resources:
 - cert-manager.yml
 - default.yml
 - kube-system.yml
-- monitoring.yml
-- traefik.yml
-- vpn-gateway.yml
-- vpn.yml
 - longhorn-system.yml
+- monitoring.yml
 - nfs-provisioner.yml
-# - storage.yml
+- traefik.yml

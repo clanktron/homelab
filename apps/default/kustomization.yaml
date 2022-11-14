@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: default
 resources:
   - bitwarden
-  - proxy
   - certs
   - filebrowser
   - flame
   - jellyfin
   - littlelink
   - portfolio
+  - proxy
   - uptime-kuma
