@@ -7,25 +7,25 @@ metadata:
     cert-manager-tls: longhorn
 
 ---
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: default
-  namespace: longhorn-system
-spec:
-  podSelector: {}
-  ingress:
-  - from:
-    # Only allow ingress from K8S
-    - ipBlock:
-        cidr: 10.0.0.0/8
-  egress:
-  - to:
-    # Only allow egress to K8S and local network
-    - ipBlock:
-        cidr: 10.0.0.0/8
-    - ipBlock:
-        cidr: 192.168.0.0/24
-  policyTypes:
-    - Ingress
-    - Egress
+#kind: NetworkPolicy
+#apiVersion: networking.k8s.io/v1
+#metadata:
+#  name: default
+#  namespace: longhorn-system
+#spec:
+#  podSelector: {}
+#  ingress:
+#  - from:
+#    # Only allow ingress from K8S
+#    - ipBlock:
+#        cidr: 10.0.0.0/8
+#  egress:
+#  - to:
+#    # Only allow egress to K8S and local network
+#    - ipBlock:
+#        cidr: 10.0.0.0/8
+#    - ipBlock:
+#        cidr: 192.168.0.0/24
+#  policyTypes:
+#    - Ingress
+#    - Egress
