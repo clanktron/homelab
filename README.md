@@ -20,4 +20,4 @@ sops --age=$AGEPUBKEY --encrypt --encrypted-regex '^(data|stringData)$' --in-pla
 
 ### Useful notes:
 
-- in the case of helm being stuck in 'pending-installation' state, delete the helm secrets and either allow flux to retry reconciliation or rerun helm command
+- in the case of helm being stuck in 'pending-installation' state, delete the helm secrets and then allow flux to retry reconciliation or rerun helm command
