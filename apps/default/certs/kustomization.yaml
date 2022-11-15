@@ -4,6 +4,7 @@ resources:
   - code-tls.yml
   - cloud-tls.yml
   - files-tls.yml
+  - flame-tls.yml
   - jupyterhub-tls.yml
   - lidarr-tls.yml
   - linksys-tls.yml
