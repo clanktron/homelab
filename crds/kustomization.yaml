@@ -4,6 +4,6 @@ resources:
   - cert-manager
   - kubed
   - longhorn
-  - monitoring
+    #  - monitoring
     #  - nfs-provisioner
   - traefik
