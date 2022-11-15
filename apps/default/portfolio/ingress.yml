@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: portfolio
   annotations:
-    # kubernetes.io/ingress.class: traefik-external
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.tls: 'true'

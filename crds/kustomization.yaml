@@ -5,5 +5,5 @@ resources:
   - kubed
   - longhorn
   - monitoring
-  - nfs-provisioner
+    #  - nfs-provisioner
   - traefik

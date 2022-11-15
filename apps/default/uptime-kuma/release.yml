@@ -52,7 +52,7 @@ spec:
       data:
         enabled: true
         type: pvc
-        storageClass: longhorn
+          # storageClass: longhorn
           # volumeSpec:
           #   hostPath:
           #     path: /home/clayton/uptime

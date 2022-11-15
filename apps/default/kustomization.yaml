@@ -8,6 +8,6 @@ resources:
   - flame
   - jellyfin
   - littlelink
-  - portfolio
+    #  - portfolio
   - proxy
   - uptime-kuma

@@ -58,10 +58,10 @@ spec:
             name: flame-data
       volumes:
         - name: flame-data
-          hostPath:
-            path: /home/clayton/flame
-          # persistentVolumeClaim:
-          #   claimName: flame-data
+          persistentVolumeClaim:
+            claimName: flame-data
+          # hostPath:
+          #   path: /home/clayton/flame
           # nfs:
           #   server: 192.168.1.56
           #   path: /mnt/ssd/vols/flame/

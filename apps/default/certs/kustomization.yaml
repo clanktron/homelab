@@ -16,4 +16,5 @@ resources:
   - radarr-tls.yml
   - sonarr-tls.yml
   - nas-tls.yml
+  - uptime-tls.yml
   - vault-tls.yml

@@ -65,7 +65,7 @@ spec:
       config:
         enabled: true
         type: pvc
-        storageClass: longhorn
+          # storageClass: longhorn
 
       transcode:
         enabled: true
