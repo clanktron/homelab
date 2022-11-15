@@ -5,7 +5,7 @@ resources:
   - bitwarden
   - certs
   # - filebrowser
-  # - flame
+  - flame
   # - jellyfin
   - littlelink
   - proxy
