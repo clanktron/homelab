@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - cert-manager
   - kubed
-  - longhorn
-    #  - monitoring
+    # - longhorn
+    # - monitoring
   - nfs-provisioner
   - traefik
