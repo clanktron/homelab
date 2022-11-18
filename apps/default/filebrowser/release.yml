@@ -58,7 +58,7 @@ spec:
         enabled: true
         # mountpath: /config
         type: pvc
-        storageClass: nfs
+        storageClass: longhorn
     
       data:
         enabled: true
