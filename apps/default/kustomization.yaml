@@ -4,8 +4,8 @@ namespace: default
 resources:
   - bitwarden
   - certs
-  # - filebrowser
-  # - flame
+  - filebrowser
+  - flame
   # - jellyfin
   - littlelink
   - proxy
