@@ -28,7 +28,7 @@ spec:
         flame.pawelmalak/name: postgres
         flame.pawelmalak/url: https://postgres.claytonc.dev
         flame.pawelmalak/icon: elephant
-      ingressClassName: "traefik-internal"
+      ingressClassName: "traefik-external"
       hosts:
         - host: postgres.claytonc.dev
       tls: 
