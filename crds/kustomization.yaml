@@ -6,5 +6,5 @@ resources:
   - longhorn
     # - monitoring
     # - nfs-provisioner
-  - postgres
+    # - postgres
   - traefik
