@@ -6,7 +6,6 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: vaultwarden
       version: 5.3.2
       sourceRef:
@@ -26,9 +25,8 @@ spec:
       main:
         enabled: true
         annotations: 
-          # kubernetes.io/ingress.class: traefik-external
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-          # cert-manager.io/cluster-issuer: letsencrypt
+          cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
           flame.pawelmalak/type: app
           flame.pawelmalak/name: vaultwarden
@@ -48,7 +46,8 @@ spec:
       config:
         enabled: true
         type: pvc
-          #storageClass: longhorn
+        storageClass: longhorn
+        
           # type: custom
           # volumeSpec:
           #   hostPath:

@@ -20,6 +20,8 @@ resources:
   - longhorn.yml
   - nextcloud.yml
   - nfs.yml
+  - postgres-operator-ui.yml
+  - postgres-operator.yml
   - prometheus.yml
   - shipa.yml
   - teleport.yml
