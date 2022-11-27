@@ -7,4 +7,5 @@ resources:
 - longhorn-system.yml
 - monitoring.yml
 - nfs-provisioner.yml
+- postgres.yml
 - traefik.yml
