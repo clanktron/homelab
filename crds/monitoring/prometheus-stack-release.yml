@@ -72,19 +72,19 @@ spec:
           
         datasources:
           enabled: true
-          defaultDatasourceEnabled: false
+          defaultDatasourceEnabled: true
           defaultDatasourceScrapeInterval: 15s
     
     
       additionalDataSources:
-      - name: Prometheus
-        type: prometheus
-        url: http://prometheus-kube-prometheus-prometheus:9090/
-        access: proxy
-        isDefault: true
+        #- name: Prometheus
+        #  type: prometheus
+        #  url: http://prometheus-kube-prom-prometheus:9090/
+        #  access: proxy
+        #  isDefault: true
       - name: Loki
         type: loki
-        url: http://loki:3100
+        url: http://loki-stack:3100
         access: proxy
     
       serviceMonitor:
