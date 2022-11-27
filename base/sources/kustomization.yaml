@@ -4,6 +4,7 @@ namespace: flux-system
 resources:
   - armo.yml
   - bitnami.yml
+  - cells.yml
   - cillium.yml
   - crossplane.yml
   - coder.yml

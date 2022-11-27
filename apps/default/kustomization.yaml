@@ -4,6 +4,7 @@ namespace: default
 resources:
   - bitwarden
   - certs
+    #- cells
   - filebrowser
   - flame
   # - jellyfin
