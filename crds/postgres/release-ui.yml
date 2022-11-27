@@ -31,7 +31,7 @@ spec:
       ingressClassName: "traefik-external"
       hosts:
         - host: postgres.claytonc.dev
-          paths: \
+          paths: ["/"]
       tls: 
         - secretName: postgres-tls
           hosts:
