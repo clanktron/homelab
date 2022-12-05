@@ -7,7 +7,7 @@ resources:
     #- cells
   - filebrowser
   - flame
-  # - jellyfin
+  - jellyfin
   - littlelink
   - proxy
   # - uptime-kuma

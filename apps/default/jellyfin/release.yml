@@ -65,7 +65,7 @@ spec:
       config:
         enabled: true
         type: pvc
-          # storageClass: longhorn
+        storageClass: longhorn
 
       transcode:
         enabled: true
@@ -110,10 +110,3 @@ spec:
           nfs:
             server: "192.168.1.56"
             path: "/mnt/ssd/vols/jellyfin/downloads"
-
-    resources:
-      requests:
-        cpu: 500m
-        memory: 1000Mi
-      limits:
-        memory: 8000Mi
