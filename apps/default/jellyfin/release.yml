@@ -86,7 +86,7 @@ spec:
 
       shows:
         enabled: true
-        mountPath: /videos
+        mountPath: /shows
         type: custom
         volumeSpec:
           nfs:
@@ -109,4 +109,4 @@ spec:
         volumeSpec:
           nfs:
             server: "192.168.1.56"
-            path: "/mnt/ssd/vols/jellyfin/downloads"
+            path: "/mnt/rust/media/downloads/"
