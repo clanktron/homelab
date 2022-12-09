@@ -66,6 +66,8 @@ spec:
         enabled: true
         type: pvc
         storageClass: longhorn
+        size: 20Gi
+
 
       transcode:
         enabled: true
