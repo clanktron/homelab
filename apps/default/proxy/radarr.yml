@@ -24,7 +24,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name:  radarr
+                name: radarr
                 port:
                   number: 7878
 
@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: radarr
 spec:
-  externalName: 192.168.1.18
+  externalName: 192.168.1.17
   type: ExternalName
   ports:
   - protocol: TCP

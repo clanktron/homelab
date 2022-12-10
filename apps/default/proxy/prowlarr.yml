@@ -24,7 +24,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name:  prowlarr
+                name: prowlarr
                 port:
                   number: 9696
 
@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: prowlarr
 spec:
-  externalName: 192.168.1.18
+  externalName: 192.168.1.17
   type: ExternalName
   ports:
   - protocol: TCP

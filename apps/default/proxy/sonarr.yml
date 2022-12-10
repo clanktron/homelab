@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: sonarr
 spec:
-  externalName: 192.168.1.18
+  externalName: 192.168.1.17
   type: ExternalName
   ports:
   - protocol: TCP
