@@ -6,6 +6,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: qbittorrent
     flame.pawelmalak/url: https://qbittorrent.claytonc.dev
