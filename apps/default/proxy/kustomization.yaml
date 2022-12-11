@@ -9,5 +9,6 @@ resources:
   - qbittorrent.yml
   - linksys.yml
   - pihole.yml
+  - portainer.yml
   - pve.yml
   - nas.yml
