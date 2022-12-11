@@ -46,7 +46,8 @@ spec:
       config:
         enabled: true
         type: pvc
-        storageClass: longhorn
+          #storageClass: longhorn
+        existingClaim: vaultwarden-config
         
           # type: custom
           # volumeSpec:

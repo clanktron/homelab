@@ -65,8 +65,9 @@ spec:
       config:
         enabled: true
         type: pvc
-        storageClass: longhorn
-        size: 20Gi
+          # storageClass: longhorn
+          #size: 20Gi
+        existingClaim: jellyfin-config
 
 
       transcode:

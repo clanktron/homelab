@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - deploy.yml
   - ingressroute.yml
-  - persistence.yml
+    #- persistence.yml
   - rbac.yml
   - secret.yml

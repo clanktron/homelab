@@ -58,7 +58,8 @@ spec:
         enabled: true
         # mountpath: /config
         type: pvc
-        storageClass: longhorn
+          #storageClass: longhorn
+        existingClaim: filebrowser-config
     
       data:
         enabled: true
