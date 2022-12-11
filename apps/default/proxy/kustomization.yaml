@@ -7,8 +7,8 @@ resources:
   - radarr.yml
   - prowlarr.yml
   - qbittorrent.yml
-  - linksys.yml
-  - pihole.yml
+    #- linksys.yml
+    #- pihole.yml
   - portainer.yml
   - pve.yml
   - nas.yml
