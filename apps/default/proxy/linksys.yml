@@ -30,6 +30,28 @@ spec:
                   number: 443
 
 ---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: linksys
+  annotations: 
+    kubernetes.io/ingress.class: traefik-crd-internal
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`linksys.claytonc.dev`)
+    kind: Rule
+    services:
+    - name: linksys
+      port: 443
+      scheme: https
+      serversTransport: insecure-skip-verify
+  tls:
+    secretName: linksys-tls
+
+---
 apiVersion: v1
 kind: Service
 metadata:
