@@ -6,7 +6,6 @@ resources:
   - files-tls.yml
   - flame-tls.yml
   - jupyterhub-tls.yml
-  - linksys-tls.yml
   - pihole-tls.yml
   - pydio-tls.yml
   - pve-tls.yml
