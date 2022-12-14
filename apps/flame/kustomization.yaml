@@ -1,7 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: flame
 resources:
-  - deploy.yml
+  - deployment.yml
   - ingressroute.yml
     #- persistence.yml
   - rbac.yml

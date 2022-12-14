@@ -4,6 +4,7 @@ apiVersion: apps/v1
 metadata:
   name: flame
 spec:
+  revisionHistoryLimit: 3
   replicas: 1
   selector:
     matchLabels:
