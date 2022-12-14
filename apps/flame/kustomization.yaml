@@ -5,4 +5,5 @@ resources:
   - ingressroute.yml
     #- persistence.yml
   - rbac.yml
+  - svc.yml
   - secret.yml

@@ -1,17 +1,4 @@
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: flame
-spec:
-  selector:
-    app: flame
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5005
-
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:

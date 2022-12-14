@@ -1,40 +1,39 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: pihole
+  name: nas
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
-    flame.pawelmalak/name: pihole
-    flame.pawelmalak/url: https://dns.claytonc.dev/admin
-    flame.pawelmalak/icon: router
+    flame.pawelmalak/name: nas
+    flame.pawelmalak/url: https://nas.claytonc.dev
+    flame.pawelmalak/icon: nas
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - dns.claytonc.dev
-    secretName: pihole-tls
+      - nas.claytonc.dev
+    secretName: nas-tls
   rules:
-    - host: dns.claytonc.dev
+    - host: nas.claytonc.dev
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name:  pihole
+                name: nas
                 port:
                   number: 80
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pihole
+  name: nas
 spec:
-  externalName: 192.168.1.159
+  externalName: 192.168.1.56
   type: ExternalName
   ports:
   - protocol: TCP

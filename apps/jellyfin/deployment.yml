@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  labels:
+    app.kubernetes.io/name: jellyfin
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jellyfin
+    spec:
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: jellyfin
+          image: "jellyfin/jellyfin:10.8.1"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: PT
+          ports:
+            - name: http
+              containerPort: 8096
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: movies
+              mountPath: /movies
+            - name: music
+              mountPath: /music
+            - name: shows
+              mountPath: /shows
+            - name: transcode
+              mountPath: /transcode
+          livenessProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8096
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+        - name: downloads
+          nfs:
+            path: /mnt/rust/media/downloads/
+            server: 192.168.1.56
+        - name: movies
+          nfs:
+            path: /mnt/rust/media/movies
+            server: 192.168.1.56
+        - name: music
+          nfs:
+            path: /mnt/rust/media/music
+            server: 192.168.1.56
+        - name: shows
+          nfs:
+            path: /mnt/rust/media/shows
+            server: 192.168.1.56
+        - name: transcode
+          emptyDir:
+            {}

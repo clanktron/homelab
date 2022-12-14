@@ -3,10 +3,15 @@ kind: Kustomization
 resources:
 - cert-manager.yml
 - default.yml
+- filebrowser.yml
+- flame.yml
+- jellyfin.yml
 - kube-system.yml
+- littlelink.yml
 - longhorn-system.yml
 - monitoring.yml
 - nfs-provisioner.yml
 - postgres.yml
 - traefik.yml
 - test.yml
+- vaultwarden.yml
