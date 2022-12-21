@@ -17,6 +17,13 @@ spec:
     remediation:
       retries: 3
   values:
+    replicaCount: 1
+    
+    image:
+      repository: pydio/cells
+      pullPolicy: IfNotPresent
+      tag: 4.0.5
+    
     service:
       type: ClusterIP
       reverseproxyurl: cells.claytonc.dev
@@ -41,3 +48,50 @@ spec:
         - secretName: cells-tls
           hosts:
             - cells.claytonc.dev
+    
+    #------------------------------
+    # Dependency settings
+    #------------------------------
+    mariadb:
+      enabled: true
+      volumePermissions:
+        enabled: true
+    
+    redis:
+      enabled: false
+      volumePermissions:
+        enabled: true
+      auth:
+        enabled: false
+    
+    nats:
+      enabled: false
+      auth:
+        enabled: false
+      volumePermissions:
+        enabled: true
+    
+    etcd:
+      enabled: false
+      auth:
+        rbac:
+          create: false
+      volumePermissions:
+        enabled: true
+    
+    minio:
+      enabled: false 
+      defaultBuckets: "thumbnails pydiods1 personal versions cellsdata binaries"
+      volumePermissions:
+        enabled: true
+    
+    mongodb:
+      enabled: false 
+      auth: 
+        enabled: false
+      volumePermissions:
+        enabled: true
+    
+    vault:
+      enabled: false
+    
