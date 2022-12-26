@@ -6,6 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/name: jellyfin
 spec:
+  nodeSelector:
+    igpu: true
   replicas: 1
   strategy:
     type: Recreate
