@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
   # - default
   # - cells
-  - filebrowser
-  - flame
-  - jellyfin
-  - littlelink
-  - proxy
-  # # - uptime-kuma
-  - vaultwarden
+  # - filebrowser
+  # - flame
+  # - jellyfin
+  # - littlelink
+  # - proxy
+  # - uptime-kuma
+  # - vaultwarden
