@@ -21,8 +21,8 @@ spec:
       defaultClass: true
       reclaimPolicy: Retain
 
-    # defaultSettings:
-    #   defaultReplicaCount: 1
+    defaultSettings:
+      defaultReplicaCount: 1
 
     ingress:
       enabled: true
