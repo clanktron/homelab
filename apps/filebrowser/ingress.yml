@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vaultwarden
+  name: filebrowser
   labels:
-    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/name: filebrowser
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/icon: file-multiple
@@ -27,7 +27,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: vaultwarden
+                name: filebrowser
                 port:
                   number: 80
 
