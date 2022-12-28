@@ -30,4 +30,3 @@ spec:
                 name: filebrowser
                 port:
                   number: 80
-
