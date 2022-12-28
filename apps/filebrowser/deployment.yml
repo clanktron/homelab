@@ -41,7 +41,7 @@ spec:
             - name: config
               mountPath: /config
             - name: data
-              mountPath: /srv/data
+              mountPath: /srv/
           livenessProbe:
             tcpSocket:
               port: 80
