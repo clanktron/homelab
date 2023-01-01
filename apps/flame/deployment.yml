@@ -19,7 +19,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: flame
-          image: pawelmalak/flame
+          image: "pawelmalak/flame:latest"
           resources:
             requests:
               memory: "64Mi"
