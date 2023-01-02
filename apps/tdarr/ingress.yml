@@ -7,14 +7,14 @@ metadata:
     app.kubernetes.io/name: tdarr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    flame.pawelmalak/icon: multimedia
+    flame.pawelmalak/icon: cog-play
     flame.pawelmalak/name: tdarr
     flame.pawelmalak/type: app
     flame.pawelmalak/url: https://tdarr.claytonc.dev
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-external
+  ingressClassName: traefik-internal
   tls:
     - hosts:
         - "tdarr.claytonc.dev"

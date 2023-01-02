@@ -2,10 +2,31 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: tdarr-config
+  namespace: tdarr
 data:
-  TZ: 'PT'
-  serverIP: '0.0.0.0'
-  serverPort: '8266'
-  webUIPort: '80'
-  internalNode: 'true'
-  nodeID: 'main'
+  Tdarr_Node_config.json: |-
+    {
+      "nodeID": "main",
+      "serverIP": "0.0.0.0",
+      "serverPort": "8266",
+      "handbrakePath": "",
+      "ffmpegPath": "",
+      "mkvpropeditPath": "",
+      "pathTranslators": [
+        {
+          "server": "",
+          "node": ""
+        }
+      ],
+      "platform_arch": "linux_x64_docker_false",
+      "logLevel": "INFO"
+    }
+  Tdarr_Server_config.json: |-
+    {
+      "serverPort": "8266",
+      "webUIPort": "80",
+      "serverIP": "0.0.0.0",
+      "handbrakePath": "",
+      "ffmpegPath": "",
+      "logLevel": "INFO"
+    }

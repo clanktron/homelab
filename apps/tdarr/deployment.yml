@@ -31,35 +31,37 @@ spec:
             - name: serverIP
               valueFrom:
                    configMapKeyRef:
-                     name: tdarr-config
+                     name: tdarr-env
                      key: serverIP
             - name: serverPort
               valueFrom:
                    configMapKeyRef:
-                     name: tdarr-config
+                     name: tdarr-env
                      key: serverPort
             - name: webUIPort
               valueFrom:
                    configMapKeyRef:
-                     name: tdarr-config
+                     name: tdarr-env
                      key: webUIPort
             - name: internalNode
               valueFrom:
                    configMapKeyRef:
-                     name: tdarr-config
+                     name: tdarr-env
                      key: internalNode
             - name: nodeID
               valueFrom:
                    configMapKeyRef:
-                     name: tdarr-config
+                     name: tdarr-env
                      key: nodeID
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: config
-              mountPath: /app
+            #- name: config
+            #  mountPath: /app/configs
+            - name: data
+              mountPath: /app/server
             - name: movies
               mountPath: /movies
             - name: shows
@@ -88,9 +90,11 @@ spec:
             timeoutSeconds: 1
             periodSeconds: 5
       volumes:
-        - name: config
+        # - name: config
+        #   configMap: tdarr-config
+        - name: data
           persistentVolumeClaim:
-            claimName: tdarr-config
+            claimName: tdarr-data
         - name: movies
           nfs:
             path: /mnt/rust/media/movies
