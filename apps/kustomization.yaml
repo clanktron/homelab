@@ -6,7 +6,9 @@ resources:
   - filebrowser
   - flame
   - jellyfin
+  - jellyseer
   - littlelink
   - proxy
+  - tdarr
   # - uptime-kuma
   - vaultwarden

@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cockroachdb-test
+  namespace: test
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+      # flame.pawelmalak/icon: file-multiple
+      # flame.pawelmalak/name: filebrowser
+      # flame.pawelmalak/type: app
+      # flame.pawelmalak/url: https://files.claytonc.dev
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  tls:
+  - hosts:
+      - databsetest.claytonc.dev
+    secretName: databasetest-tls
+  rules:
+  - host: https-example.foo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+---
+

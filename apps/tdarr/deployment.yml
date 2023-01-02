@@ -1,0 +1,104 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tdarr
+  labels:
+    app.kubernetes.io/name: tdarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tdarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tdarr
+    spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: tdarr
+          image: "haveagitgat/tdarr:latest"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: PT
+            - name: serverIP
+              valueFrom:
+                   configMapKeyRef:
+                     name: tdarr-config
+                     key: serverIP
+            - name: serverPort
+              valueFrom:
+                   configMapKeyRef:
+                     name: tdarr-config
+                     key: serverPort
+            - name: webUIPort
+              valueFrom:
+                   configMapKeyRef:
+                     name: tdarr-config
+                     key: webUIPort
+            - name: internalNode
+              valueFrom:
+                   configMapKeyRef:
+                     name: tdarr-config
+                     key: internalNode
+            - name: nodeID
+              valueFrom:
+                   configMapKeyRef:
+                     name: tdarr-config
+                     key: nodeID
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /app
+            - name: movies
+              mountPath: /movies
+            - name: shows
+              mountPath: /shows
+            - name: transcode
+              mountPath: /temp
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: tdarr-config
+        - name: movies
+          nfs:
+            path: /mnt/rust/media/movies
+            server: 192.168.1.56
+        - name: shows
+          nfs:
+            path: /mnt/rust/media/shows
+            server: 192.168.1.56
+        - name: transcode
+          emptyDir:
+            sizeLimit: 60Gi

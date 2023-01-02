@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseer
+  labels:
+    app.kubernetes.io/name: jellyseer
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jellyseer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jellyseer
+    spec:
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: jellyseer
+          image: "fallenbagel/jellyseer:develop"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: PT
+          ports:
+            - name: http
+              containerPort: 5005
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: jellyseer-config

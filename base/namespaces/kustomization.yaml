@@ -8,6 +8,7 @@ resources:
 - filebrowser.yml
 - flame.yml
 - jellyfin.yml
+- jellyseer.yml
 - kube-system.yml
 - littlelink.yml
 - longhorn-system.yml
@@ -15,5 +16,6 @@ resources:
 - nfs-provisioner.yml
 - postgres.yml
 - traefik.yml
+- tdarr.yml
 - test.yml
 - vaultwarden.yml

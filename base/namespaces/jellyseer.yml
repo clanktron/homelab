@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jellyseer
+    #  labels:
+    #    cert-manager-tls: jellyseer
+
