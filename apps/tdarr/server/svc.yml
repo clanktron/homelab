@@ -5,15 +5,15 @@ metadata:
   name: tdarr
   labels:
     app.kubernetes.io/name: tdarr
-  annotations:
 spec:
-  type: ClusterIP
   ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+    - name: https
+      protocol: TCP
+      port: 8266
+      targetPort: server
   selector:
     app.kubernetes.io/name: tdarr
-
-
