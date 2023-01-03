@@ -6,8 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/name: jellyfin
 spec:
-  nodeSelector:
-    igpu: true
+  # nodeSelector:
+  #   igpu: true
   replicas: 1
   strategy:
     type: Recreate
@@ -20,12 +20,19 @@ spec:
         app.kubernetes.io/name: jellyfin
     spec:
       serviceAccountName: default
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
         - name: jellyfin
           image: "jellyfin/jellyfin:10.8.1"
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "50m"
+            limits:
+              memory: "10000Mi"
+              cpu: "2500m"
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ

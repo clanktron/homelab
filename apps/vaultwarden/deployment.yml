@@ -25,6 +25,13 @@ spec:
       containers:
         - name: vaultwarden
           image: "vaultwarden/server:1.25.2"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "30m"
+            limits:
+              memory: "1024Mi"
+              cpu: "2000m"
           imagePullPolicy: IfNotPresent
           env:
             - name: DATA_FOLDER

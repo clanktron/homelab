@@ -24,6 +24,13 @@ spec:
       containers:
         - name: jellyseer
           image: "fallenbagel/jellyseerr:develop"
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "30m"
+            limits:
+              memory: "2250Mi"
+              cpu: "1000m"
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ

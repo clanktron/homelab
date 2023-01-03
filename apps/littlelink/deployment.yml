@@ -25,6 +25,13 @@ spec:
       containers:
         - name: littlelink-server
           image: "ghcr.io/techno-tim/littlelink-server:latest"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "20m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
           imagePullPolicy: IfNotPresent
           env:
             - name: AVATAR_2X_URL
