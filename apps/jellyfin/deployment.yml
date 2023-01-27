@@ -44,12 +44,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: downloads
-              mountPath: /downloads
             - name: movies
               mountPath: /movies
-            - name: music
-              mountPath: /music
             - name: shows
               mountPath: /shows
             - name: transcode
@@ -79,21 +75,13 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
-        - name: downloads
-          nfs:
-            path: /mnt/rust/media/downloads/
-            server: 192.168.1.56
         - name: movies
           nfs:
-            path: /mnt/rust/media/movies
-            server: 192.168.1.56
-        - name: music
-          nfs:
-            path: /mnt/rust/media/music
+            path: /main/media/movies
             server: 192.168.1.56
         - name: shows
           nfs:
-            path: /mnt/rust/media/shows
+            path: /main/media/shows
             server: 192.168.1.56
         - name: transcode
           emptyDir:

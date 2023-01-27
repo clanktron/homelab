@@ -80,6 +80,6 @@ spec:
             claimName: filebrowser-database
         - name: data
           nfs:
-            path: /mnt/ssd/
+            path: /home/clayton/ssd
             server: 192.168.1.56
 
