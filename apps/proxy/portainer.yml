@@ -35,7 +35,7 @@ kind: Service
 metadata:
   name: portainer
 spec:
-  externalName: 192.168.1.17
+  externalName: 192.168.1.56
   type: ExternalName
   ports:
   - protocol: TCP
