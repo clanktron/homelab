@@ -15,6 +15,7 @@ resources:
 - monitoring.yml
 - nfs-provisioner.yml
 - postgres.yml
+- pihole.yml
 - traefik.yml
 - tdarr.yml
 - test.yml

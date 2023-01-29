@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: pihole-config
+data:
+    webpassword: ENC[AES256_GCM,data:+xKX4ZgMRvkjiR4M0B8=,iv:P10mh8B/AYSIPg4yr4Lu4l+EzInIrAnQCeRIjA2tQcs=,tag:TzDZ6oh8NsTCi2eBqiSgOQ==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age17h94x54mrdkee8u9vu8rmnc58fn6lnxhkmkv75atv33kyaq309xq6v5ffn
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1QU1oektyK2dCRGhHUHZ0
+            VEZZWG4za2F4c2lvTEh6c0FvSlVTOTBGbjFnCjkyWHRYM0NvWm83UGd6c1paaks4
+            OEQ2V2RTOGZneWhvRGpRczBZc0dNSW8KLS0tIGJCVDl6SDZiUzNaRTV2aWJBc04r
+            UEt4a3c2Z2R5WW0raFlwdnE3dFRRamcK/ViwWNiRGRkdDMuQIP3UqUGl0VROqboq
+            AKUJXxDDFkpxRMimPD4igo46JglbbN8hu4TR2Sr69tV0/9K6sB7xAA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-01-29T05:28:47Z"
+    mac: ENC[AES256_GCM,data:Bn868IlSMfUxiogBTpjErm2dFYEGK/nGPTU4GGn4SN7f6KVFUqFz1tJwsSgZotllMfyPKmcURCQcJyEfm8zTPtfiKFoLND5GsdeTJLs5Ge/o6+q69YpK/kE7lVp1DKUX58DZswu/TSvG8O9wGJgfB/P1yo1dA7nWDLS1r3i5C2U=,iv:xxr26k/egI5M0EnaKXai3ajn8p8iOSedUhMIwDCbIXw=,tag:aqhzu+n2UD2LOIT5m/SfVg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

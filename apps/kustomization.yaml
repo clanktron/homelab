@@ -8,6 +8,7 @@ resources:
   - jellyseer
   - littlelink
   - proxy
+  - pihole
     #- tdarr
     #- uptime-kuma
   - vaultwarden
