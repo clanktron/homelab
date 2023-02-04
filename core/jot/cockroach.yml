@@ -1,7 +1,7 @@
 apiVersion: crdb.cockroachlabs.com/v1alpha1
 kind: CrdbCluster
 metadata:
-  name: cockroachdb-test
+  name: jot-db
 spec:
   dataStore:
     pvc:
@@ -22,11 +22,9 @@ spec:
   tlsEnabled: true
   image:
     name: cockroachdb/cockroach:v22.2.0
-  # nodes refers to the number of crdb pods that are created
-  # via the statefulset
   nodes: 3
   additionalLabels:
-    crdb: is-cool
+    crdb: jot-beta
   # affinity is a new API field that is behind a feature gate that is
   # disabled by default.  To enable please see the operator.yaml file.
 

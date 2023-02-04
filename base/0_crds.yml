@@ -4,12 +4,12 @@ metadata:
   name: crds
   namespace: flux-system
 spec:
-  interval: 3m0s
+  interval: 30m0s
   wait: true 
   timeout: 5m0s 
   retryInterval: 1m0s 
   prune: true 
-  force: true   
+  force: false   
   sourceRef:
     kind: GitRepository
     name: flux-system
