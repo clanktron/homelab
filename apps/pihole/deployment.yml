@@ -17,10 +17,15 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: pihole
-    spec:
+    spec:  
+      hostNetwork: true
+      dnsPolicy: "None"
+      dnsConfig:
+      nameservers:
+        # upstream DNS used by pihole.
+        - 1.1.1.1
       serviceAccountName: default
       automountServiceAccountToken: false
-      dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
         - name: pihole
