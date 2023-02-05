@@ -22,8 +22,8 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: service1
+            name: jot-db-public
             port:
-              number: 80
+              number: 8080
 ---
 
