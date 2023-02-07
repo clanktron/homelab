@@ -11,6 +11,7 @@ spec:
         resources:
           requests:
             storage: "5Gi"
+        storageClassName: longhorn
         volumeMode: Filesystem
   resources:
     requests:
@@ -19,9 +20,36 @@ spec:
     limits:
       cpu: 2
       memory: 8Gi
-  tlsEnabled: true
+  tlsEnabled: false
   image:
     name: cockroachdb/cockroach:v22.2.0
+  ingress:
+    sql:
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: cockroachdb
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        cert-manager.io/cluster-issuer: letsencrypt
+      host: cockroachdb.claytonc.dev
+      ingressClassName: traefik-internal
+      tls:
+      - hosts:
+          - cockroachdb.claytonc.dev
+        secretName: cockroach-tls
+    ui:
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        cert-manager.io/cluster-issuer: letsencrypt
+        flame.pawelmalak/type: app
+        flame.pawelmalak/name: cockroachdb
+        flame.pawelmalak/url: https://cockroachdb.claytonc.dev
+        flame.pawelmalak/icon: database
+      host: cockroachdb.claytonc.dev
+      ingressClassName: traefik-internal
+      tls:
+      - hosts:
+          - cockroachdb.claytonc.dev
+        secretName: cockroach-tls
   nodes: 3
   additionalLabels:
     crdb: jot-beta

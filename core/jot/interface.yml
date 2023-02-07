@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: cockroachdb-client-secure
 spec:
-  serviceAccountName: jot-sa
+  serviceAccountName: jot-db-sa
   containers:
   - name: cockroachdb-client-secure
     image: cockroachdb/cockroach:v22.2.2
@@ -20,12 +20,12 @@ spec:
     projected:
         sources:
           - secret:
-              name: jot-node
+              name: jot-db-node
               items:
                 - key: ca.crt
                   path: ca.crt
           - secret:
-              name: jot-root
+              name: jot-db-root
               items:
                 - key: tls.crt
                   path: client.root.crt
@@ -38,4 +38,4 @@ spec:
 #  - interface.yml
 # -- ./cockroach sql \ 
 # --certs-dir=/cockroach/cockroach-certs \ 
-# --host=cockroachdb-public
+# --host=jot-db-public
