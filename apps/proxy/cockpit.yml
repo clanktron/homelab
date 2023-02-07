@@ -30,10 +30,35 @@ spec:
                   number: 9090
 
 ---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cockpit
+  annotations: 
+    kubernetes.io/ingress.class: traefik-crd-internal
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`cockpit.claytonc.dev`)
+    kind: Rule
+    services:
+    - name: cockpit
+      port: 9090
+      scheme: https
+      serversTransport: insecure
+  tls:
+    secretName: cockpit-tls
+
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: cockpit
+  annotations:
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: insecure
 spec:
   externalName: 192.168.1.56
   type: ExternalName
