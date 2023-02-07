@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: default
 resources:
   - servers-transport.yml
+  - cockpit.yml
   - lidarr.yml
   - sonarr.yml
   - radarr.yml
