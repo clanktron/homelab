@@ -29,12 +29,12 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: cockroachdb
         traefik.ingress.kubernetes.io/router.tls: 'true'
         cert-manager.io/cluster-issuer: letsencrypt
-      host: cockroachdb.claytonc.dev
+      host: cockroachdbsql.claytonc.dev
       ingressClassName: traefik-internal
       tls:
       - hosts:
-          - cockroachdb.claytonc.dev
-        secretName: cockroach-tls
+          - cockroachdbsql.claytonc.dev
+        secretName: cockroachsql-tls
     ui:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
