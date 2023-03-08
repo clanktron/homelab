@@ -24,17 +24,6 @@ spec:
   image:
     name: cockroachdb/cockroach:v22.2.0
   ingress:
-    sql:
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: cockroachdb
-        traefik.ingress.kubernetes.io/router.tls: 'true'
-        cert-manager.io/cluster-issuer: letsencrypt
-      host: cockroachdbsql.claytonc.dev
-      ingressClassName: traefik-internal
-      tls:
-      - hosts:
-          - cockroachdbsql.claytonc.dev
-        secretName: cockroachsql-tls
     ui:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure

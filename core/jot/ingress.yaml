@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cockroachdb-sql
+  namespace: jot
+spec:
+  annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: sql
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        cert-manager.io/cluster-issuer: letsencrypt
+  tls:
+  - hosts:
+      - cockroachdb.claytonc.dev
+    secretName: 
+  rules:
+  - host: cockroachdb.claytonc.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        sql:
+          service:
+            name: jot-db-public
+            port:
+              number: 26257
+---
+
