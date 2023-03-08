@@ -2,3 +2,5 @@
 .vscode
 .sops.yaml
 vols/
+# testing dir 
+test/

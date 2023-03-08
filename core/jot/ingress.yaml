@@ -4,22 +4,22 @@ kind: Ingress
 metadata:
   name: cockroachdb-sql
   namespace: jot
-spec:
   annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: sql
         traefik.ingress.kubernetes.io/router.tls: 'true'
         cert-manager.io/cluster-issuer: letsencrypt
+spec:
   tls:
   - hosts:
       - cockroachdb.claytonc.dev
-    secretName: 
+    secretName: cockroach-tls
   rules:
   - host: cockroachdb.claytonc.dev
     http:
       paths:
       - path: /
         pathType: Prefix
-        sql:
+        backend:
           service:
             name: jot-db-public
             port:
