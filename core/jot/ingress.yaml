@@ -1,28 +1,19 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: cockroachdb-sql
+  name: jot-db
   namespace: jot
   annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: sql
-        traefik.ingress.kubernetes.io/router.tls: 'true'
-        cert-manager.io/cluster-issuer: letsencrypt
+    kubernetes.io/ingress.class: traefik-crd-internal
 spec:
+  entryPoints:
+    - cockroachdb
+  routes:
+  - match: Host(`cockroachdb.claytonc.dev`)
+    kind: Rule
+    services:
+    - name: jot-db-public
+      port: 26257
   tls:
-  - hosts:
-      - cockroachdb.claytonc.dev
     secretName: cockroach-tls
-  rules:
-  - host: cockroachdb.claytonc.dev
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: jot-db-public
-            port:
-              number: 26257
----
-
