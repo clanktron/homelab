@@ -66,6 +66,11 @@ spec:
         expose: true
         exposedPort: 443
         protocol: TCP
+      notesapi:
+        port: 4000
+        expose: true
+        exposedPort: 4000
+        protocol: TCP
       cockroachdb:
         port: 26257
         expose: true
