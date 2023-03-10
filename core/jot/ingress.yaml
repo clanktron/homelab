@@ -1,19 +1,29 @@
 ---
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: jot-db
-  namespace: jot
+  name: notes-backend
   annotations:
-    kubernetes.io/ingress.class: traefik-crd-internal
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: notes-outline
+    flame.pawelmalak/name: notesapi
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://notify.claytonc.dev
+    traefik.ingress.kubernetes.io/router.entrypoints: notesapi, websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  entryPoints:
-    - cockroachdb
-  routes:
-  - match: Host(`cockroachdb.claytonc.dev`)
-    kind: Rule
-    services:
-    - name: jot-db-public
-      port: 26257
   tls:
-    secretName: cockroach-tls
+  - hosts:
+      - notify.claytonc.dev
+    secretName: notes-backend-tls
+  rules:
+  - host: notify.claytonc.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notes-backend
+            port:
+              number: 4000
