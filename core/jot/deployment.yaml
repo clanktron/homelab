@@ -3,13 +3,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name:  notes-backend
+  namespace: jot
   labels:
     app:  notes-backend
 spec:
   selector:
     matchLabels:
       app: notes-backend
-  replicas: 1
+  replicas: 3
   strategy:
     rollingUpdate:
       maxSurge: 25%

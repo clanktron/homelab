@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: notes-backend-tls
+  name: jot-tls
 spec:
-  secretName: notes-backend-tls
+  secretName: jot-tls
   dnsNames:
-    - notify.claytonc.dev
+    - jot.claytonc.dev
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
