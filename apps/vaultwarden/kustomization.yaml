@@ -4,5 +4,5 @@ namespace: vaultwarden
 resources:
   - svc.yml
   - deployment.yml
-    #  - persistence.yml
+  - persistence.yml
   - ingress.yml
