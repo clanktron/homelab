@@ -4,8 +4,8 @@ resources:
     #- cells
   - filebrowser
   - flame
-    # - jellyfin
-    # - jellyseer
+  - jellyfin
+  - jellyseer
   - littlelink
   - proxy
     # - pihole
