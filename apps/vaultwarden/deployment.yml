@@ -24,7 +24,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: vaultwarden
-          image: "vaultwarden/server:1.25.2"
+          image: "vaultwarden/server:1.28.1"
           resources:
             requests:
               memory: "64Mi"
