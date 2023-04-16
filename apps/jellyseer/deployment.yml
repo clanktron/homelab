@@ -23,7 +23,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: jellyseer
-          image: "fallenbagel/jellyseerr:1.3.0"
+          image: "fallenbagel/jellyseerr:1.4.1"
           resources:
             requests:
               memory: "250Mi"
