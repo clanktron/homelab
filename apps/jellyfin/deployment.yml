@@ -48,6 +48,8 @@ spec:
               mountPath: /movies
             - name: shows
               mountPath: /shows
+            - name: jasmine
+              mountPath: /jasmine
             - name: transcode
               mountPath: /transcode
           livenessProbe:
@@ -82,6 +84,10 @@ spec:
         - name: shows
           nfs:
             path: /main/media/shows
+            server: 192.168.1.56
+        - name: jasmine
+          nfs:
+            path: /main/media/jasmine
             server: 192.168.1.56
         - name: transcode
           emptyDir:
