@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vaultwarden
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: vaultwarden
+spec:
+  path: "./apps/vaultwarden"
+  targetNamespace: vaultwarden
+  postBuild:
+    substituteFrom: []

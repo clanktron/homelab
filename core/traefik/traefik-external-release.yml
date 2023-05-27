@@ -1,0 +1,96 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik-external
+  namespace: flux-system
+spec:
+  targetNamespace: traefik
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik
+      version: 10.24.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+      interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+
+    # experimental:
+    #   http3:
+    #     enabled: true
+    #   plugins:
+    #     enabled: true
+      # kubernetesGateway:
+      #   enabled: true 
+    
+    ingressRoute:
+      dashboard:
+        enabled: false
+        annotations: {}
+        labels: {}
+    
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        ingressClass: traefik-crd-external
+    
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        ingressClass: traefik-external
+
+    ports:
+      traefik:
+        port: 9000
+        expose: false
+        exposedPort: 9000
+        protocol: TCP
+      web:
+        port: 8000
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 8443
+        expose: true
+        exposedPort: 443
+        protocol: TCP
+      notesapi:
+        port: 4000
+        expose: true
+        exposedPort: 4000
+        protocol: TCP
+      cockroachdb:
+        port: 26257
+        expose: true
+        exposedPort: 26257
+        protocol: TCP
+      metrics:
+        port: 9100
+        expose: false
+        exposedPort: 9100
+        protocol: TCP
+        
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+        filters: {}
+        fields:
+          general:
+            defaultmode: keep
+          headers:
+            defaultmode: keep

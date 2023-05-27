@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: armo
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://armosec.github.io/armo-helm/
-  timeout: 3m

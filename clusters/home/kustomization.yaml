@@ -1,0 +1,38 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+- ../base
+- ./apps
+
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      version: v1beta2
+      kind: Kustomization
+    patch: |
+      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+      kind: Kustomization
+      metadata:
+        name: "*"
+      spec:
+        interval: 10m
+        prune: true
+        timeout: 10m
+
+# generatorOptions:
+#   disableNameSuffixHash: true
+# 
+# configMapGenerator:
+#   - name: global-config
+#     behavior: merge
+#     literals:
+#       - FKV_KMS_URI="azurekms://kv-ssf-prod-usgva.vault.usgovcloudapi.net/cosign-signer"
+#       - FKV_PUBLISH_ACR="rgcrprod"
+#       - FKV_SERVICES_ACR="acrsharedservices"
+# 
+#   - name: aad-pod-identity-config
+#     behavior: merge
+#     literals:
+#       - FKV_CLIENT_ID="41afe34e-245c-47f8-8e11-f0ed3801ac09"
+#       - FKV_RESOURCE_ID="/subscriptions/b82373d0-f87a-45fd-b466-f1f97e68fcd1/resourceGroups/MC_rg-ssf-prod-usgovvi

@@ -18,12 +18,12 @@ spec:
       labels:
         app.kubernetes.io/name: pihole
     spec:  
-      hostNetwork: true
+      # hostNetwork: true
       dnsPolicy: "None"
       dnsConfig:
-      nameservers:
-        # upstream DNS used by pihole.
-        - 1.1.1.1
+        nameservers:
+          # upstream DNS used by pihole.
+          - 1.1.1.1
       serviceAccountName: default
       automountServiceAccountToken: false
       enableServiceLinks: true

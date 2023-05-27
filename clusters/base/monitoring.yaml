@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: monitoring
+spec:
+  path: "./core/monitoring"
+  targetNamespace: flux-system
+  postBuild:
+    substituteFrom: []

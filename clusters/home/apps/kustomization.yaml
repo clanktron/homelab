@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+- filebrowser.yaml
+- flame.yaml
+- jellyfin.yaml
+- jellyseer.yaml
+- littlelink.yaml
+- pihole.yaml
+- proxy.yaml
+- vaultwarden.yaml
+
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      version: v1beta2
+      kind: Kustomization
+    patch: |
+      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+      kind: Kustomization
+      metadata:
+        name: "*"
+      spec:
+        dependsOn:
+        - name: cert-manager
+        interval: 10m
+        prune: true
+        timeout: 10m
