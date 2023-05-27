@@ -1,3 +1,10 @@
+# MacOS clutter
 .DS_STORE
+
+# Manifests not currently deployed
+deprecated/
+
+# Misc.
 .vscode
 .sops.yaml
+
