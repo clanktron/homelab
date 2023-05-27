@@ -13,8 +13,3 @@ spec:
   targetNamespace: flux-system
   postBuild:
     substituteFrom: []
-
-#  decryption:
-#    provider: sops
-#    secretRef:
-#      name: sops-age

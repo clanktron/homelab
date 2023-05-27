@@ -26,8 +26,3 @@ spec:
   - name: cert-manager
   postBuild:
     substituteFrom: []
-
-#  decryption:
-#    provider: sops
-#    secretRef:
-#      name: sops-age

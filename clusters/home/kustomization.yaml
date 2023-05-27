@@ -16,6 +16,10 @@ patches:
       metadata:
         name: "*"
       spec:
+      decryption:
+        provider: sops
+        secretRef:
+          name: sops-age
         interval: 10m
         prune: true
         timeout: 10m
