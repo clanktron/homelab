@@ -24,6 +24,3 @@ patches:
       spec:
         dependsOn:
         - name: cert-manager
-        interval: 10m
-        prune: true
-        timeout: 10m

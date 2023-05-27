@@ -9,6 +9,8 @@ kind: Kustomization
 metadata:
   name: monitoring
 spec:
+  dependsOn:
+  - name: cert-manager
   path: "./core/monitoring"
   targetNamespace: flux-system
   postBuild:
