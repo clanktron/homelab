@@ -10,6 +10,5 @@ metadata:
   name: littlelink
 spec:
   path: "./apps/littlelink"
-  targetNamespace: littlelink
   postBuild:
     substituteFrom: []

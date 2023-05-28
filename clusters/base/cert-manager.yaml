@@ -10,7 +10,6 @@ metadata:
   name: cert-manager
 spec:
   path: "./core/cert-manager/cert-manager"
-  targetNamespace: flux-system
   postBuild:
     substituteFrom: []
 
@@ -21,7 +20,6 @@ metadata:
   name: issuers
 spec:
   path: "./core/cert-manager/issuers"
-  targetNamespace: flux-system
   dependsOn: 
   - name: cert-manager
   postBuild:

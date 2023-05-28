@@ -10,7 +10,6 @@ metadata:
   name: longhorn
 spec:
   path: "./core/longhorn/longhorn"
-  targetNamespace: flux-system
   dependsOn: 
   - name: cert-manager
   postBuild:
@@ -23,7 +22,6 @@ metadata:
   name: crds
 spec:
   path: "./core/longhorn/crds"
-  targetNamespace: flux-system
   dependsOn:
   - name: longhorn
   postBuild:

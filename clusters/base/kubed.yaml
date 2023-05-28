@@ -10,6 +10,5 @@ metadata:
   name: kubed
 spec:
   path: "./core/kubed"
-  targetNamespace: flux-system
   postBuild:
     substituteFrom: []

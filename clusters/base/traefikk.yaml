@@ -10,6 +10,5 @@ metadata:
   name: traefik
 spec:
   path: "./core/traefik"
-  targetNamespace: flux-system
   postBuild:
     substituteFrom: []

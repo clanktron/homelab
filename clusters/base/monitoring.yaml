@@ -12,6 +12,5 @@ spec:
   dependsOn:
   - name: cert-manager
   path: "./core/monitoring"
-  targetNamespace: flux-system
   postBuild:
     substituteFrom: []

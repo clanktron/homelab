@@ -10,6 +10,5 @@ metadata:
   name: pihole
 spec:
   path: "./apps/pihole"
-  targetNamespace: pihole
   postBuild:
     substituteFrom: []

@@ -10,6 +10,5 @@ metadata:
   name: filebrowser
 spec:
   path: "./apps/filebrowser"
-  targetNamespace: filebrowser
   postBuild:
     substituteFrom: []

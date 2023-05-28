@@ -10,6 +10,5 @@ metadata:
   name: jellyseerr
 spec:
   path: "./apps/jellyseerr"
-  targetNamespace: jellyseerr
   postBuild:
     substituteFrom: []

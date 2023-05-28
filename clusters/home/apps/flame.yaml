@@ -10,6 +10,5 @@ metadata:
   name: flame
 spec:
   path: "./apps/flame"
-  targetNamespace: flame
   postBuild:
     substituteFrom: []

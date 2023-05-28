@@ -10,20 +10,20 @@ patches:
       version: v1beta2
       kind: Kustomization
     patch: |
-      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-      kind: Kustomization
-      metadata:
-        name: "*"
+      op: add
+      path: /metadata
+      value:
         namespace: flux-system
-      spec:
-      decryption:
+      op: add
+      path: /spec/decryption/provider
+      value:
         provider: sops
         secretRef:
           name: sops-age
         interval: 10m
         prune: true
         timeout: 10m
-
+          
 # generatorOptions:
 #   disableNameSuffixHash: true
 # 

@@ -10,6 +10,5 @@ metadata:
   name: jellyfin
 spec:
   path: "./apps/jellyfin"
-  targetNamespace: jellyfin
   postBuild:
     substituteFrom: []

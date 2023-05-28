@@ -10,6 +10,5 @@ metadata:
   name: vaultwarden
 spec:
   path: "./apps/vaultwarden"
-  targetNamespace: vaultwarden
   postBuild:
     substituteFrom: []
