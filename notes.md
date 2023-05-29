@@ -1,5 +1,11 @@
 # Miscellaneous Notes
 
+# Rename file extensions
+```bash
+# this example renames all .yml file to .yaml
+find deprecated/ -depth -name "*.yml" -exec sh -c 'f="{}"; mv -- "$f" "${f%.yml}.yaml"' \;
+```
+
 ## Update all kustomize files:
 ```bash
 find . -type f -name kustomization.yaml -exec gsed -i 's/kustomize.config.k8s.io\/v1beta1/kustomize.config.k8s.io\/v1/g' {} \;

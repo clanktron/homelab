@@ -1,49 +1,25 @@
-# Homelab
+# Cloud Lab
 
-Kubernetes manifest files for my home environment
->currently managed by FluxCD
+The source of truth for my Kubernetes clusters. I use this to manage both my on-prem and cloud deployments. Manifests are configured in a modular fashion using [flux](https://github.com/fluxcd/flux2), [kustomize](https://github.com/kubernetes-sigs/kustomize/), and [helm](https://github.com/helm/helm) to allow for simple cross-cluster orchestration.
 
-This repo works in junction with my [k3s-ansible](https://github.com/clanktron/k3s-ansible) repo.
+>I often use this repo in junction with my [k3s-ansible](https://github.com/clanktron/k3s-ansible) repository. Once the ansible script has created the cluster it can be bootstrapped with this one.
 
-If the cluster was created without the cilium helm installation run `cilium install` to install the service mesh on the cluster.
+>If the cluster was created without a CNI, install cillum with its cli by running `cilium install`.
 
-Next make sure the cluster is configured to decrypt sops secrets:
+## Bootstrapping
 
 ```bash
+# environment
+export SOPS_AGE_KEY_FILE=path_to_agekey_file
+export CLUSTER_NAME=flux_cluster_config_to_use
+export GITHUB_TOKEN=personal_access_token
+
 # manually create flux namespace
 kubectl create ns flux-system
-
-# Move to directory with sops agekey
-cd <path-to-agekey-dir>
-
-# pipe private agekey into kubernetes secret for sops decryption
-cat age.agekey | kubectl create secret generic sops-age \
-                --namespace=flux-system \
-                --from-file=age.agekey=/dev/stdin
-```
-
-To bootstrap the cluster run:
-
-```bash
-export GITHUB_TOKEN=<personal_access_token>
-flux bootstrap github --owner=clanktron --repository=homelab --path=clusters/prod/
-```
-
-### Useful notes:
-To encrypt a secret using age run: 
-
-```bash
-export AGEPUBKEY=age17h94x54mrdkee8u9vu8rmnc58fn6lnxhkmkv75atv33kyaq309xq6v5ffn
-sops --age=$AGEPUBKEY --encrypt --encrypted-regex '^(data|stringData)$' --in-place <file>
-```
-
-In the case of helm being stuck in 'pending-installation' state, delete the helm secrets and then allow flux to retry reconciliation or rerun helm command.
-
-If a namespace is stuck (in a deleting state or other) run the following:
-```
-NAMESPACE=<your-rogue-namespace>
-kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' >temp.json
-kubectl proxy &
-curl -k -H "Content-Type: application/json" -X PUT \
-    --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+# create SOPS secret so flux can decrypt secrets
+kubectl create secret generic sops-age --namespace=flux-system --from-file=$SOPS_AGE_KEY_FILE
+# Now we can bootstrap the cluster with a single command
+flux bootstrap github --owner=clanktron --repository=homelab --path=clusters/$CLUSTER_NAME
+# or if using raw git repo (the full path must be specified)
+flux bootstrap git --url=ssh://git@remote/home/git/homelab --path=clusters/$CLUSTER_NAME
 ```
