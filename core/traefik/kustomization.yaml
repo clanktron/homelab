@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - networkpolicy.yaml
 - helmrepository.yaml
-- traefik-external-release.yml
-- traefik-internal-release.yml
+- traefik-external-release.yaml
+- traefik-internal-release.yaml

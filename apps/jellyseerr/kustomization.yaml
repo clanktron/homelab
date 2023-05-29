@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: jellyseerr
 resources:
 - database-volume.yaml
-- deployment.yml
-- ingress.yml
+- deployment.yaml
+- ingress.yaml
 - services.yaml
