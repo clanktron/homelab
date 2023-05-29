@@ -6,13 +6,12 @@ resources:
 patches:
   - target:
       group: kustomize.toolkit.fluxcd.io
-      version: v1beta2
+      version: v1
       kind: Kustomization
     patch: |-
       - op: add
-        path: /metadata
-        value:
-          namespace: flux-system
+        path: /metadata/namespace
+        value: flux-system
       - op: add
         path: /spec/decryption
         value:
@@ -23,7 +22,7 @@ patches:
           prune: true
           timeout: 10m
 
-#       apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+#       apiVersion: kustomize.toolkit.fluxcd.io/v1
 #       kind: Kustomization
 #       metadata:
 #         name: "*"

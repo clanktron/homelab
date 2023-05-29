@@ -13,7 +13,7 @@ resources:
 patches:
   - target:
       group: kustomize.toolkit.fluxcd.io
-      version: v1beta2
+      version: v1
       kind: Kustomization
     patch: |
       - op: add
