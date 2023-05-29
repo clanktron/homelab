@@ -13,14 +13,25 @@ patches:
         path: /metadata/namespace
         value: flux-system
       - op: add
+        path: /spec/interval
+        value: 10m
+      - op: add
+        path: /spec/prune
+        value: true
+      - op: add
+        path: /spec/timeout
+        value: 10m
+      - op: add
+        path: /spec/sourceRef
+        value:
+          kind: GitRepository
+          name: flux-system
+      - op: add
         path: /spec/decryption
         value:
           provider: sops
           secretRef:
             name: sops-age
-          interval: 10m
-          prune: true
-          timeout: 10m
 
 #       apiVersion: kustomize.toolkit.fluxcd.io/v1
 #       kind: Kustomization
