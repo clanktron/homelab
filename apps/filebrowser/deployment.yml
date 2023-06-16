@@ -80,6 +80,6 @@ spec:
             claimName: filebrowser-database
         - name: data
           nfs:
-            path: /home/ssd
+            path: /rust/ssd
             server: 192.168.1.56
 
