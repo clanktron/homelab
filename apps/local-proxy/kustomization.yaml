@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: proxy
 resources:
 - cockpit.yaml
+- flood.yaml
 - lidarr.yaml
 - linksys.yaml
 - pihole.yaml
