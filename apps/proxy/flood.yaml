@@ -10,7 +10,7 @@ metadata:
     flame.pawelmalak/type: app
     flame.pawelmalak/name: flood
     flame.pawelmalak/url: https://flood.claytonc.dev
-    flame.pawelmalak/icon: router
+    flame.pawelmalak/icon: download-circle
 spec:
   ingressClassName: traefik-internal
   tls:
