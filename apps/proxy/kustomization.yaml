@@ -4,6 +4,7 @@ namespace: default
 resources:
   - servers-transport.yml
   - cockpit.yml
+  - flood.yaml
   - lidarr.yml
   - sonarr.yml
   - radarr.yml
