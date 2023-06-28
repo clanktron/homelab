@@ -24,6 +24,9 @@ spec:
       containers:
         - name: filebrowser
           image: "filebrowser/filebrowser:latest"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           resources:
             requests:
               memory: "64Mi"
@@ -48,8 +51,18 @@ spec:
               subPath: .filebrowser.json
             - name: database
               mountPath: /database
-            - name: data
+            - name: teresa-data
               mountPath: /srv
+              subPath: /srv/teresa
+            - name: mark-data
+              mountPath: /srv
+              subPath: /srv/mark
+            - name: roberto-data
+              mountPath: /srv
+              subPath: /srv/roberto
+            - name: clayton-data
+              mountPath: /srv
+              subPath: /srv/clayton
           livenessProbe:
             tcpSocket:
               port: 80
@@ -78,8 +91,20 @@ spec:
         - name: database
           persistentVolumeClaim:
             claimName: filebrowser-database
-        - name: data
+        - name: clayton-data
           nfs:
-            path: /rust/ssd
+            path: /home/clayton
+            server: 192.168.1.56
+        - name: mark-data
+          nfs:
+            path: /home/mark
+            server: 192.168.1.56
+        - name: teresa-data
+          nfs:
+            path: /home/teresa
+            server: 192.168.1.56
+        - name: roberto-data
+          nfs:
+            path: /home/roberto
             server: 192.168.1.56
 
