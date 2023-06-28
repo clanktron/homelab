@@ -24,9 +24,9 @@ spec:
       containers:
         - name: filebrowser
           image: "filebrowser/filebrowser:latest"
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            # securityContext:
+            #   runAsUser: 1000
+            #   runAsGroup: 1000
           resources:
             requests:
               memory: "64Mi"
