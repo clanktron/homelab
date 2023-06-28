@@ -52,17 +52,13 @@ spec:
             - name: database
               mountPath: /database
             - name: teresa-data
-              mountPath: /srv
-              subPath: /srv/teresa
+              mountPath: /srv/teresa
             - name: mark-data
-              mountPath: /srv
-              subPath: /srv/mark
+              mountPath: /srv/mark
             - name: roberto-data
-              mountPath: /srv
-              subPath: /srv/roberto
+              mountPath: /srv/roberto
             - name: clayton-data
-              mountPath: /srv
-              subPath: /srv/clayton
+              mountPath: /srv/clayton
           livenessProbe:
             tcpSocket:
               port: 80
