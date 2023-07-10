@@ -51,6 +51,8 @@ spec:
               subPath: .filebrowser.json
             - name: database
               mountPath: /database
+            - name: jasmine-data
+              mountPath: /srv/jasmine
             - name: teresa-data
               mountPath: /srv/teresa
             - name: mark-data
@@ -102,5 +104,9 @@ spec:
         - name: roberto-data
           nfs:
             path: /home/roberto
+            server: 192.168.1.56
+        - name: jasmine-data
+          nfs:
+            path: /home/jasmine
             server: 192.168.1.56
 
