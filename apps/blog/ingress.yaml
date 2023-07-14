@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog
+  labels:
+    app.kubernetes.io/name: blog
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: post-outline
+    flame.pawelmalak/name: blog
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://blog.claytonc.dev
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik-external
+  tls:
+    - hosts:
+        - "blog.claytonc.dev"
+      secretName: "blog-tls"
+  rules:
+    - host: "blog.claytonc.dev"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: blog
+                port:
+                  number: 80
