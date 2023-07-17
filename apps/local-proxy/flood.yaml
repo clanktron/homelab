@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: flood
-    flame.pawelmalak/url: https://flood.claytonc.dev
+    flame.pawelmalak/url: https://flood.${domain}
     flame.pawelmalak/icon: download-circle
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - flood.claytonc.dev
+      - flood.${domain}
     secretName: flood-tls
   rules:
-    - host: flood.claytonc.dev
+    - host: flood.${domain}
       http:
         paths:
           - path: /

@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: radarr
-    flame.pawelmalak/url: https://radarr.claytonc.dev
+    flame.pawelmalak/url: https://radarr.${domain}
     flame.pawelmalak/icon: movie-open
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - radarr.claytonc.dev
+      - radarr.${domain}
     secretName: radarr-tls
   rules:
-    - host: radarr.claytonc.dev
+    - host: radarr.${domain}
       http:
         paths:
           - path: /

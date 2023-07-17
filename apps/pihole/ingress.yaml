@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: pihole
-    flame.pawelmalak/url: https://dns.claytonc.dev/admin
+    flame.pawelmalak/url: https://dns.${domain}/admin
     flame.pawelmalak/icon: router
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - dns.claytonc.dev
+      - dns.${domain}
     secretName: pihole-tls
   rules:
-    - host: dns.claytonc.dev
+    - host: dns.${domain}
       http:
         paths:
           - path: /

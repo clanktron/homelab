@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: lidarr
-    flame.pawelmalak/url: https://lidarr.claytonc.dev
+    flame.pawelmalak/url: https://lidarr.${domain}
     flame.pawelmalak/icon: music
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - lidarr.claytonc.dev
+      - lidarr.${domain}
     secretName: lidarr-tls
   rules:
-    - host: lidarr.claytonc.dev
+    - host: lidarr.${domain}
       http:
         paths:
           - path: /

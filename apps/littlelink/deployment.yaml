@@ -63,7 +63,7 @@ spec:
             - name: BUTTON_ORDER
               value: GITHUB,LINKED_IN,TWITTER,SNAPCHAT,EMAIL
             - name: EMAIL
-              value: hello@claytonc.dev
+              value: hello@${domain}
             - name: EMAIL_TEXT
               value: Email
             - name: FAVICON_URL

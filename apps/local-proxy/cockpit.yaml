@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: cockpit
-    flame.pawelmalak/url: https://cockpit.claytonc.dev
+    flame.pawelmalak/url: https://cockpit.${domain}
     flame.pawelmalak/icon: monitor-dashboard
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - cockpit.claytonc.dev
+      - cockpit.${domain}
     secretName: cockpit-tls
   rules:
-    - host: cockpit.claytonc.dev
+    - host: cockpit.${domain}
       http:
         paths:
           - path: /
@@ -41,7 +41,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`cockpit.claytonc.dev`)
+  - match: Host(`cockpit.${domain}`)
     kind: Rule
     services:
     - name: cockpit

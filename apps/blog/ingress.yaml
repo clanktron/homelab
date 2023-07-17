@@ -10,17 +10,17 @@ metadata:
     flame.pawelmalak/icon: post-outline
     flame.pawelmalak/name: blog
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://blog.claytonc.dev
+    flame.pawelmalak/url: https://blog.${domain}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik-external
   tls:
     - hosts:
-        - "blog.claytonc.dev"
+        - "blog.${domain}"
       secretName: "blog-tls"
   rules:
-    - host: "blog.claytonc.dev"
+    - host: "blog.${domain}"
       http:
         paths:
           - path: "/"

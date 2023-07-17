@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: qbittorrent
-    flame.pawelmalak/url: https://qbittorrent.claytonc.dev
+    flame.pawelmalak/url: https://qbittorrent.${domain}
     flame.pawelmalak/icon: download-lock
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - qbittorrent.claytonc.dev
+      - qbittorrent.${domain}
     secretName: qbittorrent-tls
   rules:
-    - host: qbittorrent.claytonc.dev
+    - host: qbittorrent.${domain}
       http:
         paths:
           - path: /

@@ -10,17 +10,17 @@ metadata:
     flame.pawelmalak/icon: link-variant
     flame.pawelmalak/name: littlelink
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://claytonc.dev
+    flame.pawelmalak/url: https://${domain}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik-external
   tls:
     - hosts:
-        - "claytonc.dev"
+        - "${domain}"
       secretName: "littlelink-tls"
   rules:
-    - host: "claytonc.dev"
+    - host: "${domain}"
       http:
         paths:
           - path: "/"

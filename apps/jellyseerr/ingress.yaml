@@ -10,17 +10,17 @@ metadata:
     flame.pawelmalak/icon: filmstrip
     flame.pawelmalak/name: jellyseer
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://jellyseer.claytonc.dev
+    flame.pawelmalak/url: https://jellyseer.${domain}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik-external
   tls:
     - hosts:
-        - "jellyseer.claytonc.dev"
+        - "jellyseer.${domain}"
       secretName: "jellyseer-tls"
   rules:
-    - host: "jellyseer.claytonc.dev"
+    - host: "jellyseer.${domain}"
       http:
         paths:
           - path: "/"

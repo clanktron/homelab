@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: sonarr
-    flame.pawelmalak/url: https://sonarr.claytonc.dev
+    flame.pawelmalak/url: https://sonarr.${domain}
     flame.pawelmalak/icon: television-classic
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - sonarr.claytonc.dev
+      - sonarr.${domain}
     secretName: sonarr-tls
   rules:
-    - host: sonarr.claytonc.dev
+    - host: sonarr.${domain}
       http:
         paths:
           - path: /

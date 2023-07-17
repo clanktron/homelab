@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: prowlarr
-    flame.pawelmalak/url: https://prowlarr.claytonc.dev
+    flame.pawelmalak/url: https://prowlarr.${domain}
     flame.pawelmalak/icon: text-search
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - prowlarr.claytonc.dev
+      - prowlarr.${domain}
     secretName: prowlarr-tls
   rules:
-    - host: prowlarr.claytonc.dev
+    - host: prowlarr.${domain}
       http:
         paths:
           - path: /

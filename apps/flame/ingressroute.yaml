@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: flame-tls
   dnsNames:
-    - dash.claytonc.dev
+    - dash.${domain}
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
@@ -24,7 +24,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`dash.claytonc.dev`)
+  - match: Host(`dash.${domain}`)
     kind: Rule
     services:
     - name: flame
