@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mealie
+  labels:
+    app.kubernetes.io/name: mealie
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: silverware-fork-knife
+    flame.pawelmalak/name: mealie
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://mealie.claytonc.dev
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik-external
+  tls:
+    - hosts:
+        - "mealie.claytonc.dev"
+      secretName: "mealie-tls"
+  rules:
+    - host: "mealie.claytonc.dev"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: mealie-frontend
+                port:
+                  number: 80

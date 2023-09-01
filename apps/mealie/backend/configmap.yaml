@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mealie-api-env
+  labels:
+    app: mealie
+data:
+  TZ: PT
+  ALLOW_SIGNUP: "true"
+  MAX_WORKERS: "1"
+  WEB_CONCURRENCY: "1"
+  BASE_URL: https://mealie.claytonc.dev
