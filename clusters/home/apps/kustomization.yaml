@@ -7,6 +7,7 @@ resources:
 - jellyfin.yaml
 - jellyseer.yaml
 - littlelink.yaml
+- mealie.yaml
 - pihole.yaml
 - proxy.yaml
 - vaultwarden.yaml
