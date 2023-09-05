@@ -4,7 +4,9 @@
 # Manifests not currently deployed
 deprecated/
 
+# Patch files
+*.patch
+
 # Misc.
 .vscode
 .sops.yaml
-
