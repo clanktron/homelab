@@ -1,0 +1,4 @@
+FROM quay.io/kairos/kairos-ubuntu-22-lts:v2.4.0
+RUN apt install -y nfs-common fish tmux
+RUN export VERSION="node-0.1.0"
+RUN envsubst '${VERSION}' </etc/os-release

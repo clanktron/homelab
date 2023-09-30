@@ -1,0 +1,55 @@
+#cloud-config
+hostname: node-{{ trunc 4 .MachineID }}
+users:
+- name: clayton
+  groups: sudo
+  shell: /usr/bin/fish
+  lock_passwd: true
+  ssh_authorized_keys:
+  # Replace with your github user and un-comment the line below:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOTdQLlqHFSdRU4iYNTx4Dgl+BUKnmSeV1od4BCvot0 clayton@ClaytonsMacBookPro.socal.rr.com"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0XOUB4lysCFKDxYspchE5MIGk+c4OOKWxQ4LNGPbPu clayton"
+  # - github:clanktron
+
+kubevip:
+  eip: "192.168.1.110"
+
+ssh_pwauth: false
+timezone: US/Los_Angeles
+
+p2p:
+ # Disabling DHT makes co-ordination to discover nodes only in the local network
+ disable_dht: true #Enabled by default
+
+ vpn:
+   create: false # defaults to true
+   use: false # defaults to true
+ # network_token is the shared secret used by the nodes to co-ordinate with p2p.
+ # Setting a network token implies auto.enable = true.
+ # To disable, just set auto.enable = false
+ network_token: "b3RwOgogIGRodDoKICAgIGludGVydmFsOiA5MDAwCiAgICBrZXk6IGtkdGtoY21sMHVJM2hzVUFUMXpUY1B2aDhBblkzNDZUbHJ3NklVRmUxYUoKICAgIGxlbmd0aDogNDMKICBjcnlwdG86CiAgICBpbnRlcnZhbDogOTAwMAogICAga2V5OiBIcEJGaGxxdlFrcTZVd3BPSTBPVkJWQ1daRjNRYlE3WGdDa1R1bnI0cGV3CiAgICBsZW5ndGg6IDQzCnJvb206IGFBUE5oRTdlODgyZUZhM2NMTW56VkM0ZDZjWFdpTU5EYlhXMDE4Skl2Q3oKcmVuZGV6dm91czogOHVzaGhzNnFrTU92U2ZvQmZXMHZPaEY1ZFlodVZlN1Flc00zRWlMM2pNMwptZG5zOiBJZ0ljaGlvRlVYOFN6V1VKQjNXQ0NyT2UzZXZ3YzE4MWVIWm42SmlYZjloCm1heF9tZXNzYWdlX3NpemU6IDIwOTcxNTIwCg=="
+
+ # Automatic cluster deployment configuration
+ auto:
+   # Enables Automatic node configuration (self-coordination)
+   # for role assignment
+   enable: true
+   # HA enables automatic HA roles assignment.
+   # A master cluster init is always required,
+   # Any additional master_node is configured as part of the 
+   # HA control plane.
+   # If auto is disabled, HA has no effect.
+   ha:
+     # Enables HA control-plane
+     enable: true
+     # Number of HA additional master nodes.
+     # A master node is always required for creating the cluster and is implied.
+     # The setting below adds 2 additional master nodes, for a total of 3.
+     master_nodes: 2
+
+install:
+  # selects biggest drive
+  device: "auto"
+  reboot: true
+  poweroff: false
+  auto: true # Required, for automated installations
