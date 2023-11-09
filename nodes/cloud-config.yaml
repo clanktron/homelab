@@ -1,14 +1,5 @@
 #cloud-config
 hostname: node-{{ trunc 4 .MachineID }}
-users:
-- name: clayton
-  shell: /usr/bin/fish
-  lock_passwd: true
-  ssh_authorized_keys:
-  # Replace with your github user and un-comment the line below:
-  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOTdQLlqHFSdRU4iYNTx4Dgl+BUKnmSeV1od4BCvot0 clayton@ClaytonsMacBookPro.socal.rr.com"
-  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0XOUB4lysCFKDxYspchE5MIGk+c4OOKWxQ4LNGPbPu clayton"
-  # - github:clanktron
 
 kubevip:
   eip: "192.168.1.110"
@@ -27,6 +18,7 @@ p2p:
  # Setting a network token implies auto.enable = true.
  # To disable, just set auto.enable = false
  network_token: "b3RwOgogIGRodDoKICAgIGludGVydmFsOiA5MDAwCiAgICBrZXk6IGtkdGtoY21sMHVJM2hzVUFUMXpUY1B2aDhBblkzNDZUbHJ3NklVRmUxYUoKICAgIGxlbmd0aDogNDMKICBjcnlwdG86CiAgICBpbnRlcnZhbDogOTAwMAogICAga2V5OiBIcEJGaGxxdlFrcTZVd3BPSTBPVkJWQ1daRjNRYlE3WGdDa1R1bnI0cGV3CiAgICBsZW5ndGg6IDQzCnJvb206IGFBUE5oRTdlODgyZUZhM2NMTW56VkM0ZDZjWFdpTU5EYlhXMDE4Skl2Q3oKcmVuZGV6dm91czogOHVzaGhzNnFrTU92U2ZvQmZXMHZPaEY1ZFlodVZlN1Flc00zRWlMM2pNMwptZG5zOiBJZ0ljaGlvRlVYOFN6V1VKQjNXQ0NyT2UzZXZ3YzE4MWVIWm42SmlYZjloCm1heF9tZXNzYWdlX3NpemU6IDIwOTcxNTIwCg=="
+ # this token is "fine" to be exposed since it's just used during the bootstrap phase
 
  # Automatic cluster deployment configuration
  auto:
@@ -54,14 +46,28 @@ install:
   auto: true # Required, for automated installations
 
 stages:
+  initramfs:
+    - name: users
+      users:
+        clayton: 
+          passwd: clayton
+          shell: /usr/bin/fish
+          lock_passwd: true
+          ssh_authorized_keys:
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOTdQLlqHFSdRU4iYNTx4Dgl+BUKnmSeV1od4BCvot0 clayton@ClaytonsMacBookPro.socal.rr.com"
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0XOUB4lysCFKDxYspchE5MIGk+c4OOKWxQ4LNGPbPu clayton"
+        git:
+          passwd: clayton
+          shell: /usr/bin/fish
+          lock_passwd: true
+          ssh_authorized_keys:
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDOTdQLlqHFSdRU4iYNTx4Dgl+BUKnmSeV1od4BCvot0 clayton@ClaytonsMacBookPro.socal.rr.com"
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII0XOUB4lysCFKDxYspchE5MIGk+c4OOKWxQ4LNGPbPu clayton"
   fs:
-    - name: "Ensure passwordless sudo"
-      commands:
-        - echo "clayton ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-    - name: "Dotfiles Setup"
+    - name: dotfiles setup
       git:
         url: "https://github.com/clanktron/dotfiles"
         path: "/scratch/dotfiles"
         branch: "main"
       commands:
-      - cd /scratch/dotfiles && USER=clayton HOME=/home/clayton XDG_CONFIG_HOME=/home/clayton/.config ./install link
+        - chown -R clayton:clayton /scratch/dotfiles && su clayton -c "HOME=/home/clayton /scratch/dotfiles/install -l"
