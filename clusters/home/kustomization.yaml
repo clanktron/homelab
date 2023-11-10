@@ -10,19 +10,19 @@ patches:
       version: v1
       kind: Kustomization
     patch: |
-      op: add
-      path: /metadata
-      value:
-        namespace: flux-system
-      op: add
-      path: /spec/decryption/provider
-      value:
-        provider: sops
-        secretRef:
-          name: sops-age
-        interval: 10m
-        prune: true
-        timeout: 10m
+      - op: add
+        path: /metadata/namespace
+        value: flux-system
+      - op: add
+        path: /spec
+        value:
+          decryption:
+            provider: sops
+            secretRef:
+              name: sops-age
+          interval: 10m
+          prune: true
+          timeout: 10m
           
 # generatorOptions:
 #   disableNameSuffixHash: true
