@@ -1,7 +1,0 @@
-FROM quay.io/kairos/kairos-ubuntu-22-lts:v2.4.1
-# user utilities
-RUN apt install -y fish tmux mediainfo
-# system utilities
-RUN apt install -y nfs-common 
-RUN export VERSION="node-0.1.0"
-RUN envsubst '${VERSION}' </etc/os-release
