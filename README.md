@@ -10,16 +10,21 @@ The source of truth for my Kubernetes clusters. I use this to manage both my on-
 
 ```bash
 # environment
-export SOPS_AGE_KEY_FILE=path_to_agekey_file
-export CLUSTER_NAME=flux_cluster_config_to_use
-export GITHUB_TOKEN=personal_access_token
+export SOPS_AGE_KEY=path_to_agekey_file
+export CLUSTER=flux_cluster_config_to_use
+export SSH_KEY=path_to_ssh_key
+# optional
+export SSH_KEY_PASS=password_to_ssh_key_file
 
 # manually create flux namespace
 kubectl create ns flux-system
 # create SOPS secret so flux can decrypt secrets
 kubectl create secret generic sops-age --namespace=flux-system --from-file=$SOPS_AGE_KEY_FILE
 # Now we can bootstrap the cluster with a single command
-flux bootstrap github --owner=clanktron --repository=homelab --path=clusters/$CLUSTER_NAME
-# or if using raw git repo (the full path must be specified)
-flux bootstrap git --url=ssh://git@remote/home/git/homelab --path=clusters/$CLUSTER_NAME
+flux bootstrap git \
+    --url=ssh://git@github.com/clanktron/homelab \
+    --branch=kairos \
+    --private-key-file="$SSH_KEY" \
+    --password="$SSH_KEY_PASS" \
+    --path=clusters/"$CLUSTER"
 ```
