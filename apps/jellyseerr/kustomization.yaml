@@ -5,4 +5,3 @@ resources:
 - database-volume.yaml
 - deployment.yaml
 - ingress.yaml
-- services.yaml
