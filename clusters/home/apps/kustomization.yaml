@@ -19,6 +19,6 @@ patches:
       kind: Kustomization
     patch: |
       - op: add
-        path: /spec/dependsOn/
+        path: /spec/dependsOn
         value: 
         - name: cert-manager
