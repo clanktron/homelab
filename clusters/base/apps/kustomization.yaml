@@ -9,7 +9,7 @@ resources:
 - littlelink.yaml
 - mealie.yaml
 - pihole.yaml
-- proxy.yaml
+  # - proxy.yaml
 - vaultwarden.yaml
 
 patches:
