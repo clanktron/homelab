@@ -7,8 +7,8 @@ resources:
 - jellyfin.yaml
 - jellyseerr.yaml
 - littlelink.yaml
-- mealie.yaml
-- pihole.yaml
+  # - mealie.yaml
+  # - pihole.yaml
   # - proxy.yaml
 - vaultwarden.yaml
 
