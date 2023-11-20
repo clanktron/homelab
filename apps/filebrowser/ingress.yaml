@@ -10,17 +10,17 @@ metadata:
     flame.pawelmalak/icon: file-multiple
     flame.pawelmalak/name: filebrowser
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://files.${domain}
+    flame.pawelmalak/url: https://files.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik-external
   tls:
     - hosts:
-        - "files.${domain}"
+        - "files.${EXTERNAL_DOMAIN}"
       secretName: "files-tls"
   rules:
-    - host: "files.${domain}"
+    - host: "files.${EXTERNAL_DOMAIN}"
       http:
         paths:
           - path: "/"

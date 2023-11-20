@@ -12,7 +12,7 @@ metadata:
     gethomepage.dev/name: Homepage
 spec:
   rules:
-    - host: "homepage.${domain}"
+    - host: "homepage.${EXTERNAL_DOMAIN}"
       http:
         paths:
           - path: "/"
