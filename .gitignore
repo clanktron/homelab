@@ -10,3 +10,4 @@ deprecated/
 # Misc.
 .vscode
 .sops.yaml
+.env.fish
