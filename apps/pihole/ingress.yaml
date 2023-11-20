@@ -4,15 +4,15 @@ kind: Ingress
 metadata:
   name: pihole
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.tls: 'true'
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: pihole
     flame.pawelmalak/url: https://dns.${INTERNAL_DOMAIN}/admin
     flame.pawelmalak/icon: router
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: 'true'
 spec:
-  ingressClassName: traefik-internal
+  ingressClassName: traefik-traefik-internal
   tls:
   - hosts:
       - dns.${INTERNAL_DOMAIN}

@@ -11,10 +11,10 @@ metadata:
     flame.pawelmalak/name: jellyfin
     flame.pawelmalak/type: app
     flame.pawelmalak/url: https://jellyfin.${EXTERNAL_DOMAIN}
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-external
+  ingressClassName: traefik-traefik-external
   tls:
     - hosts:
         - "jellyfin.${EXTERNAL_DOMAIN}"
@@ -47,7 +47,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-internal
+  ingressClassName: traefik-traefik-internal
   tls:
     - hosts:
         - "media.${INTERNAL_DOMAIN}"

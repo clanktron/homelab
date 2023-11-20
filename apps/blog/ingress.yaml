@@ -11,10 +11,10 @@ metadata:
     flame.pawelmalak/name: blog
     flame.pawelmalak/type: app
     flame.pawelmalak/url: https://blog.${EXTERNAL_DOMAIN}
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-external
+  ingressClassName: traefik-traefik-external
   tls:
     - hosts:
         - "blog.${EXTERNAL_DOMAIN}"

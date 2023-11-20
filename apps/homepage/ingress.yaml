@@ -10,7 +10,14 @@ metadata:
     gethomepage.dev/group: Cluster Management
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
+  ingressClassName: traefik-traefik-external
+  tls:
+    - hosts:
+        - "home.${EXTERNAL_DOMAIN}"
+      secretName: "home-tls"
   rules:
     - host: "homepage.${EXTERNAL_DOMAIN}"
       http:

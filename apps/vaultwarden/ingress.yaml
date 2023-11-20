@@ -11,10 +11,10 @@ metadata:
     flame.pawelmalak/name: vaultwarden
     flame.pawelmalak/type: app
     flame.pawelmalak/url: https://vault.${EXTERNAL_DOMAIN}
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-external
+  ingressClassName: traefik-traefik-external
   tls:
     - hosts:
         - "vault.${EXTERNAL_DOMAIN}"
