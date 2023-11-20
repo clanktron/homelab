@@ -10,17 +10,17 @@ metadata:
     flame.pawelmalak/icon: silverware-fork-knife
     flame.pawelmalak/name: mealie
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://mealie.claytonc.dev
+    flame.pawelmalak/url: https://mealie.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   ingressClassName: traefik-external
   tls:
     - hosts:
-        - "mealie.claytonc.dev"
+        - "mealie.${EXTERNAL_DOMAIN}"
       secretName: "mealie-tls"
   rules:
-    - host: "mealie.claytonc.dev"
+    - host: "mealie.${EXTERNAL_DOMAIN}"
       http:
         paths:
           - path: "/"

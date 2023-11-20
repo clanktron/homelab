@@ -2,15 +2,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: jellyseer
+  name: jellyseerr
   labels:
-    app.kubernetes.io/name: jellyseer
+    app.kubernetes.io/name: jellyseerr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/icon: filmstrip
     flame.pawelmalak/name: jellyseer
     flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://jellyseer.${EXTERNAL_DOMAIN}
+    flame.pawelmalak/url: https://jellyseerr.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:

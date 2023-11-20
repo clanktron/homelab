@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: pihole
-    flame.pawelmalak/url: https://dns.${domain}/admin
+    flame.pawelmalak/url: https://dns.${INTERNAL_DOMAIN}/admin
     flame.pawelmalak/icon: router
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - dns.${domain}
+      - dns.${INTERNAL_DOMAIN}
     secretName: pihole-tls
   rules:
-    - host: dns.${domain}
+    - host: dns.${INTERNAL_DOMAIN}
       http:
         paths:
           - path: /
