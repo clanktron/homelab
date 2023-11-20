@@ -7,7 +7,7 @@ resources:
 - kubed.yaml
 - longhorn.yaml
 - metallb.yaml
-- monitoring.yaml
+  # - monitoring.yaml
 - traefikk.yaml
 
 patches:
