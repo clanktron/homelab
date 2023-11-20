@@ -23,3 +23,4 @@ patches:
         value: 
         - name: cert-manager
         - name: metallb-ip-pool
+        - name: longhorn-crds
