@@ -5,6 +5,8 @@ resources:
 - default-namespaces/
 - cert-manager.yaml
 - kubed.yaml
+- longhorn.yaml
+- metallb.yaml
 - monitoring.yaml
 - traefikk.yaml
 
