@@ -68,11 +68,6 @@ spec:
         expose: true
         exposedPort: 443
         protocol: TCP
-      cockroachdb:
-        port: 26257
-        expose: true
-        exposedPort: 26257
-        protocol: TCP
     
     logs:
       general:
