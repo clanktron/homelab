@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - blog.yaml
 - filebrowser.yaml
-- flame.yaml
+  # - flame.yaml
 - jellyfin.yaml
 - jellyseerr.yaml
 - littlelink.yaml
