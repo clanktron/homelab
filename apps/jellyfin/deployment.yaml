@@ -79,16 +79,16 @@ spec:
             claimName: jellyfin-config
         - name: movies
           nfs:
-            path: /main/media/movies
-            server: 192.168.1.56
+            path: "${MOVIE_PATH}"
+            server: "${NAS}"
         - name: shows
           nfs:
-            path: /main/media/shows
-            server: 192.168.1.56
+            path: "${SHOWS_PATH}"
+            server: "${NAS}"
         - name: jasmine
           nfs:
-            path: /main/media/jasmine
-            server: 192.168.1.56
+            path: "${JASMINE_PATH}"
+            server: "${NAS}"
         - name: transcode
           emptyDir:
             {}

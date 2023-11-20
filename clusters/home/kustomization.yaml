@@ -13,3 +13,8 @@ configMapGenerator:
       - EXTERNAL_DOMAIN="claytonc.dev"
       - INTERNAL_DOMAIN="local.claytonc.dev"
       - LOCAL_IP_POOL="192.168.1.50-192.168.1.55"
+      - NAS="192.168.1.27"
+      - CLOUD_STORAGE_PATH="/home/cloud"
+      - MOVIES_PATH="/main/media/movies"
+      - SHOWS_PATH="/main/media/shows"
+      - JASMINE_PATH="/main/media/jasmine"
