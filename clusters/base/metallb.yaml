@@ -1,18 +1,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: longhorn
+  name: metallb-system
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: longhorn
+  name: metallb
 spec:
-  path: "./core/longhorn/longhorn"
-  dependsOn: 
-  - name: cert-manager
-  - name: traefik
+  path: "./core/metallb/metallb"
   postBuild:
     substituteFrom: []
 
@@ -20,10 +17,10 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: longhorn-crds
+  name: metallb-ip-pool
 spec:
-  path: "./core/longhorn/crds"
+  path: "./core/metallb/ip-pool"
   dependsOn:
-  - name: longhorn
+  - name: metallb
   postBuild:
     substituteFrom: []

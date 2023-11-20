@@ -10,5 +10,7 @@ metadata:
   name: traefik
 spec:
   path: "./core/traefik"
+  dependsOn:
+    - metallb-ip-pool 
   postBuild:
     substituteFrom: []

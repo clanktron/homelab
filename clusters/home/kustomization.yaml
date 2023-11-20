@@ -26,3 +26,4 @@ configMapGenerator:
     literals:
       - EXTERNAL_DOMAIN="claytonc.dev"
       - INTERNAL_DOMAIN="local.claytonc.dev"
+      - LOCAL_IP_POOL="192.168.1.50-192.168.1.55"
