@@ -79,7 +79,7 @@ spec:
             claimName: jellyfin-config
         - name: movies
           nfs:
-            path: "${MOVIE_PATH}"
+            path: "${MOVIES_PATH}"
             server: "${NAS}"
         - name: shows
           nfs:
