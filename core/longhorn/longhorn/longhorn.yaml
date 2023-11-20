@@ -20,7 +20,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: 1.2.4
+      version: 1.5.3
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -42,7 +42,7 @@ spec:
     ingress:
       enabled: true
       ingressClassName: traefik-internal
-      host: longhorn.${domain}
+      host: longhorn.${EXTERNAL_DOMAIN}
       tls: true
       ## Enable this in order to enable that the backend service will be connected at port 443
       secureBackends: false
@@ -54,5 +54,5 @@ spec:
         traefik.ingress.kubernetes.io/router.tls: 'true'
         flame.pawelmalak/type: app
         flame.pawelmalak/name: longhorn
-        flame.pawelmalak/url: https://longhorn.${domain}
+        flame.pawelmalak/url: https://longhorn.${EXTERNAL_DOMAIN}
         flame.pawelmalak/icon: account-cowboy-hat-outline
