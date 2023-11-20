@@ -23,7 +23,6 @@ generatorOptions:
 
 configMapGenerator:
   - name: global-config
-    behavior: merge
     literals:
       - EXTERNAL_DOMAIN="claytonc.dev"
       - INTERNAL_DOMAIN="local.claytonc.dev"
