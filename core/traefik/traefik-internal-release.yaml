@@ -61,6 +61,8 @@ spec:
         expose: true
         exposedPort: 80
         protocol: TCP
+        redirectTo:
+          port: websecure
       websecure:
         port: 8443
         expose: true
