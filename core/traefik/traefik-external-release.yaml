@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 10.24.0
+      version: 25.0.0
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -49,7 +49,7 @@ spec:
         enabled: true
         allowExternalNameServices: true
         allowEmptyServices: true
-        ingressClass: traefik-external
+        ingressClass: external
 
     ports:
       traefik:
@@ -75,7 +75,7 @@ spec:
         
     logs:
       general:
-        level: INFO
+        level: DEBUG
       access:
         enabled: true
         filters: {}
