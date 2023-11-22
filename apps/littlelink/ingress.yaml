@@ -14,7 +14,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-traefik-external
+  ingressClassName: ${EXTERNAL_INGRESS}
   tls:
     - hosts:
         - "${EXTERNAL_DOMAIN}"
