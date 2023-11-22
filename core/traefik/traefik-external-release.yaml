@@ -70,6 +70,10 @@ spec:
         expose: false
         exposedPort: 9100
         protocol: TCP
+
+    service:
+      spec:
+        loadBalancerIP: ${EXTERNAL_LB}
         
     logs:
       general:

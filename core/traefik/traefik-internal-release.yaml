@@ -66,6 +66,10 @@ spec:
         expose: true
         exposedPort: 443
         protocol: TCP
+
+    service:
+      spec:
+        loadBalancerIP: ${INTERNAL_LB}
     
     logs:
       general:
