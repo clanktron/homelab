@@ -12,6 +12,7 @@ The source of truth for my Kubernetes clusters. I use this to manage both my on-
 # environment
 export SOPS_AGE_KEY=path_to_agekey_file
 export CLUSTER=flux_cluster_config_to_use
+export BRANCH=branch
 export SSH_KEY=path_to_ssh_key
 # optional
 export SSH_KEY_PASS=password_to_ssh_key_file
@@ -23,7 +24,7 @@ kubectl create secret generic sops-age --namespace=flux-system --from-file=$SOPS
 # Now we can bootstrap the cluster with a single command
 flux bootstrap git \
     --url=ssh://git@github.com/clanktron/homelab \
-    --branch=kairos \
+    --branch=$BRANCH \
     --private-key-file="$SSH_KEY" \
     --password="$SSH_KEY_PASS" \
     --path=clusters/"$CLUSTER"
