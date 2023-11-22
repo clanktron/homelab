@@ -41,7 +41,7 @@ spec:
 
     ingress:
       enabled: true
-      ingressClassName: traefik-internal
+      ingressClassName: traefik-traefik-internal
       host: longhorn.${EXTERNAL_DOMAIN}
       tls: true
       ## Enable this in order to enable that the backend service will be connected at port 443

@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 25.0.0
+      version: 10.24.0
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -33,13 +33,13 @@ spec:
     
     ingressRoute:
       dashboard:
-        enabled: true
+        enabled: false
         annotations: {}
         labels: {}
     
     providers:
       kubernetesCRD:
-        enabled: false
+        enabled: true
         allowCrossNamespace: true
         allowExternalNameServices: true
         allowEmptyServices: true
@@ -75,7 +75,7 @@ spec:
         
     logs:
       general:
-        level: DEBUG
+        level: INFO
       access:
         enabled: true
         filters: {}
