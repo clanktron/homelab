@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: traefik
-      version: 10.24.0
+      version: 25.0.0
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -40,17 +40,17 @@ spec:
     
     providers:
       kubernetesCRD:
-        enabled: true
+        enabled: false
         allowCrossNamespace: true
         allowExternalNameServices: true
         allowEmptyServices: true
-        ingressClass: traefik-crd-internal
+        ingressClass: crd-internal
     
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: true
         allowEmptyServices: true
-        ingressClass: traefik-internal
+        ingressClass: internal
 
     ports:
       traefik:
