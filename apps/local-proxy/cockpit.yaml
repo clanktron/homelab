@@ -9,16 +9,16 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     flame.pawelmalak/type: app
     flame.pawelmalak/name: cockpit
-    flame.pawelmalak/url: https://cockpit.${domain}
+    flame.pawelmalak/url: https://cockpit.${EXTERNAL_DOMAIN}
     flame.pawelmalak/icon: monitor-dashboard
 spec:
   ingressClassName: traefik-internal
   tls:
   - hosts:
-      - cockpit.${domain}
+      - cockpit.${EXTERNAL_DOMAIN}
     secretName: cockpit-tls
   rules:
-    - host: cockpit.${domain}
+    - host: cockpit.${EXTERNAL_DOMAIN}
       http:
         paths:
           - path: /
@@ -41,7 +41,7 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`cockpit.${domain}`)
+  - match: Host(`cockpit.${EXTERNAL_DOMAIN}`)
     kind: Rule
     services:
     - name: cockpit
@@ -60,7 +60,7 @@ metadata:
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: insecure
 spec:
-  externalName: 192.168.1.56
+  externalName: ${A_MACHINE}
   type: ExternalName
   ports:
   - protocol: TCP
