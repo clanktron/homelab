@@ -40,7 +40,7 @@ spec:
       defaultReplicaCount: 1
 
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: ${INTERNAL_INGRESS}
       host: longhorn.${EXTERNAL_DOMAIN}
       tls: true
