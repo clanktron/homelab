@@ -21,6 +21,8 @@ spec:
     spec:
       serviceAccountName: default
       automountServiceAccountToken: false
+      securityContext:
+        privileged: true
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
@@ -52,6 +54,8 @@ spec:
               mountPath: /jasmine
             - name: transcode
               mountPath: /transcode
+            - name: igpu
+              mountPath: /dev/dri/renderD128
           livenessProbe:
             tcpSocket:
               port: 8096
@@ -92,3 +96,6 @@ spec:
         - name: transcode
           emptyDir:
             {}
+        - name: igpu
+          hostPath:
+            path: /dev/dri/renderD128
