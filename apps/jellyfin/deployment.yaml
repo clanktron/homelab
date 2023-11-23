@@ -55,7 +55,7 @@ spec:
             - name: transcode
               mountPath: /transcode
             - name: igpu
-              mountPath: /dev/dri/renderD128
+              mountPath: /dev/dri
           livenessProbe:
             tcpSocket:
               port: 8096
@@ -98,4 +98,4 @@ spec:
             {}
         - name: igpu
           hostPath:
-            path: /dev/dri/renderD128
+            path: /dev/dri
