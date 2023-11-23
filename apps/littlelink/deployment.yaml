@@ -25,7 +25,7 @@ metadata:
     app.kubernetes.io/name: littlelink-server
 spec:
   revisionHistoryLimit: 3
-  replicas: 1
+  replicas: 2
   strategy:
     type: Recreate
   selector:
