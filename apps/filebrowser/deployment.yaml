@@ -41,7 +41,11 @@ spec:
         app.kubernetes.io/name: filebrowser
     spec:
       serviceAccountName: default
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
