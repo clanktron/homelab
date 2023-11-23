@@ -80,7 +80,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: jellyfin-config
+            claimName: jellyfin-data
         - name: movies
           nfs:
             path: "${MOVIES_PATH}"
