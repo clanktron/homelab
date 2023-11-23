@@ -21,8 +21,6 @@ spec:
     spec:
       serviceAccountName: default
       automountServiceAccountToken: false
-      securityContext:
-        privileged: true
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
@@ -35,6 +33,8 @@ spec:
                 # limits:
                 #   memory: "10000Mi"
                 #   cpu: "3000m"
+          securityContext:
+            privileged: true
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
