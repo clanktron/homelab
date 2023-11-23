@@ -5,7 +5,7 @@ resources:
 - filebrowser.yaml
   # - flame.yaml
 - jellyfin.yaml
-- jellyseerr.yaml
+  # - jellyseerr.yaml
 - littlelink.yaml
   # - mealie.yaml
   # - pihole.yaml
