@@ -82,17 +82,14 @@ spec:
           persistentVolumeClaim:
             claimName: jellyfin-data
         - name: movies
-          nfs:
+          hostPath:
             path: "${MOVIES_PATH}"
-            server: "${NAS}"
         - name: shows
-          nfs:
+          hostPath:
             path: "${SHOWS_PATH}"
-            server: "${NAS}"
         - name: jasmine
-          nfs:
+          hostPath:
             path: "${JASMINE_PATH}"
-            server: "${NAS}"
         - name: transcode
           emptyDir:
             {}
