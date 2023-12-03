@@ -1,0 +1,33 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: flame-tls
+spec:
+  secretName: flame-tls
+  dnsNames:
+    - dash.${EXTERNAL_DOMAIN}
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flame
+  annotations:
+    kubernetes.io/ingress.class: traefik-crd-external
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`dash.${EXTERNAL_DOMAIN}`)
+    kind: Rule
+    services:
+    - name: flame
+      port: 80
+  tls:
+    secretName: flame-tls

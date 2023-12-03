@@ -1,0 +1,157 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: prometheus
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://prometheus-community.github.io/helm-charts
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus-stack
+  namespace: flux-system
+spec:
+  targetNamespace: monitoring
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 42.0.3
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus
+        namespace: flux-system
+      interval: 5m
+  install:
+    remediation:
+      retries: 0
+  values:
+    alertmanager:
+      enabled: true
+      ingress:
+        enabled: true
+        annotations: 
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: alertmanager
+          flame.pawelmalak/url: https://alert.${domain}
+          flame.pawelmalak/icon: alert-circle-outline
+        ingressClassName: traefik-internal
+        path: /
+        hosts:
+          - alert.${domain}
+        tls: 
+         - secretName: alert-tls
+           hosts:
+             - alert.${domain}
+      serviceMonitor:
+        interval: "1m"
+        selfMonitor: true
+    
+    grafana:
+      defaultDashboardsTimezone: PT
+      ingress:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: grafana
+          flame.pawelmalak/url: https://grafana.${domain}
+          flame.pawelmalak/icon: chart-box-outline
+        ingressClassName: traefik-external
+        path: /
+        hosts:
+          - grafana.${domain}
+        tls: 
+         - secretName: grafana-tls
+           hosts:
+             - grafana.${domain}
+    
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          labelValue: "1"
+          provider:
+            allowUiUpdates: true
+          
+        datasources:
+          enabled: true
+          defaultDatasourceEnabled: true
+          defaultDatasourceScrapeInterval: 15s
+    
+    
+      additionalDataSources:
+        #- name: Prometheus
+        #  type: prometheus
+        #  url: http://prometheus-kube-prom-prometheus:9090/
+        #  access: proxy
+        #  isDefault: true
+      - name: Loki
+        type: loki
+        url: http://loki-stack:3100
+        access: proxy
+    
+      serviceMonitor:
+        enabled: true
+        path: "/metrics"
+        interval: "10s"
+    
+    prometheus:
+      enabled: true
+      ingress:
+        enabled: true
+        annotations: 
+          traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.tls: 'true'
+          flame.pawelmalak/type: app
+          flame.pawelmalak/name: prometheus
+          flame.pawelmalak/url: https://prometheus.${domain}
+          flame.pawelmalak/icon: fire
+        ingressClassName: traefik-internal
+        path: /
+        hosts:
+          - prometheus.${domain}
+        tls: 
+         - secretName: prometheus-tls
+           hosts:
+             - prometheus.${domain}
+        
+      serviceMonitor:
+        enabled: true
+        path: "/metrics"
+        interval: ""
+    
+      prometheusSpec:
+        scrapeInterval: "10s"
+    
+    kubeApiServer:
+      enabled: true
+      serviceMonitor:
+        interval: "10s"
+    
+    kubelet:
+      enabled: true
+      namespace: kube-system
+      serviceMonitor:
+        interval: "10s"
+    
+    kube-state-metrics:
+      prometheus:
+        monitor:
+          enabled: true
+          interval: "5s"
+    
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          enabled: true
+          interval: "10s"

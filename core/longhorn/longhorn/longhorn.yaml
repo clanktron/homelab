@@ -1,0 +1,58 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://charts.longhorn.io
+  timeout: 3m
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: flux-system
+spec:
+  targetNamespace: longhorn-system
+  interval: 2m
+  chart:
+    spec:
+      chart: longhorn
+      version: 1.5.3
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: flux-system
+      interval: 5m
+  install:
+    remediation:
+      retries: 10
+  values:
+    persistence:
+      defaultClass: true
+      reclaimPolicy: Retain
+      migratable: true
+      defaultClassReplicaCount: 1
+
+    defaultSettings:
+      defaultReplicaCount: 1
+
+    ingress:
+      enabled: false
+      ingressClassName: ${INTERNAL_INGRESS}
+      host: longhorn.${EXTERNAL_DOMAIN}
+      tls: true
+      ## Enable this in order to enable that the backend service will be connected at port 443
+      secureBackends: false
+      tlsSecret: longhorn-tls
+      path: /
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+        cert-manager.io/cluster-issuer: letsencrypt
+        traefik.ingress.kubernetes.io/router.tls: 'true'
+        flame.pawelmalak/type: app
+        flame.pawelmalak/name: longhorn
+        flame.pawelmalak/url: https://longhorn.${EXTERNAL_DOMAIN}
+        flame.pawelmalak/icon: account-cowboy-hat-outline

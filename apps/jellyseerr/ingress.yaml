@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyseerr
+  labels:
+    app.kubernetes.io/name: jellyseerr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: filmstrip
+    flame.pawelmalak/name: jellyseer
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://jellyseerr.${EXTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "jellyseerr.${EXTERNAL_DOMAIN}"
+      secretName: "jellyseer-tls"
+  rules:
+    - host: "jellyseerr.${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyseer
+                port:
+                  number: 80

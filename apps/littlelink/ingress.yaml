@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: littlelink-server
+  labels:
+    app.kubernetes.io/name: littlelink-server
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: link-variant
+    flame.pawelmalak/name: littlelink
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://${EXTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "${EXTERNAL_DOMAIN}"
+      secretName: "littlelink-tls"
+  rules:
+    - host: "${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: littlelink-server
+                port:
+                  number: 3000

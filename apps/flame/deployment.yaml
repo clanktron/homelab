@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flame
+spec:
+  selector:
+    app: flame
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5005
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: flame
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flame
+  template:
+    metadata:
+      labels:
+        app: flame
+    spec:
+      serviceAccountName: flame
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: flame
+          image: "pawelmalak/flame:latest"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - name: http
+              containerPort: 5005
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: flame-secret
+                key: PASSWORD
+                optional: false
+          volumeMounts:
+          - mountPath: "/app/data"
+            name: flame-data
+      volumes:
+        - name: flame-data
+          persistentVolumeClaim:
+            claimName: flame-data
+          # hostPath:
+          #   path: /home/clayton/flame
+          # nfs:
+          #   server: 192.168.1.56
+          #   path: /mnt/ssd/vols/flame/
+

@@ -1,0 +1,67 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin
+  labels:
+    app.kubernetes.io/name: jellyfin
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: play-network
+    flame.pawelmalak/name: jellyfin
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://jellyfin.${EXTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "jellyfin.${EXTERNAL_DOMAIN}"
+      secretName: "jellyfin-tls"
+  rules:
+    - host: "jellyfin.${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-local
+  labels:
+    app.kubernetes.io/name: jellyfin
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: play-network
+    flame.pawelmalak/name: jellyfin (local)
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://media.${INTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${INTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "media.${INTERNAL_DOMAIN}"
+      secretName: "media-tls"
+  rules:
+    - host: "media.${INTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: jellyfin
+                port:
+                  number: 8096
+
+

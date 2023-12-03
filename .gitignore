@@ -1,3 +1,13 @@
+# MacOS clutter
 .DS_STORE
+
+# Manifests not currently deployed
+deprecated/
+
+# Patch files
+*.patch
+
+# Misc.
 .vscode
 .sops.yaml
+.env.fish

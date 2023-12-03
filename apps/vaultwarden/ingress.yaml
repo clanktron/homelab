@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden
+  labels:
+    app.kubernetes.io/name: vaultwarden
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: lock
+    flame.pawelmalak/name: vaultwarden
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://vault.${EXTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "vault.${EXTERNAL_DOMAIN}"
+      secretName: "vault-tls"
+  rules:
+    - host: "vault.${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: vaultwarden
+                port:
+                  number: 80

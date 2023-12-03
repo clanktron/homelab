@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: global-config
+    namespace: flux-system
+    literals:
+      - EXTERNAL_DOMAIN="claytonc.dev"
+      - INTERNAL_DOMAIN="local.claytonc.dev"
+      - EXTERNAL_INGRESS="traefik-traefik-external"
+      - INTERNAL_INGRESS="traefik-traefik-internal"
+      - EXTERNAL_LB="192.168.1.50"
+      - INTERNAL_LB="192.168.1.51"
+      - LOCAL_IP_POOL="192.168.1.50-192.168.1.55"
+      - NAS="192.168.1.27"
+      - A_MACHINE="192.168.1.116"
+      - CLOUD_STORAGE_PATH="/home/cloud"
+      - MOVIES_PATH="/data/media/movies"
+      - SHOWS_PATH="/data/media/shows"
+      - JASMINE_PATH="/data/media/jasmine"

@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- blog.yaml
+- filebrowser.yaml
+  # - flame.yaml
+- jellyfin.yaml
+  # - jellyseerr.yaml
+- littlelink.yaml
+  # - mealie.yaml
+  # - pihole.yaml
+  # - proxy.yaml
+- vaultwarden.yaml
+
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      version: v1
+      kind: Kustomization
+    patch: |
+      - op: add
+        path: /spec/dependsOn
+        value: 
+        - name: cert-manager
+        - name: metallb-ip-pool
+        - name: longhorn

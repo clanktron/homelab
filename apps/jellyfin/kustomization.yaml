@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: jellyfin
 resources:
-  - svc.yml
-  - deployment.yml
-  - persistence.yml
-  - ingress.yml
+  - deployment.yaml
+  - ingress.yaml
+  - persistence.yaml
+  - services.yaml

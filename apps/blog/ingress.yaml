@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog
+  labels:
+    app.kubernetes.io/name: blog
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/icon: post-outline
+    flame.pawelmalak/name: blog
+    flame.pawelmalak/type: app
+    flame.pawelmalak/url: https://blog.${EXTERNAL_DOMAIN}
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS}
+  tls:
+    - hosts:
+        - "blog.${EXTERNAL_DOMAIN}"
+      secretName: "blog-tls"
+  rules:
+    - host: "blog.${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: blog
+                port:
+                  number: 80

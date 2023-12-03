@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jellyseerr
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: jellyseerr
+spec:
+  path: "./apps/jellyseerr"
+  postBuild:
+    substituteFrom: []

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mealie-frontend-env
+  labels:
+    app: mealie
+data:
+  API_URL: http://mealie-api:9000
+  ALLOW_SIGNUP: "false"

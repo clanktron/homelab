@@ -1,0 +1,42 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portainer
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.tls: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt
+    flame.pawelmalak/type: app
+    flame.pawelmalak/name: portainer
+    flame.pawelmalak/url: https://portainer.${domain}
+    flame.pawelmalak/icon: docker
+spec:
+  ingressClassName: traefik-internal
+  tls:
+  - hosts:
+      - portainer.${domain}
+    secretName: portainer-tls
+  rules:
+    - host: portainer.${domain}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  portainer
+                port:
+                  number: 9000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portainer
+spec:
+  externalName: 192.168.1.56
+  type: ExternalName
+  ports:
+  - protocol: TCP
+    port: 9000
