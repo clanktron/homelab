@@ -50,7 +50,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "200m"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
             - name: AVATAR_ALT
               value: Clayton Castro Profile Pic
