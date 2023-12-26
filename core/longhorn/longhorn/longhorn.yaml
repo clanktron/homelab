@@ -40,19 +40,14 @@ spec:
       defaultReplicaCount: 1
 
     ingress:
-      enabled: false
+      enabled: true
       ingressClassName: ${INTERNAL_INGRESS}
-      host: longhorn.${EXTERNAL_DOMAIN}
+      host: longhorn.${INTERNAL_DOMAIN}
       tls: true
-      ## Enable this in order to enable that the backend service will be connected at port 443
-      secureBackends: false
+      secureBackends: true
       tlsSecret: longhorn-tls
       path: /
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
         cert-manager.io/cluster-issuer: letsencrypt
         traefik.ingress.kubernetes.io/router.tls: 'true'
-        flame.pawelmalak/type: app
-        flame.pawelmalak/name: longhorn
-        flame.pawelmalak/url: https://longhorn.${EXTERNAL_DOMAIN}
-        flame.pawelmalak/icon: account-cowboy-hat-outline
