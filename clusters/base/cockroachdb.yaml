@@ -9,7 +9,7 @@ kind: Kustomization
 metadata:
   name: cockroachdb
 spec:
-  path: "./core/cockroachdb/cockroachdb"
+  path: "./core/cockroachdb"
   dependsOn:
   - name: cert-manager
   - name: traefik
