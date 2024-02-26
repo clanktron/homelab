@@ -1,0 +1,32 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: littlelink-env
+  labels:
+    app.kubernetes.io/name: littlelink-server
+data:
+  AVATAR_ALT: "Clayton Castro Profile Pic"
+  AVATAR_URL: "https://pbs.twimg.com/profile_images/1724319921742786560/fP1gFn0t_400x400.jpg"
+  BIO: "lil homepage"
+  BUTTON_ORDER: "BLOG,PGP,EMAIL,GITHUB,LINKED_IN,TWITTER"
+  EMAIL: "hello@claytonc.dev"
+  EMAIL_TEXT: "Email"
+  FAVICON_URL: "https://pbs.twimg.com/profile_images/1724319921742786560/fP1gFn0t_400x400.jpg"
+  FOOTER: "Cheers!"
+  GITHUB: "https://github.com/clanktron"
+  LINKED_IN: "https://linkedin.com/in/claytonc-dev"
+  META_AUTHOR: "Clayton Castro"
+  META_DESCRIPTION: "Clayton Castro Social Links"
+  META_TITLE: "Clayton Castro"
+  NAME: "Clayton Castro"
+  THEME: "Dark"
+  TWITTER: "https://twitter.com/clank_blank"
+  TZ: "PT"
+  CUSTOM_BUTTON_ALT_TEXT: Personal Blog, PGP Key
+  CUSTOM_BUTTON_COLOR: '#4a7059,#6e609e'
+  CUSTOM_BUTTON_ICON: fa-solid fa-book, fa-solid fa-key
+  CUSTOM_BUTTON_NAME: BLOG,PGP
+  CUSTOM_BUTTON_TEXT: Blog, PGP Key
+  CUSTOM_BUTTON_TEXT_COLOR: '#ffffff,#ffffff'
+  CUSTOM_BUTTON_URL: https://blog.claytonc.dev,https://keys.openpgp.org/search?q=hello%40claytonc.dev
