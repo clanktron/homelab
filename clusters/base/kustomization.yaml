@@ -9,6 +9,7 @@ resources:
 - metallb.yaml
 - cockroachdb.yaml
   # - monitoring.yaml
+- tekton.yaml
 - traefikk.yaml
 
 patches:
