@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns
+  labels:
+    app.kubernetes.io/name: coredns
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: coredns
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: coredns
+    spec:
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: coredns
+          image: "coredns/coredns"
+          resources:
+            requests:
+              memory: "250Mi"
+              cpu: "30m"
+            limits:
+              memory: "2250Mi"
+              cpu: "1000m"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: PT
+          ports:
+            - name: dns
+              containerPort: 53
+              protocol: UDP
+          volumeMounts:
+            - name: config
+              mountPath: /etc/coredns

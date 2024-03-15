@@ -4,6 +4,7 @@ resources:
 - ../base
 - ./apps
 - cockroachdb.yaml
+- coredns.yaml
 - tekton.yaml
 
 generatorOptions:

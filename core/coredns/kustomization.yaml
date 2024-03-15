@@ -1,0 +1,5 @@
+namespace: coredns
+resources:
+- config.yaml
+- deployment.yaml
+- loadbalancer.yaml
