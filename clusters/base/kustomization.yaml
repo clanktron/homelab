@@ -7,9 +7,6 @@ resources:
 - kubed.yaml
 - longhorn.yaml
 - metallb.yaml
-- cockroachdb.yaml
-  # - monitoring.yaml
-- tekton.yaml
 - traefikk.yaml
 
 patches:
