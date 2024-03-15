@@ -40,3 +40,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/coredns
+      volumes:
+        - name: config
+          configMap:
+            name: coredns-config
