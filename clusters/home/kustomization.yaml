@@ -26,3 +26,39 @@ configMapGenerator:
       - MOVIES_PATH="/data/media/movies"
       - SHOWS_PATH="/data/media/shows"
       - JASMINE_PATH="/data/media/jasmine"
+
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      version: v1
+      kind: Kustomization
+    patch: |
+      - op: add
+        path: /metadata/namespace
+        value: flux-system
+      - op: add
+        path: /spec/timeout
+        value: 10m
+      - op: add
+        path: /spec/prune
+        value: true
+      - op: add
+        path: /spec/interval
+        value: 10m
+      - op: add
+        path: /spec/sourceRef
+        value:
+          kind: GitRepository
+          name: flux-system
+      - op: add
+        path: /spec/decryption
+        value:
+          provider: sops
+          secretRef:
+            name: sops-age
+      - op: add
+        path: /spec/postBuild
+        value:
+          substituteFrom:
+            - kind: ConfigMap
+              name: global-config
