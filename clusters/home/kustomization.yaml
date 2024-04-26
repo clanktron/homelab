@@ -5,6 +5,7 @@ resources:
 - ./apps
 - cockroachdb.yaml
 - coredns.yaml
+- mysql-operator.yaml
 - tekton.yaml
 
 generatorOptions:
