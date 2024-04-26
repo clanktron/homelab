@@ -1,0 +1,3 @@
+resources:
+- db-creds.yaml
+- mysql-cluster.yaml

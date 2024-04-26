@@ -4,8 +4,8 @@ apiVersion: v1
 metadata:
   name: carbide-registry-api-env
 data:
-  DBHOST: "carbide-db"
-  DBNAME: "carbide"
+  DBHOST: "carbide-registry-db"
+  DBNAME: "carbide_registry"
   DBPORT: "3306"
   JWTSECRET: "oogabooga"
   PORT: "5000"

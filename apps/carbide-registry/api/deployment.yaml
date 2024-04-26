@@ -1,31 +1,41 @@
 ---
 apiVersion: apps/v1
 kind: Deployment
-name: carbide-images-api
+name: carbide-registry-api
 metadata:
-  name: carbide-images-api
+  name: carbide-registry-api
   labels:
-    app.kubernetes.io/name: carbide-images-api
-    app.kubernetes.io/instance: carbide-images-api
+    app.kubernetes.io/name: carbide-registry-api
+    app.kubernetes.io/instance: carbide-registry-api
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app.kubernetes.io/name: carbide-images-api
-      app.kubernetes.io/instance: carbide-images-api
+      app.kubernetes.io/name: carbide-registry-api
+      app.kubernetes.io/instance: carbide-registry-api
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: carbide-images-api
-        app.kubernetes.io/instance: carbide-images-api
+        app.kubernetes.io/name: carbide-registry-api
+        app.kubernetes.io/instance: carbide-registry-api
     spec:
       automountServiceAccountToken: false
       securityContext:
         fsGroup: 2000
         runAsGroup: 2000
         runAsUser: 1001
+      initContainers:
+        - name: create-db
+          image: container-registry.oracle.com/mysql/community-operator
+          args:
+          - mysqlsh
+          - --user=$(DBUSER)
+          - --host=$(DBHOST)
+          - --password=$(DBPASS)
+          - --sqlc
+          - --execute=CREATE DATABASE IF NOT EXISTS $(DBNAME)
       containers:
-        - name: carbide-images-api
+        - name: carbide-registry-api
           securityContext:
             capabilities:
               drop:
@@ -34,19 +44,19 @@ spec:
             runAsNonRoot: true
           envFrom:
           - configMapRef:
-              name: carbide-images-api-env
+              name: carbide-registry-api-env
           env:
           - name: DBUSER
             valueFrom:
               secretKeyRef:
-                name: carbide-db-creds
+                name: carbide-registry-db-creds
                 key: rootUser
-          - name: DBPASSWD
+          - name: DBPASS
             valueFrom:
               secretKeyRef:
-                name: carbide-db-creds
+                name: carbide-registry-db-creds
                 key: rootPassword
-          image: "clanktron/carbide-images-api:52bea16d66aa04fe6d02c539dcc0c65805e62909"
+          image: "clanktron/carbide-registry-api:dev"
           imagePullPolicy: Always
           ports:
             - name: http

@@ -1,9 +1,9 @@
   apiVersion: mysql.oracle.com/v2
   kind: InnoDBCluster
   metadata:
-    name: carbide-db
+    name: carbide-registry-db
   spec:
-    secretName: carbide-db-credentials
+    secretName: carbide-registry-db-creds
     tlsUseSelfSigned: true
     instances: 3
     router:
