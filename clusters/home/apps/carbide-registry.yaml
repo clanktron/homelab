@@ -10,6 +10,8 @@ metadata:
   name: carbide-registry
 spec:
   path: "./apps/carbide-registry"
+  dependsOn:
+  - name: longhorn
   postBuild:
     substituteFrom: []
 
