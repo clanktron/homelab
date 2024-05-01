@@ -6,6 +6,15 @@
 find deprecated/ -depth -name "*.yml" -exec sh -c 'f="{}"; mv -- "$f" "${f%.yml}.yaml"' \;
 ```
 
+## aws
+```bash
+# https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md
+kubectl create secret generic aws-secret \
+    --namespace kube-system \
+    --from-literal "key_id=${AWS_ACCESS_KEY_ID}" \
+    --from-literal "access_key=${AWS_SECRET_ACCESS_KEY}"
+```
+
 ## Update all kustomize files:
 ```bash
 find . -type f -name kustomization.yaml -exec gsed -i 's/kustomize.config.k8s.io\/v1beta1/kustomize.config.k8s.io\/v1/g' {} \;
