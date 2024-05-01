@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: vaultwarden
 spec:
+  targetNamespace: vaultwarden
   path: "./apps/vaultwarden"
   postBuild:
     substituteFrom: []

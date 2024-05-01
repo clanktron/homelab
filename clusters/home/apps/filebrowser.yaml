@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: filebrowser
 spec:
+  targetNamespace: filebrowser
   path: "./apps/filebrowser"
   postBuild:
     substituteFrom: []

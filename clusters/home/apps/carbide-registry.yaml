@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: carbide-registry
 spec:
+  targetNamespace: carbide-registry
   path: "./apps/carbide-registry"
   dependsOn:
   - name: longhorn

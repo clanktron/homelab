@@ -13,10 +13,10 @@ spec:
   ingressClassName: ${EXTERNAL_INGRESS}
   tls:
   - hosts:
-      - dev.api.carbide.registry.${EXTERNAL_DOMAIN}
+      - api.carbide.registry.${EXTERNAL_DOMAIN}
     secretName: carbide-registry-api-tls
   rules:
-  - host: dev.api.carbide.registry.${EXTERNAL_DOMAIN}
+  - host: api.carbide.registry.${EXTERNAL_DOMAIN}
     http:
       paths:
       - path: /

@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: jellyseerr
 spec:
+  targetNamespace: jellyseerr
   path: "./apps/jellyseerr"
   postBuild:
     substituteFrom: []

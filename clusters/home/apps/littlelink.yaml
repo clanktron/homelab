@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: littlelink
 spec:
+  targetNamespace: littlelink
   path: "./apps/littlelink"
   postBuild:
     substituteFrom: []

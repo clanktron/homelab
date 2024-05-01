@@ -9,6 +9,7 @@ kind: Kustomization
 metadata:
   name: blog
 spec:
+  targetNamespace: blog
   path: "./apps/blog"
   postBuild:
     substituteFrom: []
