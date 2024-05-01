@@ -1,0 +1,59 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+  # - ./apps
+  # - ./core
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: global-config
+    namespace: flux-system
+    literals:
+      - EXTERNAL_DOMAIN="staging.claytonc.dev"
+      - INTERNAL_DOMAIN="local.staging.claytonc.dev"
+      - EXTERNAL_INGRESS="traefik-traefik-external"
+      - INTERNAL_INGRESS="traefik-traefik-internal"
+        # - EXTERNAL_LB="192.168.1.50"
+        # - INTERNAL_LB="192.168.1.51"
+        # - LOCAL_IP_POOL="192.168.1.50-192.168.1.55"
+        # - NAS="192.168.1.27"
+        # - A_MACHINE="192.168.1.116"
+
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      version: v1
+      kind: Kustomization
+    patch: |
+      - op: add
+        path: /metadata/namespace
+        value: flux-system
+      - op: add
+        path: /spec/timeout
+        value: 10m
+      - op: add
+        path: /spec/prune
+        value: true
+      - op: add
+        path: /spec/interval
+        value: 10m
+      - op: add
+        path: /spec/sourceRef
+        value:
+          kind: GitRepository
+          name: flux-system
+      - op: add
+        path: /spec/decryption
+        value:
+          provider: sops
+          secretRef:
+            name: sops-age
+      - op: add
+        path: /spec/postBuild
+        value:
+          substituteFrom:
+            - kind: ConfigMap
+              name: global-config

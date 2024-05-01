@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: carbide-registry-staging
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: carbide-registry-staging
+spec:
+  targetNamespace: carbide-registry-staging
+  path: "./apps/carbide-registry"
+  postBuild:
+    substituteFrom: []
+  patches:
+    - target:
+        group: networking.k8s.io
+        version: v1
+        kind: Ingress
+        name: carbide-registry-dashboard
+        namespace: your-namespace
+      patch: |-
+        spec:
+          tls:
+          - hosts:
+              - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
+          rules:
+          - host: dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: carbide-registry-dev
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: carbide-registry-dev
+spec:
+  targetNamespace: carbide-registry-dev
+  path: "./apps/carbide-registry"
+  postBuild:
+    substituteFrom: []
+  patches:
+    - target:
+        group: networking.k8s.io
+        version: v1
+        kind: Ingress
+        name: carbide-registry-dashboard
+        namespace: your-namespace
+      patch: |-
+        spec:
+          tls:
+          - hosts:
+              - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
+          rules:
+          - host: dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
+
