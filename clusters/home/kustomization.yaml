@@ -3,10 +3,7 @@ kind: Kustomization
 resources:
 - ../base
 - ./apps
-- cockroachdb.yaml
-- coredns.yaml
-- mysql-operator.yaml
-- tekton.yaml
+- ./core
 
 generatorOptions:
   disableNameSuffixHash: true
