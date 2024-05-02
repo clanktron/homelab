@@ -4,4 +4,4 @@ resources:
 - ./aws-load-balancer-controller.yaml
 - ./mysql-operator.yaml
 - ./local-path-provisioner.yaml
-- ./traefikk.yaml
+- ./traefik.yaml

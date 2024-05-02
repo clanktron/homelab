@@ -16,16 +16,22 @@ spec:
     substituteFrom: []
   patches:
     - patch: |-
-        op: add
-        path: /spec/values/service/spec/loadBalancerIP
-        value: ${INTERNAL_LB_IP}
+        - op: add
+          path: /spec/values
+          value:
+            service:
+              spec:
+                loadBalancerIP: ${INTERNAL_LB_IP}
       target:
         kind: HelmRelease
         name: traefik-internal
     - patch: |-
-        op: add
-        path: /spec/values/service/spec/loadBalancerIP
-        value: ${EXTERNAL_LB_IP}
+        - op: add
+          path: /spec/values
+          value:
+            service:
+              spec:
+                loadBalancerIP: ${EXTERNAL_LB_IP}
       target:
         kind: HelmRelease
         name: traefik-external
