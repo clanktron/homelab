@@ -14,3 +14,18 @@ spec:
     - name: metallb-ip-pool
   postBuild:
     substituteFrom: []
+  patches:
+    - patch: |-
+        op: add
+        path: /spec/values/service/spec/loadBalancerIP
+        value: ${INTERNAL_LB_IP}
+      target:
+        kind: HelmRelease
+        name: traefik-internal
+    - patch: |-
+        op: add
+        path: /spec/values/service/spec/loadBalancerIP
+        value: ${EXTERNAL_LB_IP}
+      target:
+        kind: HelmRelease
+        name: traefik-external

@@ -22,14 +22,6 @@ spec:
     ingressClass:
       enabled: true
       isDefaultClass: true
-
-    # experimental:
-    #   http3:
-    #     enabled: true
-    #   plugins:
-    #     enabled: true
-      # kubernetesGateway:
-      #   enabled: true 
     
     ingressRoute:
       dashboard:
@@ -70,10 +62,6 @@ spec:
         expose: false
         exposedPort: 9100
         protocol: TCP
-
-    service:
-      spec:
-        loadBalancerIP: ${EXTERNAL_LB}
         
     logs:
       general:
