@@ -20,12 +20,12 @@ spec:
         kind: Ingress
         name: carbide-registry-dashboard
       patch: |
-        - op: replace
-          path: /spec/tls/hosts
+        - op: add
+          path: /spec/tls/hosts/0
           value:
             - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
-        - op: replace
-          path: /spec/rules
+        - op: add
+          path: /spec/rules/0
           value:
             - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
     - target:
@@ -34,12 +34,12 @@ spec:
         kind: Ingress
         name: carbide-registry-api
       patch: |
-        - op: replace
-          path: /spec/tls/hosts
+        - op: add
+          path: /spec/tls/hosts/0
           value:
             - api.carbide.registry.staging.${EXTERNAL_DOMAIN}
-        - op: replace
-          path: /spec/rules
+        - op: add
+          path: /spec/rules/0
           value:
             - api.carbide.registry.staging.${EXTERNAL_DOMAIN}
 
@@ -66,12 +66,12 @@ spec:
         kind: Ingress
         name: carbide-registry-dashboard
       patch: |
-        - op: replace
-          path: /spec/tls/hosts
+        - op: add
+          path: /spec/tls/hosts/0
           value:
             - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
-        - op: replace
-          path: /spec/rules
+        - op: add
+          path: /spec/rules/0
           value:
             - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
     - target:
@@ -80,11 +80,11 @@ spec:
         kind: Ingress
         name: carbide-registry-api
       patch: |
-        - op: replace
-          path: /spec/tls/hosts
+        - op: add
+          path: /spec/tls/hosts/0
           value:
             - api.carbide.registry.dev.${EXTERNAL_DOMAIN}
-        - op: replace
-          path: /spec/rules
+        - op: add
+          path: /spec/rules/0
           value:
             - api.carbide.registry.dev.${EXTERNAL_DOMAIN}
