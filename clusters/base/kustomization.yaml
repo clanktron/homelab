@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
 - default-namespaces/
 - cert-manager.yaml
-- kubed.yaml
