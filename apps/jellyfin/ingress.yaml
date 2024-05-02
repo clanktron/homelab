@@ -7,10 +7,6 @@ metadata:
     app.kubernetes.io/name: jellyfin
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    flame.pawelmalak/icon: play-network
-    flame.pawelmalak/name: jellyfin
-    flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://jellyfin.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
@@ -40,10 +36,6 @@ metadata:
     app.kubernetes.io/name: jellyfin
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    flame.pawelmalak/icon: play-network
-    flame.pawelmalak/name: jellyfin (local)
-    flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://media.${INTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:

@@ -46,12 +46,6 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: movies
-              mountPath: /movies
-            - name: shows
-              mountPath: /shows
-            - name: jasmine
-              mountPath: /jasmine
             - name: transcode
               mountPath: /transcode
             - name: igpu
@@ -81,15 +75,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-data
-        - name: movies
-          hostPath:
-            path: "${MOVIES_PATH}"
-        - name: shows
-          hostPath:
-            path: "${SHOWS_PATH}"
-        - name: jasmine
-          hostPath:
-            path: "${JASMINE_PATH}"
         - name: transcode
           emptyDir:
             {}
