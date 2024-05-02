@@ -47,7 +47,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: ${INTERNAL_INGRESS}
+  ingressClassName: ${INTERNAL_INGRESS_CLASS}
   tls:
     - hosts:
         - "media.${INTERNAL_DOMAIN}"

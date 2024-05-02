@@ -41,7 +41,7 @@ spec:
 
     ingress:
       enabled: true
-      ingressClassName: ${INTERNAL_INGRESS}
+      ingressClassName: ${INTERNAL_INGRESS_CLASS}
       host: longhorn.${INTERNAL_DOMAIN}
       tls: true
       secureBackends: true
