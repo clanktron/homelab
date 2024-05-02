@@ -19,14 +19,29 @@ spec:
         version: v1
         kind: Ingress
         name: carbide-registry-dashboard
-        namespace: your-namespace
-      patch: |-
-        spec:
-          tls:
-          - hosts:
-              - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
-          rules:
-          - host: dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
+      patch: |
+        - op: replace
+          path: /spec/tls/hosts
+          value:
+            - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
+        - op: replace
+          path: /spec/rules
+          value:
+            - dashboard.carbide.registry.staging.${EXTERNAL_DOMAIN}
+    - target:
+        group: networking.k8s.io
+        version: v1
+        kind: Ingress
+        name: carbide-registry-api
+      patch: |
+        - op: replace
+          path: /spec/tls/hosts
+          value:
+            - api.carbide.registry.staging.${EXTERNAL_DOMAIN}
+        - op: replace
+          path: /spec/rules
+          value:
+            - api.carbide.registry.staging.${EXTERNAL_DOMAIN}
 
 ---
 apiVersion: v1
@@ -50,12 +65,26 @@ spec:
         version: v1
         kind: Ingress
         name: carbide-registry-dashboard
-        namespace: your-namespace
-      patch: |-
-        spec:
-          tls:
-          - hosts:
-              - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
-          rules:
-          - host: dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
-
+      patch: |
+        - op: replace
+          path: /spec/tls/hosts
+          value:
+            - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
+        - op: replace
+          path: /spec/rules
+          value:
+            - dashboard.carbide.registry.dev.${EXTERNAL_DOMAIN}
+    - target:
+        group: networking.k8s.io
+        version: v1
+        kind: Ingress
+        name: carbide-registry-api
+      patch: |
+        - op: replace
+          path: /spec/tls/hosts
+          value:
+            - api.carbide.registry.dev.${EXTERNAL_DOMAIN}
+        - op: replace
+          path: /spec/rules
+          value:
+            - api.carbide.registry.dev.${EXTERNAL_DOMAIN}
