@@ -13,20 +13,20 @@ spec:
   path: "./apps/filebrowser"
   postBuild:
     substituteFrom: []
-  patch:
-    - patch: |-
-        op: add
-        path: /spec/template/spec/volumes
-        value:
-          - name: data
-            nfs:
-              path: "${CLOUD_STORAGE_PATH}"
-              server: "${NAS}"
-        op: add
-        path: /spec/template/spec/containers/0/volumeMounts
-        value:
-          - name: data
-            mountPath: /srv
-      target:
-        kind: Deployment
-        name: filebrowser
+      # patches:
+      #   - patch: |-
+      #       - op: add
+      #         path: /spec/template/spec/volumes
+      #         value:
+      #           - name: data
+      #             nfs:
+      #               path: "${CLOUD_STORAGE_PATH}"
+      #               server: "${NAS}"
+      #       - op: add
+      #         path: /spec/template/spec/containers/0/volumeMounts
+      #         value:
+      #           - name: data
+      #             mountPath: /srv
+      #     target:
+      #       kind: Deployment
+      #       name: filebrowser
