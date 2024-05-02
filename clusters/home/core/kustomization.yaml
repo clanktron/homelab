@@ -7,4 +7,4 @@ resources:
 - ./metallb.yaml
 - ./mysql.yaml
 - ./tekton.yaml
-- ./traefikk.yaml
+- ./traefik.yaml
