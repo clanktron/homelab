@@ -11,7 +11,7 @@ spec:
     solvers:
     - http01:
        ingress:
-         ingressClassName: ${EXTERNAL_INGRESS}
+         ingressClassName: ${EXTERNAL_INGRESS_CLASS}
 
 ---
 apiVersion: cert-manager.io/v1
@@ -26,7 +26,7 @@ spec:
     solvers:
     - http01:
        ingress:
-         ingressClassName: ${EXTERNAL_INGRESS}
+         ingressClassName: ${EXTERNAL_INGRESS_CLASS}
 
 ---
 apiVersion: cert-manager.io/v1

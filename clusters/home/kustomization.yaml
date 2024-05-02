@@ -14,7 +14,7 @@ configMapGenerator:
     literals:
       - EXTERNAL_DOMAIN="claytonc.dev"
       - INTERNAL_DOMAIN="local.claytonc.dev"
-      - EXTERNAL_INGRESS="traefik-traefik-external"
+      - EXTERNAL_INGRESS_CLASS="traefik-traefik-external"
       - INTERNAL_INGRESS="traefik-traefik-internal"
       - EXTERNAL_LB="192.168.1.50"
       - INTERNAL_LB="192.168.1.51"
