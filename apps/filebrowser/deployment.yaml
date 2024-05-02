@@ -75,8 +75,6 @@ spec:
               subPath: .filebrowser.json
             - name: database
               mountPath: /database
-            - name: data
-              mountPath: /srv
           livenessProbe:
             tcpSocket:
               port: 80
@@ -105,7 +103,3 @@ spec:
         - name: database
           persistentVolumeClaim:
             claimName: filebrowser-database
-        - name: data
-          nfs:
-            path: "${CLOUD_STORAGE_PATH}"
-            server: "${NAS}"
