@@ -14,8 +14,8 @@ configMapGenerator:
     literals:
       - EXTERNAL_DOMAIN="staging.claytonc.dev"
       - INTERNAL_DOMAIN="local.staging.claytonc.dev"
-      - EXTERNAL_INGRESS_CLASS="traefik-traefik-external"
-      - INTERNAL_INGRESS_CLASS="traefik-traefik-external"
+      - EXTERNAL_INGRESS_CLASS="nginx"
+      - INTERNAL_INGRESS_CLASS="nginx"
 
 patches:
   - target:
