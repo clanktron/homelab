@@ -1,0 +1,49 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: carbide-registry-api
+  namespace: flux-system
+spec:
+  targetNamespace: carbide-registry
+  interval: 5m
+  chart:
+    spec:
+      chart: carbide-registry-api
+      version: 0.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: carbide-registry
+        namespace: flux-system
+      interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    replicaCount: 3
+    image:
+      repository: clanktron/carbide-registry-api
+      pullPolicy: Always
+    
+    env:
+      DBNAME: "carbide-registry"
+      DBUSER: "carbide-registry-api"
+      DBPASS: "carbidecarbidecarbide"
+      DBHOST: "carbide-registry-db"
+      DBPORT: "3306"
+      JWTSECRET: "oogabooga"
+    
+    ingress:
+      enabled: true
+      className: ${EXTERNAL_INGRESS_CLASS}
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      hosts:
+        - host: api.carbide.registry.claytonc.dev
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: carbide-registry-api-tls
+          hosts:
+            - api.carbide.registry.claytonc.dev
