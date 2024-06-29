@@ -16,7 +16,7 @@ spec:
   patches:
     - patch: |-
         - op: add
-          path: /spec/template/spec/volumes
+          path: /spec/template/spec/volumes/-
           value:
             - name: movies
               hostPath:
@@ -28,7 +28,7 @@ spec:
               hostPath:
                 path: "${JASMINE_PATH}"
         - op: add
-          path: /spec/template/spec/containers/0/volumeMounts
+          path: /spec/template/spec/containers/0/volumeMounts/-
           value:
             - name: movies
               mountPath: /movies
