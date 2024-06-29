@@ -50,6 +50,12 @@ spec:
               mountPath: /transcode
             - name: igpu
               mountPath: /dev/dri
+            - name: movies
+              mountPath: /movies
+            - name: shows
+              mountPath: /shows
+            - name: jasmine
+              mountPath: /jasmine
           livenessProbe:
             tcpSocket:
               port: 8096
@@ -81,3 +87,12 @@ spec:
         - name: igpu
           hostPath:
             path: /dev/dri
+        - name: movies
+          hostPath:
+          path: "${MOVIES_PATH}"
+        - name: shows
+          hostPath:
+            path: "${SHOWS_PATH}"
+        - name: jasmine
+          hostPath:
+            path: "${JASMINE_PATH}"
