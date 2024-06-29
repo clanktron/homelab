@@ -6,5 +6,5 @@ resources:
 - ./longhorn.yaml
 - ./metallb.yaml
 - ./mysql.yaml
-- ./tekton.yaml
+# - ./tekton.yaml
 - ./traefik.yaml
