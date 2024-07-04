@@ -2,4 +2,4 @@ resources:
   - ./deployment.yaml
   - ./services.yaml
   - ./pvcs.yaml
-  - ./wg-config.yaml
+  #   - ./wg-config.yaml
