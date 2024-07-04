@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- frontend
-- api
-- db
+- api.yaml
+- dashboard.yaml
+- db.yaml
+- gitrepos.yaml
