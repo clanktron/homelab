@@ -89,7 +89,7 @@ spec:
             path: /dev/dri
         - name: movies
           hostPath:
-          path: "${MOVIES_PATH}"
+            path: "${MOVIES_PATH}"
         - name: shows
           hostPath:
             path: "${SHOWS_PATH}"
