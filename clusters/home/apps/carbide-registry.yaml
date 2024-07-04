@@ -16,7 +16,7 @@ spec:
   postBuild:
     substituteFrom: []
     patches:
-      - patch: |-
+      - patch: |
           - op: add
             path: /spec/values
             value:
@@ -78,6 +78,7 @@ spec:
         target:
           kind: HelmRelease
           name: carbide-registry-api
+          namespace: carbide-registry
       - patch: |-
           - op: add
             path: /spec/values
@@ -105,3 +106,4 @@ spec:
         target:
           kind: HelmRelease
           name: carbide-registry-dashboard
+          namespace: carbide-registry

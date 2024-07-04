@@ -1,11 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- arr.yaml
 - blog.yaml
 - carbide-registry.yaml
 - filebrowser.yaml
 - jellyfin.yaml
-  # - jellyseerr.yaml
+- jellyseerr.yaml
 - littlelink.yaml
 - vaultwarden.yaml
 
