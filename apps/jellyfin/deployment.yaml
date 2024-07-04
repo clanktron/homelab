@@ -44,18 +44,12 @@ spec:
               containerPort: 8096
               protocol: TCP
           volumeMounts:
-            - name: config
+            - name: data
               mountPath: /config
             - name: transcode
               mountPath: /transcode
             - name: igpu
               mountPath: /dev/dri
-            - name: movies
-              mountPath: /movies
-            - name: shows
-              mountPath: /shows
-            - name: jasmine
-              mountPath: /jasmine
           livenessProbe:
             tcpSocket:
               port: 8096
@@ -78,7 +72,7 @@ spec:
             timeoutSeconds: 1
             periodSeconds: 5
       volumes:
-        - name: config
+        - name: data
           persistentVolumeClaim:
             claimName: jellyfin-data
         - name: transcode
