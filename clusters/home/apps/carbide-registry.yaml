@@ -26,6 +26,7 @@ spec:
               tag: dev
             ingress:
               annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
                 traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
                 traefik.ingress.kubernetes.io/router.tls: "true"
               className: ${EXTERNAL_INGRESS_CLASS}
@@ -88,6 +89,7 @@ spec:
               tag: dev
             ingress:
               annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
                 traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
                 traefik.ingress.kubernetes.io/router.tls: "true"
               className: ${EXTERNAL_INGRESS_CLASS}
