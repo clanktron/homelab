@@ -36,7 +36,6 @@ spec:
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
-            runAsNonRoot: true
           env:
             - name: QBT_EULA
               value: accept
