@@ -13,3 +13,49 @@ spec:
   path: "./apps/arr"
   postBuild:
     substituteFrom: []
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: downloads
+            mountPath: /downloads
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: downloads
+            hostPath:
+              path: "${DOWNLOADS_PATH}"
+      target:
+        kind: Deployment
+        name: radarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: downloads
+            mountPath: /downloads
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: downloads
+            hostPath:
+              path: "${DOWNLOADS_PATH}"
+      target:
+        kind: Deployment
+        name: sonarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: downloads
+            mountPath: /downloads
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: downloads
+            hostPath:
+              path: "${DOWNLOADS_PATH}"
+      target:
+        kind: Deployment
+        name: qbittorrent
