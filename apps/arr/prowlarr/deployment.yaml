@@ -21,18 +21,6 @@ spec:
       dnsPolicy: ClusterFirst
       securityContext:
         fsGroup: 99
-      initContainers:
-        - name: wireguard
-          image: clanktron/wg-quick
-          securityContext:
-            privileged: true
-            capabilities:
-              add: [ "NET_ADMIN" ]
-          args: [ "up", "wg0" ]
-          volumeMounts:
-            - name: wireguard-config
-              mountPath: /etc/wireguard/wg0.conf
-              subPath: wg0.conf
       containers:
         - name: prowlar
           image: ghcr.io/onedr0p/prowlarr:1.19
@@ -81,6 +69,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: prowlarr-data
-        - name: wireguard-config
-          secret:
-            secretName: wireguard-config
