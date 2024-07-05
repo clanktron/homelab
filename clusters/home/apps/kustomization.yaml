@@ -6,7 +6,6 @@ resources:
 - carbide-registry.yaml
 - filebrowser.yaml
 - jellyfin.yaml
-- jellyseerr.yaml
 - littlelink.yaml
 - vaultwarden.yaml
 
