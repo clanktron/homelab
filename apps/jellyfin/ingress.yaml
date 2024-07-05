@@ -27,33 +27,3 @@ spec:
                 port:
                   number: 8096
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: jellyfin-local
-  labels:
-    app.kubernetes.io/name: jellyfin
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-spec:
-  ingressClassName: ${INTERNAL_INGRESS_CLASS}
-  tls:
-    - hosts:
-        - "media.${INTERNAL_DOMAIN}"
-      secretName: "media-tls"
-  rules:
-    - host: "media.${INTERNAL_DOMAIN}"
-      http:
-        paths:
-          - path: "/"
-            pathType: Prefix
-            backend:
-              service:
-                name: jellyfin
-                port:
-                  number: 8096
-
-
