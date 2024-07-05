@@ -12,18 +12,29 @@ spec:
   path: "./core/longhorn/longhorn"
   dependsOn: 
   - name: cert-manager
-  - name: traefik
   postBuild:
     substituteFrom: []
-
-      # ---
-      # apiVersion: kustomize.toolkit.fluxcd.io/v1
-      # kind: Kustomization
-      # metadata:
-      #   name: longhorn-crds
-      # spec:
-      #   path: "./core/longhorn/crds"
-      #   dependsOn:
-      #   - name: longhorn
-      #   postBuild:
-      #     substituteFrom: []
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/values
+          value:
+            persistence:
+              defaultClass: true
+              reclaimPolicy: Retain
+              migratable: true
+              defaultClassReplicaCount: 1
+            defaultSettings:
+              defaultReplicaCount: 1
+            ingress:
+              enabled: true
+              ingressClassName: ${INTERNAL_INGRESS_CLASS}
+              host: longhorn.${INTERNAL_DOMAIN}
+              tls: true
+              secureBackends: true
+              tlsSecret: longhorn-tls
+              path: /
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+                cert-manager.io/cluster-issuer: letsencrypt
+                traefik.ingress.kubernetes.io/router.tls: 'true'

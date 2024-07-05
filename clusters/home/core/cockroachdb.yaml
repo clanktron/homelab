@@ -12,6 +12,5 @@ spec:
   path: "./core/cockroachdb"
   dependsOn:
   - name: cert-manager
-  - name: traefik
   postBuild:
     substituteFrom: []
