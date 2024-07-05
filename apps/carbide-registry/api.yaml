@@ -4,6 +4,7 @@ metadata:
   name: carbide-registry-api
 spec:
   interval: 5m
+  reconcileStrategy: Revision
   chart:
     spec:
       chart: ./chart
