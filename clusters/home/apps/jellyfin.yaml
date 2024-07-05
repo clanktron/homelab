@@ -13,31 +13,41 @@ spec:
   path: "./apps/jellyfin"
   postBuild:
     substituteFrom: []
-    patches:
-      - patch: |-
-          - op: add
-            path: /spec/template/spec/volumes/-
-            value:
-              - name: movies
-                hostPath:
-                path: "${MOVIES_PATH}"
-              - name: shows
-                hostPath:
-                  path: "${SHOWS_PATH}"
-              - name: jasmine
-                hostPath:
-                  path: "${JASMINE_PATH}"
-          - op: add
-            path: /spec/template/spec/containers/0/volumeMounts/-
-            value:
-              - name: movies
-                mountPath: /movies
-              - name: shows
-                mountPath: /shows
-              - name: jasmine
-                mountPath: /jasmine
-        target:
-          group: apps/v1
-          kind: Deployment
-          name: jellyfin
-          namespace: jellyfin
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: movies
+            hostPath:
+              path: "${MOVIES_PATH}"
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: shows
+            hostPath:
+              path: "${SHOWS_PATH}"
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: jasmine
+            hostPath:
+              path: "${JASMINE_PATH}"
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: movies
+            mountPath: /movies
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: shows
+            mountPath: /shows
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: jasmine
+            mountPath: /jasmine
+      target:
+        kind: Deployment
+        name: jellyfin

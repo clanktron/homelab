@@ -15,95 +15,93 @@ spec:
   - name: longhorn
   postBuild:
     substituteFrom: []
-    patches:
-      - patch: |
-          - op: add
-            path: /spec/values
-            value:
-              image:
-                pullPolicy: Always
-                repository: clanktron/carbide-registry-api
-                tag: dev
-              ingress:
-                annotations:
-                  traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-                  traefik.ingress.kubernetes.io/router.tls: "true"
-                className: ${EXTERNAL_INGRESS_CLASS}
-                enabled: true
-                hosts:
-                - host: api.carbide.registry.${EXTERNAL_DOMAIN}
-                  paths:
-                  - path: /
-                    pathType: Prefix
-                tls:
-                - hosts:
-                  - api.carbide.registry.${EXTERNAL_DOMAIN}
-                  secretName: carbide-registry-api-tls
-              replicaCount: 3
-              env:
-                DBHOST: carbide-registry-db
-                DBNAME: carbide-registry
-                DBPASS: carbidecarbidecarbide
-                DBPORT: 3306
-                DBUSER: carbide-registry-api
-                GOLICENSE_KEY: |-
-                  -----BEGIN RSA PRIVATE KEY-----
-                  MIIEowIBAAKCAQEA8n1Wmap8OkVbxO0oAljonVZ/PZPA3LxzbgL1onUKhUfTLhtQ
-                  n2mE9nsabUQwEKlvPjuDFmCspZNvKqH1TiPc90Sa6uXLEYWtj+dpsuourRr7/6CU
-                  Ii7HlwzCgUmjnBzsGuZTyrwDwrJUfJTN1aez60nmtihfe8gNuSMfEcc5Y8aq8Ee8
-                  95xlIzElRgIRuewTFzkUIBZaWcaC9ZtaLBPxxHNkaajbxr86OHushHVOFVxQHBNe
-                  c97yFuK3Gn8GKmyWr7tXPdWkiedwCj2S76pFOLbGQ0QM2dhG7TLnMl4gx67gmeDU
-                  LBBXOXpJTfLzOLI0PVJk0e0s2n/gu+NHBBMROwIDAQABAoIBAEvAPeJpML+fVSiy
-                  kVISZjBoif05gAE02bZfNE7Y0z2Jj34SyF/UPdYl5L6Hk6BQ3dCKFMxTzPs4kHy3
-                  9YLAj1GrW93PhV1m7i5LM2jR4VzwVhKoHj6DcJRORyDOWU72dgd9NmXZ0C7tOJlm
-                  ftqktf7lqi3zdMidWTQhtZ3/J310Qc9QyJWh42uifOBlz8Om+ZNnlmFd8y6nbLFH
-                  KR74rIrnMY3lUGsLPLabmva83iF6Dg0Q8cOYABisinzxFXvcSpgaH5mtrab3DB7b
-                  TynQHCZcODgekcMRY6aNtp48rrjQHDtmW+p7NlCrnHZReRckaKRxVzoQ32Oan6oN
-                  HZt6RSECgYEA8qXfq/4rCpGtUHyLic0xU7Ak7+UURRZHHPGXk8ZOT8wNYzvKx/Hg
-                  jUib2w/U6gUgArvE/japg2qx0re1QsR9nnkS8NBNGHjlh3n0bXbog1bArmy7q71j
-                  3BGxyAOnUuYuxybGvUg3TDJbGIop4azgYVAjAeEljBFXs3+rwbadSUsCgYEA/9U7
-                  6jsfMAKEaZoM+viDA2Vp357AJ1ZYtLinQDmcBkjt5TS75jyI2Wd2D/j/tmy9ZvvC
-                  ZIiplqC6plI2e4yf39Z3SXuifUdBN23kwwYm2tkKh8WkYL2VO23v+FUSzHYw2MVo
-                  //v0V6sA90vIYC2H+fRGdgRZBabbiN7gDr380dECgYAJj0tupUbg1bh0UVPWDAWD
-                  fI8X/Hh9+FC47TPBmLCBKFLms/ZbRkZIirHJQahrx+Po96jdMx4elVeIK8Cybrdc
-                  RPzgC/Tdn/W7Dqz4mxSyB/rzZElIjN+gTfopHSu8cmEpa3etAWlcUSeRoe/gekUk
-                  0Flwu4QVLqG76q3DpgQwXQKBgC0NSvjLoolc2B6Un1aO7ttpP4S+uw3yWbqxjdp0
-                  irJco3AqojBAVsUaQCM98SIZ8hyxlyEHI/4/nb7uWWPWdsz/QpBxMkMniieNtaxW
-                  Z/9AG2efeXwDxsTpbknoCWByK9XwpbX2k6fgmFH0SXwOaJSu3L2ptFeXc6+duA1A
-                  jcYRAoGBAJ/DERJa+5iNeloTfvQV0/9AOudqUEJgDpz/GlNSTeTC4PICe6Phhjqw
-                  y11AjYY9AWag7ke2HRxULhtPC1f42GjdkKYU2QSFSH9oPJYobwdcF689S5cXNJro
-                  Mm79ChyZdhwIA5jFEshbyPjoQSNIhQIWV/rgyS6F6maUOOLHNExy
-                  -----END RSA PRIVATE KEY-----
-                JWTSECRET: oogabooga
-        target:
-          kind: HelmRelease
-          name: carbide-registry-api
-          namespace: carbide-registry
-      - patch: |-
-          - op: add
-            path: /spec/values
-            value:
-              image:
-                pullPolicy: Always
-                repository: clanktron/carbide-registry-dashboard
-                tag: dev
-              ingress:
-                annotations:
-                  traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-                  traefik.ingress.kubernetes.io/router.tls: "true"
-                className: ${EXTERNAL_INGRESS_CLASS}
-                enabled: true
-                hosts:
-                - host: dashboard.carbide.registry.${EXTERNAL_DOMAIN}
-                  paths:
-                  - path: /
-                    pathType: Prefix
-                tls:
-                - hosts:
-                  - dashboard.carbide.registry.${EXTERNAL_DOMAIN}
-                  secretName: carbide-registry-dashboard-tls
-              replicaCount: 3
-        target:
-          kind: HelmRelease
-          name: carbide-registry-dashboard
-          namespace: carbide-registry
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/values
+          value:
+            image:
+              pullPolicy: Always
+              repository: clanktron/carbide-registry-api
+              tag: dev
+            ingress:
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+                traefik.ingress.kubernetes.io/router.tls: "true"
+              className: ${EXTERNAL_INGRESS_CLASS}
+              enabled: true
+              hosts:
+              - host: api.carbide.registry.${EXTERNAL_DOMAIN}
+                paths:
+                - path: /
+                  pathType: Prefix
+              tls:
+              - hosts:
+                - api.carbide.registry.${EXTERNAL_DOMAIN}
+                secretName: carbide-registry-api-tls
+            replicaCount: 3
+            env:
+              DBHOST: carbide-registry-db
+              DBNAME: carbide-registry
+              DBPASS: carbidecarbidecarbide
+              DBPORT: 3306
+              DBUSER: carbide-registry-api
+              GOLICENSE_KEY: |-
+                -----BEGIN RSA PRIVATE KEY-----
+                MIIEowIBAAKCAQEA8n1Wmap8OkVbxO0oAljonVZ/PZPA3LxzbgL1onUKhUfTLhtQ
+                n2mE9nsabUQwEKlvPjuDFmCspZNvKqH1TiPc90Sa6uXLEYWtj+dpsuourRr7/6CU
+                Ii7HlwzCgUmjnBzsGuZTyrwDwrJUfJTN1aez60nmtihfe8gNuSMfEcc5Y8aq8Ee8
+                95xlIzElRgIRuewTFzkUIBZaWcaC9ZtaLBPxxHNkaajbxr86OHushHVOFVxQHBNe
+                c97yFuK3Gn8GKmyWr7tXPdWkiedwCj2S76pFOLbGQ0QM2dhG7TLnMl4gx67gmeDU
+                LBBXOXpJTfLzOLI0PVJk0e0s2n/gu+NHBBMROwIDAQABAoIBAEvAPeJpML+fVSiy
+                kVISZjBoif05gAE02bZfNE7Y0z2Jj34SyF/UPdYl5L6Hk6BQ3dCKFMxTzPs4kHy3
+                9YLAj1GrW93PhV1m7i5LM2jR4VzwVhKoHj6DcJRORyDOWU72dgd9NmXZ0C7tOJlm
+                ftqktf7lqi3zdMidWTQhtZ3/J310Qc9QyJWh42uifOBlz8Om+ZNnlmFd8y6nbLFH
+                KR74rIrnMY3lUGsLPLabmva83iF6Dg0Q8cOYABisinzxFXvcSpgaH5mtrab3DB7b
+                TynQHCZcODgekcMRY6aNtp48rrjQHDtmW+p7NlCrnHZReRckaKRxVzoQ32Oan6oN
+                HZt6RSECgYEA8qXfq/4rCpGtUHyLic0xU7Ak7+UURRZHHPGXk8ZOT8wNYzvKx/Hg
+                jUib2w/U6gUgArvE/japg2qx0re1QsR9nnkS8NBNGHjlh3n0bXbog1bArmy7q71j
+                3BGxyAOnUuYuxybGvUg3TDJbGIop4azgYVAjAeEljBFXs3+rwbadSUsCgYEA/9U7
+                6jsfMAKEaZoM+viDA2Vp357AJ1ZYtLinQDmcBkjt5TS75jyI2Wd2D/j/tmy9ZvvC
+                ZIiplqC6plI2e4yf39Z3SXuifUdBN23kwwYm2tkKh8WkYL2VO23v+FUSzHYw2MVo
+                //v0V6sA90vIYC2H+fRGdgRZBabbiN7gDr380dECgYAJj0tupUbg1bh0UVPWDAWD
+                fI8X/Hh9+FC47TPBmLCBKFLms/ZbRkZIirHJQahrx+Po96jdMx4elVeIK8Cybrdc
+                RPzgC/Tdn/W7Dqz4mxSyB/rzZElIjN+gTfopHSu8cmEpa3etAWlcUSeRoe/gekUk
+                0Flwu4QVLqG76q3DpgQwXQKBgC0NSvjLoolc2B6Un1aO7ttpP4S+uw3yWbqxjdp0
+                irJco3AqojBAVsUaQCM98SIZ8hyxlyEHI/4/nb7uWWPWdsz/QpBxMkMniieNtaxW
+                Z/9AG2efeXwDxsTpbknoCWByK9XwpbX2k6fgmFH0SXwOaJSu3L2ptFeXc6+duA1A
+                jcYRAoGBAJ/DERJa+5iNeloTfvQV0/9AOudqUEJgDpz/GlNSTeTC4PICe6Phhjqw
+                y11AjYY9AWag7ke2HRxULhtPC1f42GjdkKYU2QSFSH9oPJYobwdcF689S5cXNJro
+                Mm79ChyZdhwIA5jFEshbyPjoQSNIhQIWV/rgyS6F6maUOOLHNExy
+                -----END RSA PRIVATE KEY-----
+              JWTSECRET: oogabooga
+      target:
+        kind: HelmRelease
+        name: carbide-registry-api
+    - patch: |-
+        - op: add
+          path: /spec/values
+          value:
+            image:
+              pullPolicy: Always
+              repository: clanktron/carbide-registry-dashboard
+              tag: dev
+            ingress:
+              annotations:
+                traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+                traefik.ingress.kubernetes.io/router.tls: "true"
+              className: ${EXTERNAL_INGRESS_CLASS}
+              enabled: true
+              hosts:
+              - host: dashboard.carbide.registry.${EXTERNAL_DOMAIN}
+                paths:
+                - path: /
+                  pathType: Prefix
+              tls:
+              - hosts:
+                - dashboard.carbide.registry.${EXTERNAL_DOMAIN}
+                secretName: carbide-registry-dashboard-tls
+            replicaCount: 3
+      target:
+        kind: HelmRelease
+        name: carbide-registry-dashboard
