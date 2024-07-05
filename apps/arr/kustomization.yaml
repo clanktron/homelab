@@ -1,5 +1,5 @@
 resources:
-  - jellyseer
+  - jellyseerr
   - prowlarr
   - qbittorrent
   - radarr
