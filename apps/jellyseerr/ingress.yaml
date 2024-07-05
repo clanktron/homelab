@@ -7,10 +7,6 @@ metadata:
     app.kubernetes.io/name: jellyseerr
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    flame.pawelmalak/icon: filmstrip
-    flame.pawelmalak/name: jellyseer
-    flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://jellyseerr.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
@@ -18,7 +14,7 @@ spec:
   tls:
     - hosts:
         - "jellyseerr.${EXTERNAL_DOMAIN}"
-      secretName: "jellyseer-tls"
+      secretName: "jellyseerr-tls"
   rules:
     - host: "jellyseerr.${EXTERNAL_DOMAIN}"
       http:
@@ -27,6 +23,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: jellyseer
+                name: jellyseerr
                 port:
                   number: 80
