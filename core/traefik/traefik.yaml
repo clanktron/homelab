@@ -4,7 +4,6 @@ metadata:
   name: traefik
   namespace: flux-system
 spec:
-  targetNamespace: traefik
   interval: 5m
   chart:
     spec:

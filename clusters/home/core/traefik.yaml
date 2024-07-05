@@ -41,6 +41,9 @@ spec:
         - op: replace
           path: /metadata/name
           value: traefik-external
+        - op: replace
+          path: /spec/targetNamespace
+          value: traefik-external
         - op: add
           path: /spec/values
           value:
