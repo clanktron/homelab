@@ -39,7 +39,7 @@ spec:
   patches:
     - patch: |-
         - op: replace
-          path: /spec/name
+          path: /metadata/name
           value: traefik-external
         - op: add
           path: /spec/values
