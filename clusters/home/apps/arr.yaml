@@ -28,34 +28,34 @@ spec:
               path: "${DOWNLOADS_PATH}"
       target:
         kind: Deployment
+        name: \b(radarr|sonarr|qbittorrent)\b
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: movies
+            mountPath: /movies
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: movies
+            hostPath:
+              path: "${MOVIES_PATH}"
+      target:
+        kind: Deployment
         name: radarr
     - patch: |-
         - op: add
           path: /spec/template/spec/containers/0/volumeMounts/-
           value:
-            name: downloads
-            mountPath: /downloads
+            name: shows
+            mountPath: /shows
         - op: add
           path: /spec/template/spec/volumes/-
           value:
-            name: downloads
+            name: shows
             hostPath:
-              path: "${DOWNLOADS_PATH}"
+              path: "${SHOWS_PATH}"
       target:
         kind: Deployment
         name: sonarr
-    - patch: |-
-        - op: add
-          path: /spec/template/spec/containers/0/volumeMounts/-
-          value:
-            name: downloads
-            mountPath: /downloads
-        - op: add
-          path: /spec/template/spec/volumes/-
-          value:
-            name: downloads
-            hostPath:
-              path: "${DOWNLOADS_PATH}"
-      target:
-        kind: Deployment
-        name: qbittorrent
