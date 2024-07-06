@@ -59,3 +59,33 @@ spec:
       target:
         kind: Deployment
         name: sonarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: jasmine-movies
+            mountPath: /jasmine-movies
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: jasmine-movies
+            hostPath:
+              path: "${JASMINE_PATH}/movies"
+      target:
+        kind: Deployment
+        name: radarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: jasmine-shows
+            mountPath: /jasmine-shows
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: jasmine-shows
+            hostPath:
+              path: "${JASMINE_PATH}/shows"
+      target:
+        kind: Deployment
+        name: sonarr
