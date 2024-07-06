@@ -49,7 +49,7 @@ patches:
         value:
           name: wireguard-config
           secret:
-            secretName: prowlarr-wg-config
+            secretName: sonarr-wg-config
   - target:
       group: apps
       version: v1
