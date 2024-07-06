@@ -26,9 +26,51 @@ patches:
               - name: wireguard-config
                 mountPath: /etc/wireguard/wg0.conf
                 subPath: wg0.conf
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: radarr
+    patch: |
       - op: add
         path: /spec/template/spec/volumes/-
         value:
           name: wireguard-config
           secret:
-            secretName: wireguard-config
+            secretName: radarr-wg-config
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: sonarr
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: wireguard-config
+          secret:
+            secretName: prowlarr-wg-config
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: prowlarr
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: wireguard-config
+          secret:
+            secretName: prowlarr-wg-config
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: qbittorrent
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: wireguard-config
+          secret:
+            secretName: qbittorrent-wg-config
