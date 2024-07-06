@@ -20,7 +20,7 @@ spec:
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       securityContext:
-        fsGroup: 99
+        fsGroup: 1000
       containers:
         - name: radarr
           image: ghcr.io/onedr0p/radarr:5.7.0
@@ -33,6 +33,8 @@ spec:
               cpu: "300m"
           securityContext:
             privileged: false
+            runAsUser: 1000
+            runAsGroup: 1000
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
