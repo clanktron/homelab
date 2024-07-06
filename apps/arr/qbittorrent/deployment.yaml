@@ -50,6 +50,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: localtime
+              mountPath: /etc/localtime
           livenessProbe:
             tcpSocket:
               port: 8080
@@ -75,3 +77,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: qbittorrent-config
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
