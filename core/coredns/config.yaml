@@ -23,4 +23,4 @@ data:
        loadbalance
     }
   Hosts: |-
-    ${INTERNAL_LB_IP} *.local.claytonc.dev
+    ${INTERNAL_LB} *.local.claytonc.dev

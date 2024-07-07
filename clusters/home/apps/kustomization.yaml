@@ -19,4 +19,5 @@ patches:
         path: /spec/dependsOn
         value: 
         - name: cert-manager
+        - name: metallb-ip-pool
         - name: longhorn
