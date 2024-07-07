@@ -14,13 +14,11 @@ spec:
     substituteFrom: []
 
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
 metadata:
-  name: metallb-ip-pool
+  name: ip-pool
+  namespace: metallb-system
 spec:
-  path: "./core/metallb/ip-pool"
-  dependsOn:
-  - name: metallb
-  postBuild:
-    substituteFrom: []
+  addresses:
+  - ${LOCAL_IP_POOL}
