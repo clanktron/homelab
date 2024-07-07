@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-helm-repo
+spec:
+  path: "./core/traefik/repo"
+  postBuild:
+    substituteFrom: []
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-external
+spec:
+  path: "./core/traefik/release"
+  postBuild:
+    substituteFrom: []
+  patches:
+    - patch: |-
+        - op: replace
+          path: /metadata/name
+          value: traefik-external
+      target:
+        kind: HelmRelease
+        name: traefik
+    - patch: |-
+        - op: add
+          path: /spec/values
+          value:
+            ingressClass:
+              enabled: true
+              isDefaultClass: true
+              name: external
+            logs:
+              general:
+                level: DEBUG
+            service:
+              enabled: true
+              type: LoadBalancer
+              spec:
+                loadBalancerIP: "${EXTERNAL_LB_IP}"
+      target:
+        kind: HelmRelease
+        name: traefik
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-internal
+spec:
+  path: "./core/traefik/release"
+  postBuild:
+    substituteFrom: []
+  patches:
+    - patch: |-
+        - op: replace
+          path: /metadata/name
+          value: traefik-internal
+      target:
+        kind: HelmRelease
+        name: traefik
+    - patch: |-
+        - op: add
+          path: /spec/values
+          value:
+            ingressClass:
+              enabled: true
+              isDefaultClass: false
+              name: internal
+            logs:
+              general:
+                level: DEBUG
+            service:
+              enabled: true
+              type: LoadBalancer
+              spec:
+                loadBalancerIP: "${INTERNAL_LB_IP}"
+      target:
+        kind: HelmRelease
+        name: traefik

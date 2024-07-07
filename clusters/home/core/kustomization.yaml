@@ -6,5 +6,4 @@ resources:
 - ./longhorn.yaml
 - ./metallb.yaml
 - ./mysql.yaml
-- ./traefik-external.yaml
-- ./traefik-internal.yaml
+- ./traefik.yaml
