@@ -4,6 +4,7 @@ resources:
 - ./cockroachdb.yaml
   # - ./coredns.yaml
 - ./longhorn.yaml
+- ./mariadb.yaml
 - ./metallb.yaml
 - ./mysql.yaml
 - ./traefik.yaml
