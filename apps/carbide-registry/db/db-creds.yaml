@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: carbide-registry-db-creds
-type: Opaque
+  name: carbide-db-creds
+  labels:
+    k8s.mariadb.com/watch: ""
 stringData:
-  rootUser: carbide-registry-api
-  rootHost: "%"
-  rootPassword: carbidecarbidecarbide
+  password: carbidecarbidecarbide
+  root-password: supersecretshhh
