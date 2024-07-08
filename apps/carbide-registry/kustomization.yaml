@@ -4,4 +4,3 @@ resources:
 - db
 - api.yaml
 - dashboard.yaml
-- gitrepos.yaml
