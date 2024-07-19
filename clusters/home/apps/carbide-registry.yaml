@@ -23,7 +23,7 @@ spec:
             image:
               pullPolicy: Always
               repository: clanktron/carbide-registry-api
-              tag: dev
+              tag: staging
             ingress:
               annotations:
                 cert-manager.io/cluster-issuer: letsencrypt
@@ -86,7 +86,7 @@ spec:
             image:
               pullPolicy: Always
               repository: clanktron/carbide-registry-dashboard
-              tag: dev
+              tag: staging
             ingress:
               annotations:
                 cert-manager.io/cluster-issuer: letsencrypt
