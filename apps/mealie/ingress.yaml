@@ -7,26 +7,22 @@ metadata:
     app.kubernetes.io/name: mealie
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    flame.pawelmalak/icon: silverware-fork-knife
-    flame.pawelmalak/name: mealie
-    flame.pawelmalak/type: app
-    flame.pawelmalak/url: https://mealie.${EXTERNAL_DOMAIN}
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
-  ingressClassName: traefik-traefik-external
+  ingressClassName: ${EXTERNAL_INGRESS_CLASS}
   tls:
     - hosts:
-        - "mealie.${EXTERNAL_DOMAIN}"
+        - "${EXTERNAL_DOMAIN}"
       secretName: "mealie-tls"
   rules:
-    - host: "mealie.${EXTERNAL_DOMAIN}"
+    - host: "${EXTERNAL_DOMAIN}"
       http:
         paths:
           - path: "/"
             pathType: Prefix
             backend:
               service:
-                name: mealie-frontend
+                name: mealie
                 port:
-                  number: 80
+                  number: 9000

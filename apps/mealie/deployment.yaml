@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mealie-frontend
+  name: mealie
   labels:
     app.kubernetes.io/name: mealie
 spec:
@@ -23,10 +23,10 @@ spec:
       enableServiceLinks: true
       containers:
         - name: mealie
-          image: "hkotel/mealie:frontend-v1.0.0beta-5"
-            # securityContext:
-            #   runAsUser: 1000
-            #   runAsGroup: 1000
+          image: "ghcr.io/mealie-recipes/mealie:v1.12.0"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           resources:
             requests:
               memory: "64Mi"
@@ -37,36 +37,36 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
-              name: mealie-frontend-env
+              name: mealie-env
           ports:
-            - name: frontend-http
-              containerPort: 3000
+            - name: http
+              containerPort: 9000
               protocol: TCP
           volumeMounts:
-            - name: database
+            - name: data
               mountPath: /app/data
           livenessProbe:
             tcpSocket:
-              port: 3000
+              port: 9000
             initialDelaySeconds: 0
             failureThreshold: 3
             timeoutSeconds: 1
             periodSeconds: 10
           readinessProbe:
             tcpSocket:
-              port: 3000
+              port: 9000
             initialDelaySeconds: 0
             failureThreshold: 3
             timeoutSeconds: 1
             periodSeconds: 10
           startupProbe:
             tcpSocket:
-              port: 3000
+              port: 9000
             initialDelaySeconds: 0
             failureThreshold: 30
             timeoutSeconds: 1
             periodSeconds: 5
       volumes:
-        - name: database
+        - name: data
           persistentVolumeClaim:
-            claimName: mealie-sqlite
+            claimName: mealie-data

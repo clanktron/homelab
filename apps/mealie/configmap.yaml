@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mealie-env
+  labels:
+    app: mealie
+data:
+  TZ: 'America/Los_Angeles'
+  ALLOW_SIGNUP: "true"
+  BASE_URL: https://mealie.claytonc.dev
+  DB_ENGINE: 'postgres'
+  POSTGRES_USER: mealie
+  POSTGRES_PASSWORD: '54hftLtgYRSDU%'
+  POSTGRES_SERVER: mealie-db-public
+  POSTGRES_PORT: 26257
+  POSTGRES_DB: default_db
