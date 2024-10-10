@@ -12,5 +12,5 @@ data:
   POSTGRES_USER: mealie
   POSTGRES_PASSWORD: '54hftLtgYRSDU%'
   POSTGRES_SERVER: mealie-db-public
-  POSTGRES_PORT: 26257
+  POSTGRES_PORT: '26257'
   POSTGRES_DB: default_db
