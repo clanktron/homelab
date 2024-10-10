@@ -7,7 +7,6 @@ resources:
 - filebrowser.yaml
 - jellyfin.yaml
 - littlelink.yaml
-- mealie.yaml
 - vaultwarden.yaml
 
 patches:
