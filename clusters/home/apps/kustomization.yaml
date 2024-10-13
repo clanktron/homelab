@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - arr.yaml
 - blog.yaml
-- carbide-registry.yaml
 - filebrowser.yaml
 - jellyfin.yaml
 - littlelink.yaml
