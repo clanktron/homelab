@@ -19,19 +19,22 @@ spec:
           path: /spec/template/spec/volumes/-
           value:
             name: movies
-            hostPath:
+            nfs:
+              server: "${STORAGE_SERVER}"
               path: "${MOVIES_PATH}"
         - op: add
           path: /spec/template/spec/volumes/-
           value:
             name: shows
-            hostPath:
+            nfs:
+              server: "${STORAGE_SERVER}"
               path: "${SHOWS_PATH}"
         - op: add
           path: /spec/template/spec/volumes/-
           value:
             name: jasmine
-            hostPath:
+            nfs:
+              server: "${STORAGE_SERVER}"
               path: "${JASMINE_PATH}"
         - op: add
           path: /spec/template/spec/containers/0/volumeMounts/-
