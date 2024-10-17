@@ -48,12 +48,6 @@ patches:
           kind: GitRepository
           name: flux-system
       - op: add
-        path: /spec/decryption
-        value:
-          provider: sops
-          secretRef:
-            name: sops-age
-      - op: add
         path: /spec/postBuild
         value:
           substituteFrom:
