@@ -23,7 +23,6 @@ configMapGenerator:
       - MOVIES_PATH="/data/media/movies"
       - SHOWS_PATH="/data/media/shows"
       - JASMINE_PATH="/data/media/jasmine"
-      - DOWNLOADS_PATH="/services/downloads"
 
 patches:
   - target:
