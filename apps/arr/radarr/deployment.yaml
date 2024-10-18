@@ -46,6 +46,8 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /config
+            - name: downloads
+              mountPath: /downloads
           livenessProbe:
             tcpSocket:
               port: 7878
@@ -71,3 +73,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: radarr-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: arr-downloads

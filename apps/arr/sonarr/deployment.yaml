@@ -46,6 +46,8 @@ spec:
           volumeMounts:
             - name: sonarr-data
               mountPath: /config
+            - name: downloads
+              mountPath: /downloads
           livenessProbe:
             tcpSocket:
               port: 8989
@@ -71,3 +73,6 @@ spec:
         - name: sonarr-data
           persistentVolumeClaim:
             claimName: sonarr-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: arr-downloads

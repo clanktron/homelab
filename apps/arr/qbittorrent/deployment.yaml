@@ -52,6 +52,8 @@ spec:
               mountPath: /config
             - name: localtime
               mountPath: /etc/localtime
+            - name: downloads
+              mountPath: /downloads
           livenessProbe:
             tcpSocket:
               port: 8080
@@ -80,3 +82,6 @@ spec:
         - name: localtime
           hostPath:
             path: /etc/localtime
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: arr-downloads

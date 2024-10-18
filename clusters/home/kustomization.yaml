@@ -18,6 +18,7 @@ configMapGenerator:
       - INTERNAL_INGRESS_CLASS="internal"
       - EXTERNAL_LB_IP="10.56.1.100"
       - INTERNAL_LB_IP="10.56.1.101"
+      - STORAGE_SERVER='100.64.199.90'
       - LOCAL_IP_POOL="10.56.1.100-10.56.1.105"
       - MOVIES_PATH="/data/media/movies"
       - SHOWS_PATH="/data/media/shows"
