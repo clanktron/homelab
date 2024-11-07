@@ -1,5 +1,9 @@
 # Miscellaneous Notes
 
+# TODO:
+- filestash replaces filebrowser
+    - onlyoffice integration? (low priority)
+
 # Rename file extensions
 ```bash
 # this example renames all .yml file to .yaml
