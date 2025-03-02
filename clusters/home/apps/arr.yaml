@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: arr
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: arr
+spec:
+  targetNamespace: arr
+  path: "./apps/arr"
+  postBuild:
+    substituteFrom: []
+  patches:
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: movies
+            mountPath: /movies
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: movies
+            nfs:
+              server: "${STORAGE_SERVER}"
+              path: "${MOVIES_PATH}"
+      target:
+        kind: Deployment
+        name: radarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: shows
+            mountPath: /shows
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: shows
+            nfs:
+              server: "${STORAGE_SERVER}"
+              path: "${SHOWS_PATH}"
+      target:
+        kind: Deployment
+        name: sonarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: jasmine-movies
+            mountPath: /jasmine-movies
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: jasmine-movies
+            nfs:
+              server: "${STORAGE_SERVER}"
+              path: "${JASMINE_PATH}/movies"
+      target:
+        kind: Deployment
+        name: radarr
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/volumeMounts/-
+          value:
+            name: jasmine-shows
+            mountPath: /jasmine-shows
+        - op: add
+          path: /spec/template/spec/volumes/-
+          value:
+            name: jasmine-shows
+            hostPath:
+              path: "${JASMINE_PATH}/shows"
+      target:
+        kind: Deployment
+        name: sonarr
