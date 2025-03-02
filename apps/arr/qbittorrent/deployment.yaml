@@ -37,8 +37,8 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
           env:
-            - name: QBT_EULA
-              value: accept
+            - name: QBT_LEGAL_NOTICE
+              value: confirm
             - name: QBT_CONFIG_PATH
               value: /config
             - name: QBT_DOWNLOADS_PATH
