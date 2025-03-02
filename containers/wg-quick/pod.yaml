@@ -3,6 +3,10 @@ kind: Pod
 metadata:
   name: debug-wg-quick
 spec:
+  dnsPolicy: ClusterFirst
+  dnsConfig:
+    nameservers:
+      - 10.2.0.1
   containers:
     - name: wg-quick
       image: docker.io/clanktron/wg-quick
@@ -19,4 +23,4 @@ spec:
   volumes:
     - name: wg-conf
       secret:
-        secretName: wg-conf
+        secretName: prowlarr-wg-config

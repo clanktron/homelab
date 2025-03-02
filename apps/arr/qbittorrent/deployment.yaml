@@ -20,7 +20,9 @@ spec:
     spec:
       serviceAccountName: default
       automountServiceAccountToken: false
-      dnsPolicy: ClusterFirst
+      dnsConfig:
+        nameservers:
+          - 10.2.0.1
       securityContext:
         fsGroup: 1000
       containers:
