@@ -1,0 +1,92 @@
+{{- if .Values.jellyseerr.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "arr.fullname" . }}-jellyseerr
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}-jellyseerr
+spec:
+  replicas: {{ .Values.jellyseerr.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "arr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.jellyseerr.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "arr.labels" . | nindent 8 }}
+        {{- with .Values.jellyseerr.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.jellyseerr.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      {{- with .Values.jellyseerr.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.jellyseerr.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.jellyseerr.image.repository }}:{{ .Values.jellyseerr.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.jellyseerr.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.jellyseerr.service.port }}
+              protocol: TCP
+          {{- with .Values.jellyseerr.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.jellyseerr.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.jellyseerr.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.jellyseerr.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /app/config
+              readonly: false
+          {{- with .Values.radarr.volumeMounts }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" . }}-jellyseerr-data
+        {{- with .Values.radarr.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.jellyseerr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.jellyseerr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.jellyseerr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

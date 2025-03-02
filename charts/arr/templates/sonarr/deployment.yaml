@@ -1,0 +1,100 @@
+{{- if .Values.sonarr.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "arr.fullname" . }}-sonarr
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}-sonarr
+spec:
+  replicas: {{ .Values.sonarr.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "arr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.sonarr.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "arr.labels" . | nindent 8 }}
+        {{- with .Values.sonarr.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.sonarr.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      {{- with .Values.sonarr.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- toYaml .Values.initContainers | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.sonarr.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.sonarr.image.repository }}:{{ .Values.sonarr.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.sonarr.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.sonarr.service.port }}
+              protocol: TCP
+          {{- with .Values.sonarr.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.sonarr.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.sonarr.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.sonarr.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+          {{- with .Values.sonarr.volumeMounts }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-sonarr-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-downloads
+        {{- with .Values.radarr.volumeMounts }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.sonarr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.sonarr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.sonarr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

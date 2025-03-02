@@ -1,0 +1,19 @@
+{{- if and .Values.sonarr.enabled .Values.sonarr.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "arr.fullname" . }}-sonarr-data
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  {{- with .Values.sonarr.persistence.storageClass }}
+  storageClass: {{- . | toYaml | nindent 2 }}
+  {{- end }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.sonarr.persistence.storage }}
+{{- end }}

@@ -1,0 +1,19 @@
+{{- if and .Values.jellyseerr.enabled .Values.jellyseerr.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "arr.fullname" . }}-jellyseerr-data
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  {{- with .Values.jellyseerr.persistence.storageClass }}
+  storageClass: {{- . | toYaml | nindent 2 }}
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.jellyseerr.persistence.storage }}
+{{- end }}

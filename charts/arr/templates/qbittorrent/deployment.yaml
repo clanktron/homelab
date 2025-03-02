@@ -1,0 +1,108 @@
+{{- if .Values.qbittorrent.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "arr.fullname" . }}-qbittorrent
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.qbittorrent.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "arr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.qbittorrent.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "arr.labels" . | nindent 8 }}
+        {{- with .Values.qbittorrent.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.qbittorrent.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      {{- with .Values.qbittorrent.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- toYaml .Values.initContainers | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.qbittorrent.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.qbittorrent.image.repository }}:{{ .Values.qbittorrent.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.qbittorrent.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.qbittorrent.service.port }}
+              protocol: TCP
+          env:
+          - name: QBT_EULA
+            value: accept
+          - name: QBT_CONFIG_PATH
+            value: /config
+          - name: QBT_DOWNLOADS_PATH
+            value: /downloads
+          {{- with .Values.qbittorrent.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.qbittorrent.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.qbittorrent.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: localtime
+              mountPath: /etc/localtime
+            - name: downloads
+              mountPath: /downloads
+            {{- with .Values.radarr.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-qbittorrent-data
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-downloads
+        {{- with .Values.radarr.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.qbittorrent.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.qbittorrent.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.qbittorrent.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

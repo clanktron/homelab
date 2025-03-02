@@ -1,0 +1,19 @@
+{{- if and .Values.radarr.enabled .Values.radarr.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "arr.fullname" . }}-radarr-data
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  {{- with .Values.radarr.persistence.storageClass }}
+  storageClass: {{- . | toYaml | nindent 2 }}
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.radarr.persistence.storage }}
+{{- end }}

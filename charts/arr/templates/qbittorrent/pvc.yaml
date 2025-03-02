@@ -1,0 +1,21 @@
+{{- if and .Values.qbittorrent.enabled .Values.qbittorrent.persistence.enabled }}
+{{- if not .Values.qbittorrent.persistence.existingClaim }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "arr.fullname" . }}-qbittorrent-data
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  {{- with .Values.qbittorrent.persistence.storageClass }}
+  storageClass: {{- . | toYaml | nindent 2 }}
+  {{- end }}
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.qbittorrent.persistence.storage }}
+{{- end }}
+{{- end }}

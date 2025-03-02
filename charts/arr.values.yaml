@@ -1,0 +1,105 @@
+downloads:
+  enabled: true
+  storage: 250Gi
+
+jellyseerr:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 10Gi
+  replicaCount: 1
+  image:
+    repository: "fallenbagel/jellyseerr"
+    pullPolicy: IfNotPresent
+    tag: "1.9.2"
+  
+  ingress:
+    enabled: true
+    className: ""
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: jellyseerr.claytonc.dev
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+    - hosts:
+      - jellyseerr.claytonc.dev
+      secretName: jellyseerr-tls
+  
+  resources:
+    requests:
+      memory: "250Mi"
+      cpu: "30m"
+    limits:
+      memory: "2250Mi"
+      cpu: "1000m"
+
+prowlarr:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 3Gi
+  replicaCount: 1
+  image:
+    repository: "ghcr.io/onedr0p/prowlarr"
+    pullPolicy: IfNotPresent
+    tag: "1.19"
+
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: prowlarr-wg-config
+  
+sonarr:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 10Gi
+  replicaCount: 1
+  image:
+    repository: ghcr.io/onedr0p/sonarr
+    pullPolicy: IfNotPresent
+    tag: "4.0.5.1710"
+  
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: sonarr-wg-config
+  
+
+radarr:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 10Gi
+  replicaCount: 1
+  image:
+    repository: ghcr.io/onedr0p/radarr
+    pullPolicy: IfNotPresent
+    tag: "5.7.0"
+  
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: radarr-wg-config
+  
+
+qbittorrent:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 3Gi
+  replicaCount: 1
+  image:
+    repository: "qbittorrentofficial/qbittorrent-nox"
+    pullPolicy: IfNotPresent
+    tag: "4.6.5-1"
+
+  volumes:
+    - name: wireguard-config
+      secret:
+        secretName: qbittorrent-wg-config

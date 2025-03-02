@@ -1,0 +1,43 @@
+{{- if and .Values.jellyseerr.enabled .Values.jellyseerr.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "arr.fullname" . }}-jellyseerr
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}-jellyseerr
+  {{- with .Values.jellyseerr.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.jellyseerr.ingress.className }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- if .Values.jellyseerr.ingress.tls }}
+  tls:
+    {{- range .Values.jellyseerr.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.jellyseerr.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            {{- with .pathType }}
+            pathType: {{ . }}
+            {{- end }}
+            backend:
+              service:
+                name: {{ include "arr.fullname" $ }}-jellyseerr
+                port:
+                  number: {{ $.Values.jellyseerr.service.port }}
+          {{- end }}
+    {{- end }}
+{{- end }}

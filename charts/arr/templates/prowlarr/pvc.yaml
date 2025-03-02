@@ -1,0 +1,19 @@
+{{- if and .Values.prowlarr.enabled .Values.prowlarr.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "arr.fullname" . }}-prowlarr-data
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: "keep"
+spec:
+  {{- with .Values.prowlarr.persistence.storageClass }}
+  storageClass: {{- . | toYaml | nindent 2 }}
+  {{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.prowlarr.persistence.storage }}
+{{- end }}

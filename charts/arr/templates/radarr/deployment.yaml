@@ -1,0 +1,100 @@
+{{- if .Values.radarr.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "arr.fullname" . }}-radarr
+  labels:
+    {{- include "arr.labels" . | nindent 4 }}-radarr
+spec:
+  replicas: {{ .Values.radarr.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "arr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.radarr.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "arr.labels" . | nindent 8 }}
+        {{- with .Values.radarr.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.radarr.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      {{- with .Values.radarr.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- toYaml .Values.initContainers | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.radarr.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.radarr.image.repository }}:{{ .Values.radarr.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.radarr.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.radarr.service.port }}
+              protocol: TCP
+          {{- with .Values.radarr.env }}
+          env:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.radarr.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.radarr.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.radarr.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+          {{- with .Values.radarr.volumeMounts }}
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-radarr-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: {{ include "arr.fullname" $ }}-downloads
+        {{- with .Values.radarr.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.radarr.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.radarr.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.radarr.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

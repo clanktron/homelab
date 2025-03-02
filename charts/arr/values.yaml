@@ -1,0 +1,635 @@
+# Default values for arr.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This is to override the chart name.
+nameOverride: ""
+fullnameOverride: ""
+
+# applies to all containers except Jellyseerr
+## pass an empty array to this to remove it completely
+initContainers:
+  - name: wireguard
+    image: clanktron/wg-quick
+    securityContext:
+      privileged: true
+      capabilities:
+        add: ["NET_ADMIN"]
+    args: ["up", "wg0"]
+    volumeMounts:
+      - name: wireguard-config
+        mountPath: /etc/wireguard/wg0.conf
+        subPath: wg0.conf
+
+downloads:
+  enabled: true
+  storage: 250Gi
+
+jellyseerr:
+  enabled: true
+  persistence:
+    enabled: false
+    storage: 2Gi
+  replicaCount: 1
+  # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: "fallenbagel/jellyseerr"
+    # This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.9.2"
+  
+  # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  # This is for setting Kubernetes Labels to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podLabels: {}
+  
+  podSecurityContext: {}
+    # fsGroup: 2000
+  
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  
+  # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 5055
+  
+  # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - host: jellyseerr.claytonc.dev
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+    - secretName: jellyseerr-tls
+      hosts:
+        - jellyseerr.claytonc.dev
+  
+  resources:
+    requests:
+      memory: "250Mi"
+      cpu: "30m"
+    limits:
+      memory: "2250Mi"
+      cpu: "1000m"
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  
+  # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+  
+  # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  
+  # Additional volumes on the output Deployment definition.
+  volumes: []
+  
+  # Additional volumeMounts on the output Deployment definition.
+  volumeMounts: []
+  
+  nodeSelector: {}
+  
+  tolerations: []
+  
+  affinity: {}
+  
+
+prowlarr:
+  enabled: true
+  persistence:
+    enabled: false
+    storage: 2Gi
+  replicaCount: 1
+  # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: "ghcr.io/onedr0p/prowlarr"
+    # This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "1.19"
+  
+  # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  # This is for setting Kubernetes Labels to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podLabels: {}
+  
+  podSecurityContext:
+    fsGroup: 99
+  
+  securityContext:
+    privileged: false
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  
+  # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 9696
+  
+  # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  env:
+    - name: TZ
+      value: 'America/Los_Angeles'
+  
+  # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+  
+  # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  # Additional volumes on the output Deployment definition.
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: prowlarr-wg-config
+  
+  # Additional volumeMounts on the output Deployment definition.
+  volumeMounts: []
+
+  nodeSelector: {}
+  
+  tolerations: []
+  
+  affinity: {}
+  
+sonarr:
+  enabled: true
+  persistence:
+    enabled: false
+    storage: 10Gi
+  replicaCount: 1
+  # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: ghcr.io/onedr0p/sonarr
+    # This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "4.0.5.1710"
+  
+  # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  # This is for setting Kubernetes Labels to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podLabels: {}
+  
+  podSecurityContext:
+    fsGroup: 65534
+  
+  securityContext:
+    privileged: false
+    runAsUser: 65534 
+    runAsGroup: 65534 
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  env:
+  - name: TZ
+    value: 'America/Los_Angeles'
+  
+  # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 8989
+  
+  # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  env:
+    - name: TZ
+      value: 'America/Los_Angeles'
+  
+  # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+  
+  # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  
+  # Additional volumes on the output Deployment definition.
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: sonarr-wg-config
+  
+  # Additional volumeMounts on the output Deployment definition.
+  volumeMounts: []
+
+  nodeSelector: {}
+  
+  tolerations: []
+  
+  affinity: {}
+
+radarr:
+  enabled: true
+  persistence:
+    enabled: true
+    storage: 10Gi
+  replicaCount: 1
+  # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: ghcr.io/onedr0p/radarr
+    # This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "5.7.0"
+  
+  # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  
+  # this is for setting kubernetes annotations to a pod.
+  # for more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podannotations: {}
+  # this is for setting kubernetes labels to a pod.
+  # for more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podlabels: {}
+  
+  podSecurityContext:
+    fsGroup: 65534  
+  
+  securityContext:
+    privileged: false
+    runAsUser: 65534  
+    runAsGroup: 65534  
+    # capabilities:
+    #   drop:
+    #   - all
+    # readonlyrootfilesystem: true
+    # runasnonroot: true
+    # runasuser: 1000
+  
+  # this is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # this sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # this sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 7878
+  
+  # this block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ingress:
+    enabled: false
+    classname: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathtype: implementationspecific
+    tls: []
+    #  - secretname: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+    env:
+      - name: TZ
+        value: 'America/Los_Angeles'
+  
+  resources: {}
+    # we usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. this also increases chances charts run on environments with little
+    # resources, such as minikube. if you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128mi
+  
+  # this is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessprobe:
+    httpget:
+      path: /
+      port: http
+  readinessprobe:
+    httpget:
+      path: /
+      port: http
+  
+  # this section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minreplicas: 1
+    maxreplicas: 100
+    targetcpuutilizationpercentage: 80
+    # targetmemoryutilizationpercentage: 80
+  
+  # additional volumes on the output deployment definition.
+  volumes:
+  - name: wireguard-config
+    secret:
+      secretName: radarr-wg-config
+  
+  # additional volumemounts on the output deployment definition.
+  volumemounts:
+
+  nodeselector: {}
+  
+  tolerations: []
+  
+  affinity: {}
+
+qbittorrent:
+  enabled: true
+  persistence:
+    enabled: false
+    storage: 2Gi
+  replicaCount: 1
+  # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+  image:
+    repository: "qbittorrentofficial/qbittorrent-nox"
+    # This sets the pull policy for images.
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "4.6.5-1"
+  
+  # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
+  
+  # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  
+  # this is for setting kubernetes annotations to a pod.
+  # for more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podannotations: {}
+  # this is for setting kubernetes labels to a pod.
+  # for more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podlabels: {}
+  
+  podsecuritycontext:
+    fsGroup: 1000
+  
+  securitycontext:
+    securityContext:
+      allowPrivilegeEscalation: false
+    # capabilities:
+    #   drop:
+    #   - all
+    # readonlyrootfilesystem: true
+    # runasnonroot: true
+    # runasuser: 1000
+  
+  # this is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    # this sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+    type: ClusterIP
+    # this sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+    port: 8080
+  
+  # this block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+  ingress:
+    enabled: false
+    classname: ""
+    annotations: {}
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathtype: implementationspecific
+    tls: []
+    #  - secretname: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  
+  resources: {}
+    # we usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. this also increases chances charts run on environments with little
+    # resources, such as minikube. if you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128mi
+
+  # this is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessprobe:
+    httpget:
+      path: /
+      port: http
+  readinessprobe:
+    httpget:
+      path: /
+      port: http
+  
+  # this section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+  autoscaling:
+    enabled: false
+    minreplicas: 1
+    maxreplicas: 100
+    targetcpuutilizationpercentage: 80
+    # targetmemoryutilizationpercentage: 80
+  
+  # additional volumes on the output deployment definition.
+  volumes:
+    # required for initContainer
+    - name: wireguard-config
+      secret:
+        secretName: qbittorrent-wg-config
+  
+  # additional volumemounts on the output deployment definition.
+  volumemounts: []
+
+  nodeselector: {}
+  
+  tolerations: []
+  
+  affinity: {}
