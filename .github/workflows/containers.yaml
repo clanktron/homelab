@@ -25,6 +25,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./containers/wg-quick
-          file: Containerfile
+          file: ./containers/wg-quick/Containerfile
           push: true
           tags: clanktron/wg-quick:latest
