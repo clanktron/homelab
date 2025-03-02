@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: sonarr
-          image: ghcr.io/onedr0p/sonarr:4.0.5.1710
+          image: ghcr.io/onedr0p/sonarr:4.0.13
           resources:
             requests:
               memory: "150Mi"

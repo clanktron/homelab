@@ -23,7 +23,7 @@ spec:
         fsGroup: 99
       containers:
         - name: prowlar
-          image: ghcr.io/onedr0p/prowlarr:1.19
+          image: ghcr.io/onedr0p/prowlarr:1.31.2
           resources:
             requests:
               memory: "150Mi"

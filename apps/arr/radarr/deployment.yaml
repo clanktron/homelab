@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: radarr
-          image: ghcr.io/onedr0p/radarr:5.7.0
+          image: ghcr.io/onedr0p/radarr:5.19.3
           resources:
             requests:
               memory: "150Mi"
