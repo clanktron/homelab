@@ -11,3 +11,4 @@ deprecated/
 .vscode
 .sops.yaml
 .env.fish
+secrets
