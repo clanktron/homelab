@@ -7,6 +7,7 @@ resources:
 - jellyfin.yaml
 - littlelink.yaml
 - vaultwarden.yaml
+- trig-rush.yaml
 
 patches:
   - target:

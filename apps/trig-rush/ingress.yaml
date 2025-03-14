@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trigonometry-rush
+  labels:
+    app.kubernetes.io/name: trigonometry-rush
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: ${EXTERNAL_INGRESS_CLASS}
+  tls:
+    - hosts:
+        - "trigonometry-rush.${EXTERNAL_DOMAIN}"
+      secretName: "trigonometry-rush-tls"
+  rules:
+    - host: "trigonometry-rush.${EXTERNAL_DOMAIN}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: trigonometry-rush
+                port:
+                  number: 80

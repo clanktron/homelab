@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trigonometry-rush
+spec:
+  selector:
+    app: trigonometry-rush
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: trigonometry-rush
+spec:
+  revisionHistoryLimit: 3
+  replicas: 3
+  selector:
+    matchLabels:
+      app: trigonometry-rush
+  template:
+    metadata:
+      labels:
+        app: trigonometry-rush
+    spec:
+      containers:
+        - name: trigonometry-rush
+          image: "docker.io/clanktron/trigonometry-rush:stable"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
