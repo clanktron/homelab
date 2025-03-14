@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: trigonometry-rush
-          image: "docker.io/clanktron/trigonometry-rush:stable"
+          image: "docker.io/clanktron/trigonometry-rush:latest"
           resources:
             requests:
               memory: "64Mi"
