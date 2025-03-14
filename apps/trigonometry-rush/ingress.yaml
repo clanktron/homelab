@@ -25,4 +25,4 @@ spec:
               service:
                 name: trigonometry-rush
                 port:
-                  number: 80
+                  number: 8080

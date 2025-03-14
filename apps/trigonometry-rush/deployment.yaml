@@ -8,8 +8,8 @@ spec:
     app: trigonometry-rush
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8080
+      targetPort: 8080
 
 ---
 kind: Deployment
@@ -29,7 +29,8 @@ spec:
     spec:
       containers:
         - name: trigonometry-rush
-          image: "docker.io/clanktron/trigonometry-rush:latest"
+          image: "docker.io/clanktron/trigonometry-rush:stable"
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "64Mi"
@@ -39,7 +40,7 @@ spec:
               cpu: "200m"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           readinessProbe:
             httpGet:
