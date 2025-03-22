@@ -34,10 +34,23 @@ spec:
         - op: add
           path: /spec/values
           value:
+            gateway:
+              enabled: false
+            gatewayClass:
+              enabled: true
+            providers:
+              kubernetesCRD:
+                enabled: false
+              kubernetesIngress:
+                enabled: true
+              kubernetesGateway:
+                enabled: true
             ingressClass:
               enabled: true
               isDefaultClass: true
               name: external
+            autoscaling:
+              enabled: true
             logs:
               general:
                 level: DEBUG
@@ -71,10 +84,23 @@ spec:
         - op: add
           path: /spec/values
           value:
+            gateway:
+              enabled: false
+            gatewayClass:
+              enabled: true
+            providers:
+              kubernetesCRD:
+                enabled: false
+              kubernetesIngress:
+                enabled: true
+              kubernetesGateway:
+                enabled: true
             ingressClass:
               enabled: true
               isDefaultClass: false
               name: internal
+            autoscaling:
+              enabled: true
             logs:
               general:
                 level: DEBUG
