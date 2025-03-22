@@ -49,8 +49,6 @@ spec:
               enabled: true
               isDefaultClass: true
               name: external
-            autoscaling:
-              enabled: true
             logs:
               general:
                 level: DEBUG
@@ -99,8 +97,6 @@ spec:
               enabled: true
               isDefaultClass: false
               name: internal
-            autoscaling:
-              enabled: true
             logs:
               general:
                 level: DEBUG
