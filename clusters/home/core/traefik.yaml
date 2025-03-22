@@ -38,6 +38,7 @@ spec:
               enabled: false
             gatewayClass:
               enabled: true
+              name: external
             providers:
               kubernetesCRD:
                 enabled: false
@@ -86,6 +87,7 @@ spec:
               enabled: false
             gatewayClass:
               enabled: true
+              name: internal
             providers:
               kubernetesCRD:
                 enabled: false
