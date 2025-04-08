@@ -4,6 +4,7 @@ resources:
 - arr.yaml
 - blog.yaml
 - filebrowser.yaml
+- home-assistant.yaml
 - jellyfin.yaml
 - littlelink.yaml
 - vaultwarden.yaml
