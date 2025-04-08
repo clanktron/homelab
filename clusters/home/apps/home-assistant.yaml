@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: home-assistant
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: home-assistant
+spec:
+  targetNamespace: home-assistant
+  path: "./apps/home-assistant"
+  postBuild:
+    substituteFrom: []
