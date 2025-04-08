@@ -1,0 +1,12 @@
+FROM alpine:latest
+
+RUN apk add --no-cache openssh git git-lfs bash \
+ && git lfs install --system
+
+RUN adduser -D git && \
+    mkdir -p /home/git/.ssh && \
+    chown -R git:git /home/git
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
