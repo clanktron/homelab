@@ -4,4 +4,5 @@ resources:
   - deployment.yaml
   - ingress.yaml
   - service.yaml
+  - matter-volume.yaml
   - volume.yaml

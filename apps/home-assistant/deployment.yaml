@@ -4,6 +4,8 @@ metadata:
   name: home-assistant
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: home-assistant
@@ -12,6 +14,8 @@ spec:
       labels:
         app: home-assistant
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: home-assistant
           image: "homeassistant/home-assistant:2025.4"
@@ -30,7 +34,40 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+        - name: home-assistant-matter-server
+          image: "ghcr.io/home-assistant-libs/python-matter-server:7.0.1"
+          securityContext:
+            privileged: true
+            capabilities:
+              add: ["NET_ADMIN"]
+            appArmorProfile:
+              type: Unconfined
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+          ports:
+            - name: websocket
+              containerPort: 5580
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 5580
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - name: matter
+              mountPath: /data
+            - name: dbus
+              mountPath: /run/dbus
+              readOnly: true
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: home-assistant
+        - name: matter
+          persistentVolumeClaim:
+            claimName: matter
+        - name: dbus
+          hostPath:
+            path: /run/dbus
