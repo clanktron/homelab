@@ -72,7 +72,8 @@ spec:
           path: /spec/template/spec/volumes/-
           value:
             name: jasmine-shows
-            hostPath:
+            nfs:
+              server: "${STORAGE_SERVER}"
               path: "${JASMINE_PATH}/shows"
       target:
         kind: Deployment
