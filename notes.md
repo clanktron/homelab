@@ -1,6 +1,7 @@
 # Miscellaneous Notes
 
 # TODO:
+- SSO auth mechanism
 - filestash replaces filebrowser
     - onlyoffice integration? (low priority)
 
@@ -62,6 +63,5 @@ curl -k -H "Content-Type: application/json" -X PUT \
 - ram upgrade (2x16 sticks) can be bought from crucial for $57 (last I checked)
 
 ## Future Plans
-- everything kubernetes (k3s)
 - need a barebones OS...arch, nixos, karios, elemental, or maybe even talos????
 - kubevirt for vm needs (nic stuff for router, etc)
