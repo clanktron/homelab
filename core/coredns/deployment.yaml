@@ -33,6 +33,10 @@ spec:
               memory: "2250Mi"
               cpu: "1000m"
           imagePullPolicy: IfNotPresent
+          ports:
+            - name: dns
+              containerPort: 53
+              protocol: UDP
           env:
             - name: TZ
               value: PT

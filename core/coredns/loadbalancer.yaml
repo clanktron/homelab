@@ -10,8 +10,8 @@ spec:
   type: LoadBalancer
   ports:
   - port: 53
+    targetPort: dns
     protocol: UDP
-  - port: 53
-    protocol: TCP
+    name: dns
   selector:
     app.kubernetes.io/name: coredns
