@@ -2,25 +2,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: coredns-config
+  name: coredns
 data:
   Corefile: |-
-    . {
-       errors
-       health {
-          lameduck 5s
-       }
-       ready
-       hosts /etc/coredns/Hosts {
-          fallthrough
-       }
-       forward . 1.1.1.1:53 {
-          max_concurrent 1000
-       }
-       cache 30
-       loop
-       reload
-       loadbalance
+    .:53 {
+      log
+      errors
+    
+      template IN A {
+        match "^(.*\.)local\.claytonc\.dev\.$"
+        answer "{{ .Name }} 60 IN A 10.56.1.101"
+        fallthrough
+      }
+    
+      forward . 10.56.1.1
+      cache 30
     }
-  Hosts: |-
-    ${INTERNAL_LB} *.local.claytonc.dev

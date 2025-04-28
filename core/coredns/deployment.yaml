@@ -22,6 +22,9 @@ spec:
       containers:
         - name: coredns
           image: "coredns/coredns"
+          args:
+          - -conf
+          - /etc/coredns/Corefile
           resources:
             requests:
               memory: "250Mi"
@@ -33,14 +36,11 @@ spec:
           env:
             - name: TZ
               value: PT
-          ports:
-            - name: dns
-              containerPort: 53
-              protocol: UDP
           volumeMounts:
             - name: config
-              mountPath: /etc/coredns
+              mountPath: /etc/coredns/Corefile
+              subPath: Corefile
       volumes:
         - name: config
           configMap:
-            name: coredns-config
+            name: coredns
