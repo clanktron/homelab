@@ -4,13 +4,14 @@ resources:
   - qbittorrent
   - radarr
   - sonarr
+  - bazarr
 
 patches:
   - target:
       group: apps
       version: v1
       kind: Deployment
-      name: \b(radarr|sonarr|prowlarr|qbittorrent)\b
+      name: \b(bazarr|radarr|sonarr|prowlarr|qbittorrent|)\b
     patch: |
       - op: add
         path: /spec/template/spec/initContainers

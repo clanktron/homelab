@@ -1,0 +1,88 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr
+  labels:
+    app.kubernetes.io/name: bazarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bazarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bazarr
+    spec:
+      automountServiceAccountToken: false
+      dnsConfig:
+        nameservers:
+          - 10.2.0.1
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: bazarr
+          image: ghcr.io/onedr0p/bazarr:1.5.1
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "50m"
+            limits:
+              memory: "1000Mi"
+              cpu: "300m"
+          securityContext:
+            privileged: false
+            runAsUser: 1000
+            runAsGroup: 1000
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: 'America/Los_Angeles'
+          ports:
+            - name: http
+              containerPort: 6767
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+          livenessProbe:
+            tcpSocket:
+              port: 6767
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 6767
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 6767
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: bazarr-data
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: arr-downloads
+        - name: movies
+          nfs:
+            server: "${STORAGE_SERVER}"
+            path: "${MOVIES_PATH}"
+        - name: shows
+          nfs:
+            server: "${STORAGE_SERVER}"
+            path: "${SHOWS_PATH}"
