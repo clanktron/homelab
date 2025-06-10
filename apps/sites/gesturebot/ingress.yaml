@@ -2,13 +2,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gesturebot
+  labels:
+    app.kubernetes.io/name: gesturebot
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
+  ingressClassName: ${EXTERNAL_INGRESS_CLASS}
   tls:
   - hosts:
-      - gesturebot.claytonc.dev
+      - gesturebot.${EXTERNAL_DOMAIN}
     secretName: gesturebot-tls
   rules:
-  - host: gesturebot.claytonc.dev
+  - host: gesturebot.${EXTERNAL_DOMAIN}
     http:
       paths:
       - path: /
