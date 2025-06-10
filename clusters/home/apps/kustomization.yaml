@@ -4,6 +4,7 @@ resources:
 - arr.yaml
 - blog.yaml
 - filebrowser.yaml
+- gesturebot.yaml
 - home-assistant.yaml
 - jellyfin.yaml
 - littlelink.yaml

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gesturebot
+spec:
+  tls:
+  - hosts:
+      - gesturebot.claytonc.dev
+    secretName: gesturebot-tls
+  rules:
+  - host: gesturebot.claytonc.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gesturebot
+            port:
+              number: 80

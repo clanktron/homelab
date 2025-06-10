@@ -1,0 +1,13 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: gesturebot
+spec:
+  selector:
+    app: gesturebot
+  type: ClusterIP
+  ports:
+  - name: gesturebot
+    protocol: TCP
+    port: 80
