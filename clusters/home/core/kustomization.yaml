@@ -6,6 +6,7 @@ resources:
 - ./longhorn.yaml
 - ./mariadb.yaml
 - ./metallb.yaml
+- ./monitoring.yaml
 - ./mattermost.yaml
 - ./mysql.yaml
 - ./traefik.yaml

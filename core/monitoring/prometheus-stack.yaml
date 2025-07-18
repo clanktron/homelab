@@ -37,10 +37,6 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
-          flame.pawelmalak/type: app
-          flame.pawelmalak/name: alertmanager
-          flame.pawelmalak/url: https://alert.${domain}
-          flame.pawelmalak/icon: alert-circle-outline
         ingressClassName: traefik-internal
         path: /
         hosts:
@@ -48,7 +44,7 @@ spec:
         tls: 
          - secretName: alert-tls
            hosts:
-             - alert.${domain}
+             - alert.${INTERNAL_DOMAIN}
       serviceMonitor:
         interval: "1m"
         selfMonitor: true
@@ -61,18 +57,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
-          flame.pawelmalak/type: app
-          flame.pawelmalak/name: grafana
-          flame.pawelmalak/url: https://grafana.${domain}
-          flame.pawelmalak/icon: chart-box-outline
         ingressClassName: traefik-external
         path: /
         hosts:
-          - grafana.${domain}
+          - grafana.${INTERNAL_DOMAIN}
         tls: 
          - secretName: grafana-tls
            hosts:
-             - grafana.${domain}
+             - grafana.${INTERNAL_DOMAIN}
     
       sidecar:
         dashboards:
@@ -112,18 +104,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
           cert-manager.io/cluster-issuer: letsencrypt
           traefik.ingress.kubernetes.io/router.tls: 'true'
-          flame.pawelmalak/type: app
-          flame.pawelmalak/name: prometheus
-          flame.pawelmalak/url: https://prometheus.${domain}
-          flame.pawelmalak/icon: fire
         ingressClassName: traefik-internal
         path: /
         hosts:
-          - prometheus.${domain}
+          - prometheus.${INTERNAL_DOMAIN}
         tls: 
          - secretName: prometheus-tls
            hosts:
-             - prometheus.${domain}
+             - prometheus.${INTERNAL_DOMAIN}
         
       serviceMonitor:
         enabled: true
