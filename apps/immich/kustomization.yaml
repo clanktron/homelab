@@ -1,0 +1,7 @@
+resources:
+- ./immich.yaml
+- ./redis.yaml
+- ./postgres.yaml
+- ./ml.yaml
+- ./config.yaml
+

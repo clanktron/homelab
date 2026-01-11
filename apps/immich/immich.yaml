@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-server
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: immich-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: immich-server
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: immich-config
+        - secretRef:
+            name: immich-secrets
+        image: ghcr.io/immich-app/immich-server:v2.4.1
+        imagePullPolicy: IfNotPresent
+        name: immich-server
+        ports:
+        - containerPort: 2283
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /usr/src/app/upload
+          name: upload
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: upload
+        nfs:
+          path: /photos
+          server: 10.56.1.155
+      - hostPath:
+          path: /etc/localtime
+          type: File
+        name: localtime

@@ -11,6 +11,7 @@ resources:
 - ladebugs.yaml
 - vaultwarden.yaml
 - trig-rush.yaml
+- immich.yaml
 
 patches:
   - target:
