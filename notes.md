@@ -1,9 +1,10 @@
 # Miscellaneous Notes
 
 # TODO:
+- ceph
+- vault
+- seafile
 - SSO auth mechanism
-- filestash replaces filebrowser
-    - onlyoffice integration? (low priority)
 
 # Rename file extensions
 ```bash
