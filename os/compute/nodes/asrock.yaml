@@ -1,0 +1,9 @@
+scheme_version: 1
+install:
+  management_interface:
+    interfaces:
+      - name: 
+    method: dhcp
+  vip: 192.168.0.210
+  vip_mode: static
+  device: /dev/nvme0n1
